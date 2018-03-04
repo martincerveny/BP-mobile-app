@@ -1,10 +1,18 @@
 import React from 'react';
 import {TabNavigator} from "react-navigation";
 import Icon from 'react-native-vector-icons/Feather';
-
 import NextMeetingNavigation from './NextMeetingNavigation';
 import UserNavigation from './UserNavigation';
 import MeetingNavigation from './MeetingNavigation';
+
+const config = {
+    tabBarPosition: 'bottom',
+        swipeEnabled: false,
+    tabBarOptions: {
+        activeTintColor: '#e74c3c',
+        showLabel: false
+    },
+};
 
 const AppNavigation = TabNavigator({
         'nextMeeting': {
@@ -23,7 +31,6 @@ const AppNavigation = TabNavigator({
         'meeting': {
             screen: MeetingNavigation,
             navigationOptions: {
-                tabBarLabel: 'MeetingList',
                 tabBarIcon: ({ tintColor, focused }) => (
                     <Icon
                         name={'list'}
@@ -36,7 +43,6 @@ const AppNavigation = TabNavigator({
         'user': {
             screen: UserNavigation,
             navigationOptions: {
-                tabBarLabel: 'Zoznam ľudí',
                 tabBarIcon: ({ tintColor }) => (
                     <Icon
                         name={'users'}
@@ -46,14 +52,7 @@ const AppNavigation = TabNavigator({
                 ),
             },
         },
-    }, {
-        tabBarPosition: 'bottom',
-        swipeEnabled: false,
-        tabBarOptions: {
-            activeTintColor: '#e74c3c',
-            showLabel: false
-        },
-    }
+    }, config
 );
 
 export default AppNavigation;

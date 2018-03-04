@@ -45,4 +45,11 @@ class UserSearchResultsScreen extends Component {
         );
     }
 }
+
+UserSearchResultsScreen.navigationOptions = {
+    headerTitle: 'Výsledky hľadania',
+    headerStyle: {backgroundColor: '#e74c3c'},
+    headerTintColor: 'white',
+};
+
 export default UserSearchResultsScreen;

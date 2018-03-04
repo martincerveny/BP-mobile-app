@@ -8,54 +8,14 @@ import UserDetailScreen from "../screens/User/UserDetailScreen/UserDetailScreen"
 import MeetingDetailScreen from "../screens/Meeting/MeetingDetailScreen/MeetingDetailScreen";
 
 const MeetingNavigation = StackNavigator({
-    'meeting.list': {
-        screen: MeetingListScreen,
-        navigationOptions: {
-            headerTitle: 'Zoznam schôdzok',
-            headerStyle: {backgroundColor: '#e74c3c'},
-            headerTintColor: 'white',
-        },
-    },
-    'meeting.detail': {
-        screen: MeetingDetailScreen,
-        navigationOptions: {
-            headerTitle: 'Úvodná schôdzka',
-            headerStyle: {backgroundColor: '#e74c3c'},
-            headerTintColor: 'white',
-        },
-    },
-    'user.detail': {
-        screen: UserDetailScreen,
-        navigationOptions: {
-            headerTitle: 'Jan Novotný',
-            headerStyle: {backgroundColor: '#e74c3c'},
-            headerTintColor: 'white',
-        },
-    },
-    'user.search.index': {
-        screen: UserSearchIndexScreen,
-        navigationOptions:{
-            headerTitle: 'Hľadať',
-            headerStyle: {backgroundColor: '#e74c3c'},
-            headerTintColor: 'white',
-        },
-    },
-    'user.create': {
-        screen: UserCreateScreen,
-        navigationOptions: {
-            headerTitle: 'Pridať osobu',
-            headerStyle: {backgroundColor: '#e74c3c'},
-            headerTintColor: 'white',
-        },
-    },
-    'user.search.results': {
-        screen: UserSearchResultsScreen,
-        navigationOptions: {
-            headerTitle: 'Výsledky hľadania',
-            headerStyle: {backgroundColor: '#e74c3c'},
-            headerTintColor: 'white',
-        },
-    },
+    'meeting.list': { screen: MeetingListScreen },
+    'meeting.detail': { screen: MeetingDetailScreen },
+
+    //user
+    'user.detail': { screen: UserDetailScreen },
+    'user.search.index': { screen: UserSearchIndexScreen },
+    'user.create': { screen: UserCreateScreen },
+    'user.search.results': { screen: UserSearchResultsScreen },
 });
 
 export default MeetingNavigation;

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Container, Header, Content, List, ListItem, Left, Body, Right, Thumbnail, Text, Badge } from 'native-base';
 import styles from './styles';
+import NextMeetingListScreen from "../../Meeting/NextMeeting/NextMeetingListScreen/NextMeetingListScreen";
 
 class UserListScreen extends Component {
     render() {
@@ -57,5 +58,11 @@ class UserListScreen extends Component {
         );
     }
 }
+
+UserListScreen.navigationOptions = {
+    headerTitle: 'Zoznam ľudí',
+    headerStyle: {backgroundColor: '#e74c3c'},
+    headerTintColor: 'white',
+};
 
 export default UserListScreen;

@@ -31,4 +31,10 @@ class UserSearchIndexScreen extends Component {
     }
 }
 
+UserSearchIndexScreen.navigationOptions = {
+    headerTitle: 'Hľadať',
+    headerStyle: {backgroundColor: '#e74c3c'},
+    headerTintColor: 'white',
+};
+
 export default UserSearchIndexScreen;

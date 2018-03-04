@@ -4,7 +4,7 @@ import NextMeetingCard from '../../../../components/NextMeetingCard/NextMeetingC
 import { Container, Content, List, ListItem, Text, Card, CardItem } from 'native-base';
 import styles from './styles';
 
-export default class NextMeetingListScreen extends Component {
+class NextMeetingListScreen extends Component {
     render () {
         return (
             <View style={ styles.container }>
@@ -46,3 +46,11 @@ export default class NextMeetingListScreen extends Component {
         )
     }
 }
+
+NextMeetingListScreen.navigationOptions = {
+        headerTitle: 'Najbližšie schôdzky',
+        headerStyle: {backgroundColor: '#e74c3c'},
+        headerTintColor: 'white',
+};
+
+export default NextMeetingListScreen;

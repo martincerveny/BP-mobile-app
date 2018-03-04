@@ -4,22 +4,8 @@ import NextMeetingListScreen from "../screens/Meeting/NextMeeting/NextMeetingLis
 import NextMeetingDetailScreen from "../screens/Meeting/NextMeeting/NextMeetingDetailScreen/NextMeetingDetailScreen";
 
 const NextMeetingNavigation = StackNavigator({
-    'meeting.nextMeeting.list': {
-        screen: NextMeetingListScreen,
-        navigationOptions: {
-            headerTitle: 'Najbližšie schôdzky',
-            headerStyle: {backgroundColor: '#e74c3c'},
-            headerTintColor: 'white',
-        },
-    },
-    'meeting.nextMeeting.detail': {
-        screen: NextMeetingDetailScreen,
-        navigationOptions: {
-            headerTitle: 'Úvodná schôdzka',
-            headerStyle: {backgroundColor: '#e74c3c'},
-            headerTintColor: 'white',
-        }
-    },
+    'meeting.nextMeeting.list': { screen: NextMeetingListScreen },
+    'meeting.nextMeeting.detail': {screen: NextMeetingDetailScreen},
 });
 
 export default NextMeetingNavigation;

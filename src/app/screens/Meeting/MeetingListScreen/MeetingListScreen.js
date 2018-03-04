@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Container, Header, Content, List, ListItem, Left, Body, Right, Thumbnail, Text, Badge } from 'native-base';
 import {StyleSheet} from "react-native";
 import styles from './styles';
+import NextMeetingListScreen from "../NextMeeting/NextMeetingListScreen/NextMeetingListScreen";
 
 class MeetingListScreen extends Component {
     render() {
@@ -76,5 +77,11 @@ class MeetingListScreen extends Component {
         );
     }
 }
+
+MeetingListScreen.navigationOptions = {
+    headerTitle: 'Zoznam schôdzok',
+    headerStyle: {backgroundColor: '#e74c3c'},
+    headerTintColor: 'white',
+};
 
 export default MeetingListScreen;

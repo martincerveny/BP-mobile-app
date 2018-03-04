@@ -84,4 +84,10 @@ class UserCreateScreen extends Component {
     }
 }
 
+UserCreateScreen.navigationOptions = {
+    headerTitle: 'Pridať osobu',
+    headerStyle: {backgroundColor: '#e74c3c'},
+    headerTintColor: 'white',
+};
+
 export default UserCreateScreen;

@@ -4,22 +4,8 @@ import UserListScreen from "../screens/User/UserListScreen/UserListScreen";
 import UserDetailScreen from "../screens/User/UserDetailScreen/UserDetailScreen";
 
 const UserNavigation = StackNavigator({
-    'user.list': {
-        screen: UserListScreen,
-        navigationOptions: {
-            headerTitle: 'Zoznam ľudí',
-            headerStyle: {backgroundColor: '#e74c3c'},
-            headerTintColor: 'white',
-        },
-    },
-    'user.detail': {
-        screen: UserDetailScreen,
-        navigationOptions: {
-            headerTitle: 'Jan Novotný',
-            headerStyle: {backgroundColor: '#e74c3c'},
-            headerTintColor: 'white',
-        },
-    },
+    'user.list': {screen: UserListScreen },
+    'user.detail': {screen: UserDetailScreen},
 });
 
 export default UserNavigation;

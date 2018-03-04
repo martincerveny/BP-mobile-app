@@ -4,6 +4,7 @@ import UserItem from '../../../components/UserItem/PersonTab';
 import MeetingListItem from '../../../components/MeetingListItem/MeetingListItem';
 import UserNoteListItem from '../../../components/UserNoteListItem/UserNoteListItem';
 import styles from './styles';
+import UserListScreen from "../UserListScreen/UserListScreen";
 
 class UserDetailScreen extends Component {
     render() {
@@ -24,5 +25,11 @@ class UserDetailScreen extends Component {
         );
     }
 }
+
+UserDetailScreen.navigationOptions = {
+    headerTitle: 'Jan Novotný',
+    headerStyle: {backgroundColor: '#e74c3c'},
+    headerTintColor: 'white',
+};
 
 export default UserDetailScreen

@@ -4,6 +4,7 @@ import MeetingItem from '../../../components/MeetingItem/MeetingItem';
 import PeopleTab from '../../../components/UserListItem/UserListItem';
 import NoteListItem from '../../../components/NoteListItem/NoteListItem';
 import styles from './styles';
+import MeetingListScreen from "../MeetingListScreen/MeetingListScreen";
 
 class MeetingDetailScreen extends Component {
     render() {
@@ -24,5 +25,11 @@ class MeetingDetailScreen extends Component {
         );
     }
 }
+
+MeetingDetailScreen.navigationOptions = {
+    headerTitle: 'Úvodná schôdzka',
+    headerStyle: {backgroundColor: '#e74c3c'},
+    headerTintColor: 'white',
+};
 
 export default MeetingDetailScreen;

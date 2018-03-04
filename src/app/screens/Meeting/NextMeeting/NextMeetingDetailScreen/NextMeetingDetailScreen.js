@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import { Container, Tab, Tabs, TabHeading, Icon, Text } from 'native-base';
-import MeetingTab from '../../../../components/MeetingItem/MeetingItem';
-import PeopleTab from '../../../../components/UserListItem/UserListItem';
 import NoteListItem from '../../../../components/NoteListItem/NoteListItem';
 import styles from './styles';
 
@@ -18,5 +16,11 @@ class NextMeetingDetailScreen extends Component {
         );
     }
 }
+
+NextMeetingDetailScreen.navigationOptions = {
+    headerTitle: 'Úvodná schôdzka',
+    headerStyle: {backgroundColor: '#e74c3c'},
+    headerTintColor: 'white',
+};
 
 export default NextMeetingDetailScreen;
