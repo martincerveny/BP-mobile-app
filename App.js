@@ -1,7 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import { HomeTabs } from "./src/config/routes";
-import { StyleSheet, View } from 'react-native';
+import Application from './src/app';
 
 export default class App extends Component {
     async componentWillMount() {
@@ -13,7 +12,7 @@ export default class App extends Component {
 
   render() {
     return (
-            <HomeTabs/>
+            <Application/>
     );
   }
 }
