@@ -4,7 +4,7 @@ import styles from './styles';
 
 const MeetingListItem = ({ item, onPress }) => (
     <List>
-        <ListItem button onPress={() => onPress(item.getId())} style={ styles.listItem }>
+        <ListItem  button onPress={() => onPress(item.getId())} style={ styles.listItem }>
             <Body>
                 <Text>{item.getName()}</Text>
             </Body>

@@ -1,35 +1,12 @@
 import React, {Component} from 'react';
-import { AsyncStorage, ListView } from 'react-native';
-import { Container, Header, Content, List, ListItem, Left, Body, Right, Thumbnail, Text, Badge } from 'native-base';
+import Header from '../../../components/Header/Header'
+import { Container, Content, List, ListItem, Left, Body, Right, Thumbnail, Text, Badge, Button, Icon } from 'native-base';
 import styles from './styles';
 import MeetingStore from "../../../flux/Meeting/MeetingStore";
 import MeetingList from '../../../components/MeetingList/MeetingList';
 
-let meeting1 = {
-            id: 1,
-            name: 'Úvodná schôdzka',
-            date: '14.3.2018',
-            time: '14:30',
-            place: 'Brno',
-            peopleCount: 7,
-            note: 'Text poznamky'
-        };
-
-let meeting2 = {
-        id: 2,
-        name: 'Druha schôdzka',
-        date: '20.3.2018',
-        time: '17:30',
-        place: 'Bratislava',
-        peopleCount: 4,
-        note: 'Text poznamky 2'
-    };
-
-AsyncStorage.setItem('@MeetingStore:meeting:id:1', JSON.stringify(meeting1));
-AsyncStorage.setItem('@MeetingStore:meeting:id:2', JSON.stringify(meeting2));
-
 class MeetingListScreen extends Component {
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.state = {
             items: []
@@ -39,25 +16,33 @@ class MeetingListScreen extends Component {
         this.handleItemPress = this.handleItemPress.bind(this);
     }
 
-    componentDidMount() {
+    componentDidMount () {
         this.loadItems();
     };
 
-    loadItems() {
+    loadItems () {
         MeetingStore.getAllItems().then(items => {
             return this.setState({ items })
         });
     }
 
-    handleItemPress(id) {
-        this.props.navigation.navigate("meeting.detail")
+    handleItemPress (id) {
+        this.props.navigation.navigate("meeting.detail", { meetingId: id})
     }
 
-    render() {
+    render () {
         const { items } = this.state;
 
         return (
             <Container style={ styles.container }>
+                <Header
+                    title='Zoznam schôdzok'
+                    right={
+                        <Button transparent onPress={() => this.props.navigation.navigate("meeting.create")}>
+                            <Icon style={{ color: '#fff'}} name="add" />
+                        </Button>
+                    }
+                />
                 <Content>
                     <MeetingList
                     items={items}
@@ -68,11 +53,5 @@ class MeetingListScreen extends Component {
         );
     }
 }
-
-MeetingListScreen.navigationOptions = {
-    headerTitle: 'Zoznam schôdzok',
-    headerStyle: {backgroundColor: '#e74c3c'},
-    headerTintColor: 'white',
-};
 
 export default MeetingListScreen;

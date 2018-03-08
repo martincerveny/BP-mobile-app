@@ -1,12 +1,20 @@
 import React, {Component} from 'react';
-import { Container, Header, Content, List, ListItem, Left, Body, Right, Thumbnail, Text, Badge } from 'native-base';
+import { Container, Content, List, ListItem, Left, Body, Right, Thumbnail, Text, Badge, Button, Icon } from 'native-base';
 import styles from './styles';
-import NextMeetingListScreen from "../../Meeting/NextMeeting/NextMeetingListScreen/NextMeetingListScreen";
+import Header from '../../../components/Header/Header'
 
 class UserListScreen extends Component {
-    render() {
+
+    constructor (props) {
+        super(props);
+    };
+
+    render () {
         return (
             <Container style={ styles.container }>
+                <Header
+                    title='Zoznam ľudí'
+                />
                 <Content>
                     <List>
                         <ListItem itemDivider>
@@ -58,11 +66,5 @@ class UserListScreen extends Component {
         );
     }
 }
-
-UserListScreen.navigationOptions = {
-    headerTitle: 'Zoznam ľudí',
-    headerStyle: {backgroundColor: '#e74c3c'},
-    headerTintColor: 'white',
-};
 
 export default UserListScreen;

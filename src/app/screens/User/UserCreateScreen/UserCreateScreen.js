@@ -1,24 +1,41 @@
 import React, {Component} from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Container, Content, Text, Icon, Left, Separator, ListItem, List, Right, Input, Body, Label, Button, Picker} from 'native-base';
+import Header from '../../../components/Header/Header'
+
 const Item = Picker.Item;
 import styles from './styles';
 
 class UserCreateScreen extends Component {
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.state = {
             selected2: undefined
         };
+
+        this.goBack = this.goBack.bind(this);
     }
-    onValueChange2(value: string) {
+    onValueChange2 (value: string) {
         this.setState({
             selected2: value
         });
     }
+
+    goBack () {
+        this.props.navigation.goBack()
+    }
+
     render() {
         return (
             <Container style={ styles.container}>
+                <Header
+                    title='Vytvoriť osobu'
+                    left={
+                        <Button transparent onPress={this.goBack}>
+                            <Icon style={{ color: '#fff'}} name="arrow-round-back" />
+                        </Button>
+                    }
+                />
                 <Content>
                     <Separator bordered>
                         <Text>ZÁKLADNÉ INFORMÁCIE</Text>
@@ -83,11 +100,5 @@ class UserCreateScreen extends Component {
         );
     }
 }
-
-UserCreateScreen.navigationOptions = {
-    headerTitle: 'Pridať osobu',
-    headerStyle: {backgroundColor: '#e74c3c'},
-    headerTintColor: 'white',
-};
 
 export default UserCreateScreen;

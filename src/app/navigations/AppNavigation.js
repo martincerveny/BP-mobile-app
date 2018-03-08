@@ -7,7 +7,7 @@ import MeetingNavigation from './MeetingNavigation';
 
 const config = {
     tabBarPosition: 'bottom',
-        swipeEnabled: false,
+    swipeEnabled: false,
     tabBarOptions: {
         activeTintColor: '#e74c3c',
         showLabel: false
