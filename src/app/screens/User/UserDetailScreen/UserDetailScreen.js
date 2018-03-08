@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import { Container, Tab, Tabs, TabHeading, Icon, Text } from 'native-base';
+import { Container, Tab, Tabs, TabHeading, Icon, Text, Content, List, ListItem, Body, Input, Right } from 'native-base';
 import UserItem from '../../../components/UserItem/PersonTab';
-import MeetingListItem from '../../../components/MeetingListItem/MeetingListItem';
 import UserNoteListItem from '../../../components/UserNoteListItem/UserNoteListItem';
 import styles from './styles';
-import UserListScreen from "../UserListScreen/UserListScreen";
 
 class UserDetailScreen extends Component {
     render() {
@@ -15,7 +13,34 @@ class UserDetailScreen extends Component {
                         <UserItem />
                     </Tab>
                     <Tab heading={ <TabHeading><Icon name="list" /></TabHeading>}>
-                        <MeetingListItem />
+                        <Content>
+                            <List>
+                                <ListItem button style={ styles.listItem }>
+                                    <Body>
+                                    <Text>A-zet</Text>
+                                    </Body>
+                                    <Right>
+                                        <Text note>20.2.2018</Text>
+                                    </Right>
+                                </ListItem>
+                                <ListItem button style={ styles.listItem }>
+                                    <Body>
+                                    <Text>Brnenská schôdzka</Text>
+                                    </Body>
+                                    <Right>
+                                        <Text note>14.3.2018</Text>
+                                    </Right>
+                                </ListItem>
+                                <ListItem button style={ styles.listItem }>
+                                    <Body>
+                                    <Text>Bratislavské stretnutie</Text>
+                                    </Body>
+                                    <Right>
+                                        <Text note>14.3.2018</Text>
+                                    </Right>
+                                </ListItem>
+                            </List>
+                        </Content>
                     </Tab>
                     <Tab heading={ <TabHeading><Icon name="paper" /></TabHeading>}>
                         <UserNoteListItem />
