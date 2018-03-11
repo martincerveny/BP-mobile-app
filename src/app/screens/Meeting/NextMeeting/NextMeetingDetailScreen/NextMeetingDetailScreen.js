@@ -2,23 +2,43 @@ import React, {Component} from 'react';
 import { Container, Icon, Text, Card, CardItem, Left, Body, Content, Thumbnail, ListItem, Input, Button } from 'native-base';
 import Header from '../../../../components/Header/Header'
 import styles from './styles';
+import MeetingStore from "../../../../flux/Meeting/MeetingStore";
 
 class NextMeetingDetailScreen extends Component {
     constructor (props) {
         super(props);
+        this.state = {
+            meetingItem: '',
+        };
 
-        this.goBack = this.goBack.bind(this)
+        this.goBack = this.goBack.bind(this);
+        this.loadItem = this.loadItem.bind(this);
+    };
+
+    componentDidMount () {
+        this.loadItem();
     };
 
     goBack () {
         this.props.navigation.goBack()
     }
 
+    loadItem () {
+        const meetingId = this.props.navigation.state.params.meetingId;
+
+        MeetingStore.getItemById(meetingId).then(meetingItem => {
+            return this.setState({ meetingItem })
+        });
+
+    };
+
     render() {
+        const { meetingItem, userItems } = this.state;
+
         return (
             <Container>
                 <Header
-                    title='Úvodná schôdzka'
+                    title={meetingItem.name}
                     left={
                         <Button transparent onPress={this.goBack}>
                             <Icon style={{ color: '#fff'}} name="arrow-round-back" />

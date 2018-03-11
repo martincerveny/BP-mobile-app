@@ -1,12 +1,39 @@
 import React, {Component} from 'react';
 import { ScrollView, View, TouchableOpacity } from 'react-native';
-import NextMeetingCard from '../../../../components/NextMeetingCard/NextMeetingCard';
-import { Container, Content, List, ListItem, Text, Card, CardItem } from 'native-base';
+import { Container, Content, List, ListItem, Card, CardItem } from 'native-base';
 import Header from '../../../../components/Header/Header'
 import styles from './styles';
+import MeetingStore from "../../../../flux/Meeting/MeetingStore";
+import NextMeetingList from '../../../../components/NextMeetingList/NextMeetingList';
 
 class NextMeetingListScreen extends Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            items: []
+        };
+
+        this.loadItems = this.loadItems.bind(this);
+        this.handleItemPress = this.handleItemPress.bind(this);
+    }
+
+    componentDidMount () {
+        this.loadItems();
+    };
+
+    loadItems () {
+        MeetingStore.getAllItems().then(items => {
+            return this.setState({ items })
+        });
+    }
+
+    handleItemPress (id) {
+        this.props.navigation.navigate("meeting.nextMeeting.detail", { meetingId: id})
+    }
+
     render () {
+        const { items } = this.state;
+
         return (
             <Container>
                 <Header
@@ -14,47 +41,15 @@ class NextMeetingListScreen extends Component {
                 />
                 <View style={ styles.container }>
                     <ScrollView>
-                            <Content>
-                                <Card>
-                                    <CardItem style={{ backgroundColor: '#e74c3c'}}>
-                                        <Text style={{ color: 'white'}}>14.3.2018</Text>
-                                    </CardItem>
-                                </Card>
-
-                                <TouchableOpacity button activeOpacity={0.5} onPress={() => this.props.navigation.navigate("meeting.nextMeeting.detail")}>
-                                    <NextMeetingCard />
-                                </TouchableOpacity>
-                                <TouchableOpacity  button activeOpacity={0.5} onPress={() => this.props.navigation.navigate("meeting.nextMeeting.detail")}>
-                                    <NextMeetingCard/>
-                                </TouchableOpacity>
-                                <TouchableOpacity  button activeOpacity={0.5} onPress={() => this.props.navigation.navigate("meeting.nextMeeting.detail")}>
-                                    <NextMeetingCard/>
-                                </TouchableOpacity>
-                                <Card>
-                                    <CardItem style={{ backgroundColor: '#e74c3c'}}>
-                                        <Text style={{ color: 'white'}}>15.3.2018</Text>
-                                    </CardItem>
-                                </Card>
-                                <TouchableOpacity  button activeOpacity={0.5} onPress={() => this.props.navigation.navigate("meeting.nextMeeting.detail")}>
-                                    <NextMeetingCard/>
-                                </TouchableOpacity>
-                                <Card>
-                                    <CardItem style={{ backgroundColor: '#e74c3c'}}>
-                                        <Text style={{ color: 'white'}}>15.3.2018</Text>
-                                    </CardItem>
-                                </Card>
-                            </Content>
+                        <NextMeetingList
+                            items={items}
+                            onItemPress={this.handleItemPress}
+                        />
                     </ScrollView>
                 </View>
             </Container>
         )
     }
 }
-
-NextMeetingListScreen.navigationOptions = {
-        headerTitle: 'Najbližšie schôdzky',
-        headerStyle: {backgroundColor: '#e74c3c'},
-        headerTintColor: 'white',
-};
 
 export default NextMeetingListScreen;

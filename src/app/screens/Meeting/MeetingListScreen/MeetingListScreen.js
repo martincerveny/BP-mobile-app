@@ -46,7 +46,7 @@ class MeetingListScreen extends Component {
                 <Content>
                     <MeetingList
                     items={items}
-                    onMeetingItemPress={this.handleItemPress}
+                    onItemPress={this.handleItemPress}
                     />
                 </Content>
             </Container>

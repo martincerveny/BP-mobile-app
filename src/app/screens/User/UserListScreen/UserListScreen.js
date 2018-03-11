@@ -1,66 +1,50 @@
-import React, {Component} from 'react';
-import { Container, Content, List, ListItem, Left, Body, Right, Thumbnail, Text, Badge, Button, Icon } from 'native-base';
-import styles from './styles';
+import React from 'react';
+import { Container, Content } from 'native-base';
 import Header from '../../../components/Header/Header'
+import UserStore from "../../../flux/User/UserStore";
+import UserList from '../../../components/UserList/UserList'
 
-class UserListScreen extends Component {
+import styles from './styles';
+
+class UserListScreen extends React.Component {
 
     constructor (props) {
         super(props);
+        this.state = {
+            items: []
+        };
+
+        this.loadItems = this.loadItems.bind(this);
+        this.handleItemPress = this.handleItemPress.bind(this);
     };
 
+    componentDidMount () {
+        this.loadItems();
+    };
+
+    loadItems () {
+        UserStore.getAllItems().then(items => {
+            return this.setState({ items })
+        });
+    }
+
+    handleItemPress (id) {
+        this.props.navigation.navigate("user.detail", { userId: id})
+    }
+
     render () {
+        const { items } = this.state;
+
         return (
             <Container style={ styles.container }>
                 <Header
                     title='Zoznam ľudí'
                 />
                 <Content>
-                    <List>
-                        <ListItem itemDivider>
-                            <Text style={{ paddingLeft: 10}}>J</Text>
-                        </ListItem>
-                        <ListItem style={ styles.listItem }>
-                            <Thumbnail square size={80} source={require('../../../../resources/images/person-flat.png')} />
-                            <Body>
-                                <Text>Jakub Brown</Text>
-                            </Body>
-                        </ListItem>
-                        <ListItem style={ styles.listItem } onPress={() => this.props.navigation.navigate("user.detail")}>
-                            <Thumbnail square size={80} source={require('../../../../resources/images/person-flat.png')} />
-                            <Body>
-                                <Text>Jan Novotný</Text>
-                            </Body>
-                        </ListItem>
-                        <ListItem itemDivider>
-                            <Text style={{ paddingLeft: 10}}>K</Text>
-                        </ListItem>
-                        <ListItem style={ styles.listItem }>
-                            <Thumbnail square size={80} source={require('../../../../resources/images/person-flat.png')} />
-                            <Body>
-                                <Text>Karlos Black</Text>
-                            </Body>
-                        </ListItem>
-                        <ListItem itemDivider>
-                            <Text style={{ paddingLeft: 10}}>M</Text>
-                        </ListItem>
-                        <ListItem style={ styles.listItem }>
-                            <Thumbnail square size={80} source={require('../../../../resources/images/person-flat.png')} />
-                            <Body>
-                                <Text>Martin Red</Text>
-                            </Body>
-                        </ListItem>
-                        <ListItem itemDivider>
-                            <Text style={{ paddingLeft: 10}}>P</Text>
-                        </ListItem>
-                        <ListItem style={ styles.listItem }>
-                            <Thumbnail square size={80} source={require('../../../../resources/images/person-flat.png')} />
-                            <Body>
-                                <Text>Peter Green</Text>
-                            </Body>
-                        </ListItem>
-                    </List>
-
+                    <UserList
+                        items={items}
+                        onItemPress={this.handleItemPress}
+                    />
                 </Content>
             </Container>
         );

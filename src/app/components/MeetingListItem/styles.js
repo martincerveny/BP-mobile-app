@@ -9,5 +9,6 @@ export default StyleSheet.create({
     },
     listItem: {
         paddingLeft: 15,
+        height: 60
     }
 });

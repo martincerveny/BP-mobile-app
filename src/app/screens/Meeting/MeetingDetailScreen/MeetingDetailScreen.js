@@ -1,9 +1,10 @@
 import React from 'react';
 import { Container, Tab, Tabs, TabHeading, Icon, Text, Button } from 'native-base';
-import PeopleTab from '../../../components/UserListItem/UserListItem';
+import MeetingDetailUserListTab from '../../../components/MeetingDetailUserListTab/MeetingDetailUserListTab';
 import NoteListItem from '../../../components/NoteListItem/NoteListItem';
 import MeetingDetailTab from '../../../components/MeetingDetailTab/MeetingDetailTab';
 import MeetingStore from "../../../flux/Meeting/MeetingStore";
+import UserStore from "../../../flux/User/UserStore";
 import Header from '../../../components/Header/Header'
 
 import styles from './styles';
@@ -12,15 +13,20 @@ class MeetingDetailScreen extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            meetingItem: ''
+            meetingItem: '',
+            userItems: []
         };
 
-        this.goBack = this.goBack.bind(this)
+        this.goBack = this.goBack.bind(this);
         this.loadItem = this.loadItem.bind(this);
+        this.loadUserItems = this.loadUserItems.bind(this);
+        this.handleUserItemPress = this.handleUserItemPress.bind(this);
+
     };
 
     componentDidMount () {
         this.loadItem();
+        this.loadUserItems();
     };
 
     loadItem () {
@@ -31,12 +37,27 @@ class MeetingDetailScreen extends React.Component {
 
     };
 
+    /**
+     * @TODO vybrat ludi len k danej schodzke podla meetingIds
+     */
+    loadUserItems () {
+        const meetingId = this.props.navigation.state.params.meetingId;
+
+        UserStore.getAllItems().then(userItems => {
+            return this.setState({ userItems })
+        });
+    }
+
     goBack () {
         this.props.navigation.goBack()
     }
 
+    handleUserItemPress (id) {
+        this.props.navigation.navigate("user.detail", { userId: id})
+    }
+
     render () {
-        const { meetingItem } = this.state;
+        const { meetingItem, userItems } = this.state;
 
         return (
             <Container>
@@ -47,6 +68,11 @@ class MeetingDetailScreen extends React.Component {
                             <Icon style={{ color: '#fff'}} name="arrow-round-back" />
                         </Button>
                     }
+                    right={
+                        <Button transparent onPress={() => this.props.navigation.navigate("user.search.index")}>
+                            <Icon style={{ color: '#fff'}} name="md-person-add" />
+                        </Button>
+                    }
                 />
                 <Tabs>
                     <Tab heading={ <TabHeading><Icon name="ios-keypad" /></TabHeading>}>
@@ -55,7 +81,10 @@ class MeetingDetailScreen extends React.Component {
                        />
                     </Tab>
                     <Tab heading={ <TabHeading><Icon name="ios-people" /></TabHeading>}>
-                        <PeopleTab navigation={ this.props.navigation }/>
+                        <MeetingDetailUserListTab
+                            userItems={userItems}
+                            onUserItemPress={this.handleUserItemPress}
+                        />
                     </Tab>
                     <Tab heading={ <TabHeading><Icon name="ios-paper" /></TabHeading>}>
                         <NoteListItem />

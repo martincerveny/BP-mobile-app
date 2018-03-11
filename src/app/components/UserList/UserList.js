@@ -1,20 +1,20 @@
 import React from 'react';
 import { ListView  } from 'react-native';
-import MeetingListItem from './../MeetingListItem/MeetingListItem';
+import UserListItem from './../UserListItem/UserListItem';
 
 import styles from './styles';
 
-const MeetingList = ({ items, onItemPress }) => (
+const UserList = ({ items, onItemPress }) => (
     <ListView
         enableEmptySections
         dataSource={new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(items)}
         renderRow={item => (
-            <MeetingListItem
+            <UserListItem
                 item={item}
                 onPress={onItemPress}
             />
         )}
     />
-);
+)
 
-export default MeetingList;
+export default UserList;

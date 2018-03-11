@@ -1,5 +1,5 @@
 /**
- * MeetingList
+ * MeetingItem
  */
 class MeetingItem {
     getId() {

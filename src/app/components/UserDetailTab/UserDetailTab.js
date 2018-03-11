@@ -1,17 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Container, Content, Text, Icon, Left, Separator, ListItem, List, Right, Input, Item, Thumbnail, Body } from 'native-base';
 import styles from './styles';
 
-class UserItem extends Component {
-    render() {
-        return (
+const UserDetailTab = ({ userItem }) => (
             <Container style={ styles.container }>
                 <Content>
                     <ListItem>
                         <Thumbnail square size={80} source={require('../../../resources/images/person-flat.png')} />
                             <Body>
-                        <Text>Jan Novotný</Text>
-                        <Text note>44 rokov</Text>
+                        <Text>{userItem.name}</Text>
+                        <Text note>{userItem.age}</Text>
                         </Body>
                     </ListItem>
                     <Separator bordered>
@@ -23,7 +21,7 @@ class UserItem extends Component {
                             <Text>Bydlisko</Text>
                         </Left>
                         <Right>
-                            <Text>Brno</Text>
+                            <Text>{userItem.address}</Text>
                         </Right>
                     </ListItem>
                     <ListItem>
@@ -32,18 +30,16 @@ class UserItem extends Component {
                             <Text>Firma</Text>
                         </Left>
                         <Right>
-                            <Text>123 s.r.o.</Text>
+                            <Text>{userItem.company}</Text>
                         </Right>
                     </ListItem>
 
                     <Separator bordered>
                         <Text>POZNÁMKA</Text>
                     </Separator>
-                    <Text style={{ paddingLeft: 15, paddingTop: 10}}>Text poznámky</Text>
+                    <Text style={{ paddingLeft: 15, paddingTop: 10}}>{userItem.note}</Text>
                 </Content>
             </Container>
-        );
-    }
-}
+);
 
-export default UserItem;
+export default UserDetailTab;
