@@ -15,7 +15,7 @@ const UserStore = {
      * Returns item for the given ID.
      *
      * @param {string} id - Item's ID.
-     * @returns {Promise.<MeetingItem>} - Returns a Promise object.
+     * @returns {Promise.<UserItem>} - Returns a Promise object.
      */
     async getItemById (id) {
         return await AsyncStorage.getItem(UserConstants.STORE_KEY_ITEM + id)
@@ -25,19 +25,27 @@ const UserStore = {
     /**
      * Gets all items from the store.
      *
-     * @returns {Promise.<Array.<MeetingItem>>} - Returns a Promise object.
+     * @returns {Promise.<Array.<UserItem>>} - Returns a Promise object.
      */
     async getAllItems () {
         return (await AsyncStorage.multiGet(await UserStore.keys()))
             .map(result => _mapToItem(JSON.parse(result[1])))
     },
 
-
-    // async getAllItemsByMeetingId (meetingId) {
-    //     return (await AsyncStorage.multiGet(await UserStore.keys()))
-    //         .filter(item => item.get() === meetingId)
-    //         .map(result => _mapToItem(JSON.parse(result[1])))
-    // },
+    /**
+     * Return all items by MeetingId.
+     *
+     * @param meetingId
+     * @returns {Promise.<Array.<UserItem>>} - Returns a Promise object.
+     */
+    async getAllItemsByMeetingId (meetingId) {
+        return (await AsyncStorage.multiGet(await UserStore.keys()))
+            .map(result => _mapToItem(JSON.parse(result[1])))
+            .filter(item => item.getMeetingIds().find(element => {
+                    return element === meetingId;
+                }
+            ))
+    },
 
     /**
      * Gets all keys with all IDs for this store.

@@ -18,8 +18,13 @@ class NextMeetingListScreen extends Component {
     }
 
     componentDidMount () {
+        MeetingStore.addChangeListener(this.loadItems);
         this.loadItems();
     };
+
+    componentWillUnmount () {
+        MeetingStore.removeChangeListener(this.loadItems);
+    }
 
     loadItems () {
         MeetingStore.getAllItems().then(items => {

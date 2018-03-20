@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import Bullet from 'bullet-pubsub';
 import { AsyncStorage } from 'react-native';
 import MeetingConstants from './MeetingConstants';
 import MeetingItem from "./MeetingItem";
@@ -33,6 +34,17 @@ const MeetingStore = {
     },
 
     /**
+     * Gets all items from the store by array of meetingIds.
+     *
+     * @param {Array} meetingIds - array of meetingIds
+     * @returns {Promise.<Array.<MeetingItem>>} - Returns a Promise object.
+     */
+    async getAllItemsByMeetingIds (meetingIds) {
+        return (await AsyncStorage.multiGet(meetingIds))
+            .map(result => _mapToItem(JSON.parse(result[1])))
+    },
+
+    /**
      * Gets all keys with all IDs for this store.
      *
      * @returns {Promise.<Array.<string>>} - Returns a Promise object.
@@ -42,6 +54,71 @@ const MeetingStore = {
             .filter(key => STORE_KEY_REGEXP.test(key))
     },
 
+    dispatchIndex: (payload) => {
+        switch (payload.type) {
+            case MeetingConstants.MEETING_CREATE:
+                _createItem(payload.data)
+                    .then(() => { })
+                    .catch(() => { });
+                break;
+            case MeetingConstants.MEETING_DELETE:
+                _deleteItem(payload.data)
+                    .then(() => { })
+                    .catch(() => { });
+                break
+        }
+    },
+
+    /**
+     * Emits the change event listener.
+     *
+     * @returns {undefined}
+     */
+    emitChangeListener () {
+        Bullet.trigger(MeetingConstants.MEETING_EVENT_CHANGE)
+    },
+
+    /**
+     * Adds the change event listener.
+     *
+     * @param {Function} callback - Callback function.
+     * @returns {undefined}
+     */
+    addChangeListener (callback) {
+        Bullet.on(MeetingConstants.MEETING_EVENT_CHANGE, callback)
+    },
+
+    /**
+     * Removes the change event listener.
+     *
+     * @param {Function} callback - Callback function.
+     * @returns {undefined}
+     */
+    removeChangeListener (callback) {
+        Bullet.off(MeetingConstants.MEETING_EVENT_CHANGE, callback)
+    }
+};
+
+/**
+ * Creates Meeting Item
+ * @param data
+ * @returns {Promise<void>}
+ * @private
+ */
+async function _createItem (data) {
+    AsyncStorage.setItem(MeetingConstants.STORE_KEY_ITEM + data.id, JSON.stringify(data));
+    MeetingStore.emitChangeListener()
+}
+
+/**
+ * Deletes Meeting Item
+ * @param data
+ * @returns {Promise<void>}
+ * @private
+ */
+async function _deleteItem (data) {
+    AsyncStorage.removeItem(MeetingConstants.STORE_KEY_ITEM + data.id);
+    MeetingStore.emitChangeListener()
 }
 
 function _mapToItem (obj) {

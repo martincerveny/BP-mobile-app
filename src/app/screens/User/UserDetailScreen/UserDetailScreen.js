@@ -18,7 +18,6 @@ class UserDetailScreen extends Component {
 
         this.goBack = this.goBack.bind(this);
         this.loadItem = this.loadItem.bind(this);
-        this.loadMeetingItems = this.loadMeetingItems.bind(this);
         this.handleMeetingItemPress = this.handleMeetingItemPress.bind(this);
     };
 
@@ -28,25 +27,18 @@ class UserDetailScreen extends Component {
 
     componentDidMount () {
         this.loadItem();
-        this.loadMeetingItems();
     };
 
     loadItem () {
         const userId = this.props.navigation.state.params.userId;
         UserStore.getItemById(userId).then(userItem => {
-            return this.setState({ userItem })
+            MeetingStore.getAllItemsByMeetingIds(userItem.getMeetingIds()).then(meetingItems => {
+                this.setState({ meetingItems })
+            });
+            this.setState({ userItem })
         });
 
     };
-
-    /**
-     * @TODO vybrat schodzky len k danej osobe podla meetingIds
-     */
-    loadMeetingItems () {
-        MeetingStore.getAllItems().then(meetingItems => {
-            return this.setState({ meetingItems })
-        });
-    }
 
     handleMeetingItemPress (id) {
         this.props.navigation.navigate("meeting.detail", { meetingId: id})
@@ -63,6 +55,11 @@ class UserDetailScreen extends Component {
                         <Button transparent onPress={this.goBack}>
                             <Icon style={{ color: '#fff'}} name="arrow-round-back" />
                         </Button>
+                    }
+                    right={
+                            <Button transparent>
+                                <Icon style={{ color: '#fff'}} name="create" />
+                            </Button>
                     }
                 />
                 <Tabs>

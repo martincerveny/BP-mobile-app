@@ -33,7 +33,7 @@ let meeting3 = {
 
 let user1 = {
     id: 1,
-    meetingIDs: [1,2],
+    meetingIds: ['@MeetingStore:meeting:id:1','@MeetingStore:meeting:id:2'],
     name: 'Vanes Béresová',
     age: 20,
     address: 'Košice',
@@ -43,7 +43,7 @@ let user1 = {
 
 let user2 = {
     id: 2,
-    meetingIDs: [],
+    meetingIds: ['@MeetingStore:meeting:id:1'],
     name: 'Lukáš Pokorný',
     age: 30,
     address: 'Brno',
@@ -53,7 +53,7 @@ let user2 = {
 
 let user3 = {
     id: 3,
-    meetingIDs: [],
+    meetingIds: ['@MeetingStore:meeting:id:2','@MeetingStore:meeting:id:3'],
     name: 'Tibor Kováč',
     age: 42,
     address: 'Bratislava',
@@ -63,7 +63,7 @@ let user3 = {
 
 let user4 = {
     id: 4,
-    meetingIDs: [],
+    meetingIds: ['@MeetingStore:meeting:id:3'],
     name: 'Tomáš Kríž',
     age: 35,
     address: 'Trenčín',
@@ -73,7 +73,7 @@ let user4 = {
 
 let user5 = {
     id: 5,
-    meetingIDs: [],
+    meetingIds: ['@MeetingStore:meeting:id:2'],
     name: 'Jozef Drahovský',
     age: 40,
     address: 'Košice',
@@ -83,7 +83,7 @@ let user5 = {
 
 let user6 = {
     id: 6,
-    meetingIDs: [],
+    meetingIds: ['@MeetingStore:meeting:id:3'],
     name: 'Veronika Dobrá',
     age: 25,
     address: 'Banská Bystrica',
@@ -93,6 +93,7 @@ let user6 = {
 
 const Seeds = {
     seed () {
+
         AsyncStorage.setItem('@MeetingStore:meeting:id:1', JSON.stringify(meeting1));
         AsyncStorage.setItem('@MeetingStore:meeting:id:2', JSON.stringify(meeting2));
         AsyncStorage.setItem('@MeetingStore:meeting:id:3', JSON.stringify(meeting3));
@@ -104,6 +105,6 @@ const Seeds = {
         AsyncStorage.setItem('@UserStore:user:id:5', JSON.stringify(user5));
         AsyncStorage.setItem('@UserStore:user:id:6', JSON.stringify(user6));
     }
-}
+} ;
 
 export default Seeds;

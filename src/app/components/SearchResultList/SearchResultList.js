@@ -1,20 +1,21 @@
 import React from 'react';
-import { ListView  } from 'react-native';
-import UserListItem from './../UserListItem/UserListItem';
+import { ListView } from 'react-native';
+import SearchResultListItem from './../SearchResultListItem/SearchResultListItem';
 
 import styles from './styles';
 
-const UserList = ({ items, onItemPress }) => (
+const SearchResultList = ({ items, onItemPress, createItemOnPress }) => (
     <ListView
         enableEmptySections
         dataSource={new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(items)}
         renderRow={item => (
-            <UserListItem
+            <SearchResultListItem
                 item={item}
                 onPress={onItemPress}
+                createOnPress={createItemOnPress}
             />
         )}
     />
 );
 
-export default UserList;
+export default SearchResultList;

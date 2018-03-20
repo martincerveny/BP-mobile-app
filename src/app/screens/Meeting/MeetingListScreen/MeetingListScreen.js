@@ -17,8 +17,13 @@ class MeetingListScreen extends Component {
     }
 
     componentDidMount () {
+        MeetingStore.addChangeListener(this.loadItems);
         this.loadItems();
     };
+
+    componentWillUnmount () {
+        MeetingStore.removeChangeListener(this.loadItems);
+    }
 
     loadItems () {
         MeetingStore.getAllItems().then(items => {
@@ -37,9 +42,14 @@ class MeetingListScreen extends Component {
             <Container style={ styles.container }>
                 <Header
                     title='Zoznam schôdzok'
-                    right={
+                    left={
                         <Button transparent onPress={() => this.props.navigation.navigate("meeting.create")}>
                             <Icon style={{ color: '#fff'}} name="add" />
+                        </Button>
+                    }
+                    right={
+                        <Button transparent>
+                            <Icon style={{ color: '#fff'}} name="search" />
                         </Button>
                     }
                 />

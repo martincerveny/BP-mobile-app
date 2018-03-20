@@ -21,7 +21,7 @@ class MeetingDetailScreen extends React.Component {
         this.loadItem = this.loadItem.bind(this);
         this.loadUserItems = this.loadUserItems.bind(this);
         this.handleUserItemPress = this.handleUserItemPress.bind(this);
-
+        this.handleUpdateItemPress = this.handleUpdateItemPress.bind(this);
     };
 
     componentDidMount () {
@@ -37,13 +37,10 @@ class MeetingDetailScreen extends React.Component {
 
     };
 
-    /**
-     * @TODO vybrat ludi len k danej schodzke podla meetingIds
-     */
     loadUserItems () {
         const meetingId = this.props.navigation.state.params.meetingId;
 
-        UserStore.getAllItems().then(userItems => {
+        UserStore.getAllItemsByMeetingId('@MeetingStore:meeting:id:'+ meetingId).then(userItems => {
             return this.setState({ userItems })
         });
     }
@@ -54,6 +51,10 @@ class MeetingDetailScreen extends React.Component {
 
     handleUserItemPress (id) {
         this.props.navigation.navigate("user.detail", { userId: id})
+    }
+
+    handleUpdateItemPress (id) {
+        this.props.navigation.navigate("meeting.update", { meetingId: id})
     }
 
     render () {
@@ -69,8 +70,8 @@ class MeetingDetailScreen extends React.Component {
                         </Button>
                     }
                     right={
-                        <Button transparent onPress={() => this.props.navigation.navigate("user.search.index")}>
-                            <Icon style={{ color: '#fff'}} name="md-person-add" />
+                        <Button transparent onPress={() => this.handleUpdateItemPress(meetingItem.getId())}>
+                            <Icon style={{ color: '#fff'}} name="create" />
                         </Button>
                     }
                 />
@@ -84,6 +85,7 @@ class MeetingDetailScreen extends React.Component {
                         <MeetingDetailUserListTab
                             userItems={userItems}
                             onUserItemPress={this.handleUserItemPress}
+                            navigation={this.props.navigation}
                         />
                     </Tab>
                     <Tab heading={ <TabHeading><Icon name="ios-paper" /></TabHeading>}>

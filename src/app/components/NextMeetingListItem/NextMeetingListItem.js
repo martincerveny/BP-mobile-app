@@ -15,7 +15,6 @@ const NextMeetingListItem = ({ item, onPress }) => (
             <Card>
                 <CardItem >
                     <Left>
-                        <Icon active name="flame" style={{ color: '#e74c3c'}}/>
                         <Body>
                         <Text>{item.getName()}</Text>
                         <Text note>{item.getDate()}</Text>

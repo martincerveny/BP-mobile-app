@@ -6,7 +6,7 @@ import UserList from '../../../components/UserList/UserList'
 
 import styles from './styles';
 
-class UserListScreen extends React.Component {
+class UserAddListScreen extends React.Component {
 
     constructor (props) {
         super(props);
@@ -14,9 +14,14 @@ class UserListScreen extends React.Component {
             items: []
         };
 
+        this.goBack = this.goBack.bind(this);
         this.loadItems = this.loadItems.bind(this);
         this.handleItemPress = this.handleItemPress.bind(this);
     };
+
+    goBack () {
+        this.props.navigation.goBack()
+    }
 
     componentDidMount () {
         this.loadItems();
@@ -29,7 +34,7 @@ class UserListScreen extends React.Component {
     }
 
     handleItemPress (id) {
-        this.props.navigation.navigate("user.detail", { userId: id})
+        // this.props.navigation.navigate("user.detail", { userId: id})
     }
 
     render () {
@@ -40,13 +45,13 @@ class UserListScreen extends React.Component {
                 <Header
                     title='Zoznam ľudí'
                     left={
-                        <Button transparent onPress={() => this.props.navigation.navigate("user.create")}>
-                            <Icon style={{ color: '#fff'}} name="add" />
+                        <Button transparent onPress={this.goBack}>
+                            <Icon style={{ color: '#fff'}} name="arrow-round-back" />
                         </Button>
                     }
                     right={
-                        <Button transparent>
-                            <Icon style={{ color: '#fff'}} name="search" />
+                        <Button transparent onPress={() => this.props.navigation.navigate("user.create")}>
+                            <Icon style={{ color: '#fff'}} name="add" />
                         </Button>
                     }
                 />
@@ -61,4 +66,4 @@ class UserListScreen extends React.Component {
     }
 }
 
-export default UserListScreen;
+export default UserAddListScreen;

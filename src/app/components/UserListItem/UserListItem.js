@@ -11,6 +11,6 @@ const UserListItem = ({ item, onPress }) => (
             </Body>
         </ListItem>
     </List>
-)
+);
 
 export default UserListItem;

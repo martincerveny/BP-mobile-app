@@ -13,6 +13,6 @@ const MeetingListItem = ({ item, onPress }) => (
             </Right>
         </ListItem>
     </List>
-)
+);
 
 export default MeetingListItem;

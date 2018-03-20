@@ -1,6 +1,8 @@
 import React from 'react';
 import AppNavigation from "./navigations/AppNavigation";
-import { Root } from 'native-base';
+import { Root, StyleProvider } from 'native-base';
+import getTheme from './../../native-base-theme/components';
+import platform from './../../native-base-theme/variables/platform';
 import Seeds from "./seeds/Seeds";
 
 class App extends React.Component {
@@ -10,9 +12,11 @@ class App extends React.Component {
 
     render() {
         return (
-            <Root>
-                <AppNavigation/>
-            </Root>
+            <StyleProvider style={getTheme(platform)}>
+                <Root>
+                    <AppNavigation/>
+                </Root>
+            </StyleProvider>
         );
     }
 }

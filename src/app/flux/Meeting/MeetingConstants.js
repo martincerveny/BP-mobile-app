@@ -1,3 +1,6 @@
 export default {
+    MEETING_EVENT_CHANGE: 'MEETING_EVENT_CHANGE',
+    MEETING_CREATE: 'MEETING_CREATE',
+    MEETING_DELETE: 'MEETING_DELETE',
     STORE_KEY_ITEM: '@MeetingStore:meeting:id:'
 }
