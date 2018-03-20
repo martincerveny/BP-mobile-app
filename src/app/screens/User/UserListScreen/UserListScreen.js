@@ -18,7 +18,12 @@ class UserListScreen extends React.Component {
         this.handleItemPress = this.handleItemPress.bind(this);
     };
 
+    componentWillUnmount () {
+        UserStore.removeChangeListener(this.loadItems);
+    }
+
     componentDidMount () {
+        UserStore.addChangeListener(this.loadItems);
         this.loadItems();
     };
 

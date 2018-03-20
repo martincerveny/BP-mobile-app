@@ -10,8 +10,16 @@ class UserItem {
         return this.meetingIds;
     }
 
-    getName() {
-        return this.name;
+    getFirstName() {
+        return this.firstName;
+    }
+
+    getLastName() {
+        return this.lastName;
+    }
+
+    getImage() {
+        return this.image;
     }
 
     getAge() {

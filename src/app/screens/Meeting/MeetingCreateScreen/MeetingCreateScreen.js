@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, DatePickerIOS, TouchableOpacity } from 'react-native';
-import { Container, Content, Text, Icon, Left, ListItem, List, Right, Input, Body, Label, Button } from 'native-base';
+import {
+    Container, Content, Text, Icon, Left, ListItem, List, Right, Input, Body, Label, Button,
+    Toast
+} from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
 import styles from './styles';
@@ -56,8 +59,7 @@ class MeetingCreateScreen extends React.Component {
     }
 
     handleCreateItem () {
-        let meetingItem;
-        meetingItem = {
+        let meetingItem = {
             id: this.state.id,
             name: this.state.name,
             date: this.state.date,
@@ -66,7 +68,13 @@ class MeetingCreateScreen extends React.Component {
         };
 
         createMeetingItem(meetingItem);
-
+        Toast.show({
+            text: 'Schôdzka bola vytvorená.',
+            position: 'bottom',
+            buttonText: 'OK',
+            duration: 3000,
+            type: 'success'
+        });
         this.props.navigation.navigate("meeting.list")
     }
 

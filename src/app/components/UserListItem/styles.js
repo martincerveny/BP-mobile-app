@@ -1,7 +1,3 @@
 import {StyleSheet} from "react-native";
 
-export default StyleSheet.create({
-    listItem: {
-        paddingLeft: 15,
-    }
-});
+export default StyleSheet.create({});

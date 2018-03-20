@@ -1,7 +1,8 @@
 import _ from 'lodash'
 import { AsyncStorage } from 'react-native';
-import UserConstants from './UserConstants';
 import UserItem from "./UserItem";
+import Bullet from "bullet-pubsub";
+import UserConstants from "../User/UserConstants";
 
 /**
  * Regexp for match the item's key stored in cache.
@@ -57,8 +58,67 @@ const UserStore = {
             .filter(key => STORE_KEY_REGEXP.test(key))
     },
 
+    /**
+     * Dispatch index function
+     *
+     * @param payload
+     */
+    dispatchIndex: (payload) => {
+        switch (payload.type) {
+            case UserConstants.USER_CREATE:
+                _createItem(payload.data)
+                    .then(() => { })
+                    .catch(() => { });
+                break;
+        }
+    },
+
+    /**
+     * Emits the change event listener.
+     *
+     * @returns {undefined}
+     */
+    emitChangeListener () {
+        Bullet.trigger(UserConstants.USER_EVENT_CHANGE)
+    },
+
+    /**
+     * Adds the change event listener.
+     *
+     * @param {Function} callback - Callback function.
+     * @returns {undefined}
+     */
+    addChangeListener (callback) {
+        Bullet.on(UserConstants.USER_EVENT_CHANGE, callback)
+    },
+
+    /**
+     * Removes the change event listener.
+     *
+     * @param {Function} callback - Callback function.
+     * @returns {undefined}
+     */
+    removeChangeListener (callback) {
+        Bullet.off(UserConstants.USER_EVENT_CHANGE, callback)
+    }
+};
+
+/**
+ * Creates Meeting Item
+ * @param data
+ * @returns {Promise<void>}
+ * @private
+ */
+async function _createItem (data) {
+    AsyncStorage.setItem(UserConstants.STORE_KEY_ITEM + data.id, JSON.stringify(data));
+    UserStore.emitChangeListener();
 }
 
+/**
+ * Map data to object
+ * @param obj
+ * @private
+ */
 function _mapToItem (obj) {
     return _.assign(new UserItem(), obj)
 }

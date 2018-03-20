@@ -54,6 +54,11 @@ const MeetingStore = {
             .filter(key => STORE_KEY_REGEXP.test(key))
     },
 
+    /**
+     * Dispatch index function
+     *
+     * @param payload
+     */
     dispatchIndex: (payload) => {
         switch (payload.type) {
             case MeetingConstants.MEETING_CREATE:
@@ -121,6 +126,11 @@ async function _deleteItem (data) {
     MeetingStore.emitChangeListener()
 }
 
+/**
+ * Map data to object
+ * @param obj
+ * @private
+ */
 function _mapToItem (obj) {
     return _.assign(new MeetingItem(), obj)
 }

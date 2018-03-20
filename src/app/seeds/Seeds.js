@@ -34,7 +34,8 @@ let meeting3 = {
 let user1 = {
     id: 1,
     meetingIds: ['@MeetingStore:meeting:id:1','@MeetingStore:meeting:id:2'],
-    name: 'Vanes Béresová',
+    firstName: 'Vanes',
+    lastName: 'Béresová',
     age: 20,
     address: 'Košice',
     company: '123 s.r.o.',
@@ -44,7 +45,8 @@ let user1 = {
 let user2 = {
     id: 2,
     meetingIds: ['@MeetingStore:meeting:id:1'],
-    name: 'Lukáš Pokorný',
+    firstName: 'Lukáš',
+    lastName: 'Pokorný',
     age: 30,
     address: 'Brno',
     company: 'New company',
@@ -54,7 +56,8 @@ let user2 = {
 let user3 = {
     id: 3,
     meetingIds: ['@MeetingStore:meeting:id:2','@MeetingStore:meeting:id:3'],
-    name: 'Tibor Kováč',
+    firstName: 'Tibor',
+    lastName: 'Kováč',
     age: 42,
     address: 'Bratislava',
     company: 'Red Devil s.r.o.',
@@ -64,7 +67,8 @@ let user3 = {
 let user4 = {
     id: 4,
     meetingIds: ['@MeetingStore:meeting:id:3'],
-    name: 'Tomáš Kríž',
+    firstName: 'Tomáš',
+    lastName: 'Kríž',
     age: 35,
     address: 'Trenčín',
     company: 'SK stav s.r.o',
@@ -74,7 +78,8 @@ let user4 = {
 let user5 = {
     id: 5,
     meetingIds: ['@MeetingStore:meeting:id:2'],
-    name: 'Jozef Drahovský',
+    firstName: 'Jozef',
+    lastName: 'Drahovský',
     age: 40,
     address: 'Košice',
     company: 'Lucky s.r.o.',
@@ -84,7 +89,8 @@ let user5 = {
 let user6 = {
     id: 6,
     meetingIds: ['@MeetingStore:meeting:id:3'],
-    name: 'Veronika Dobrá',
+    firstName: 'Veronika',
+    lastName: 'Dobrá',
     age: 25,
     address: 'Banská Bystrica',
     company: 'King s.r.o.',

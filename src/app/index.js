@@ -3,12 +3,8 @@ import AppNavigation from "./navigations/AppNavigation";
 import { Root, StyleProvider } from 'native-base';
 import getTheme from './../../native-base-theme/components';
 import platform from './../../native-base-theme/variables/platform';
-import Seeds from "./seeds/Seeds";
-
+import { AsyncStorage } from 'react-native';
 class App extends React.Component {
-    componentDidMount() {
-        Seeds.seed()
-    }
 
     render() {
         return (

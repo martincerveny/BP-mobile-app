@@ -41,10 +41,11 @@ class UserSearchIndexScreen extends Component {
     }
 
     handleButtonPress () {
-        this.props.navigation.navigate("user.search.result", { token: this.state.token, term: this.state.term })
+        this.props.navigation.navigate("user.search.result", { token: this.state.token, term: this.state.term, meetingId: this.props.navigation.state.params.meetingId })
     }
 
     render() {
+
         return (
             <Container >
                 <Header

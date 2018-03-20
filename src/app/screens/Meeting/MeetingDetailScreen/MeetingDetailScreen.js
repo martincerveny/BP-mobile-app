@@ -6,7 +6,7 @@ import MeetingDetailTab from '../../../components/MeetingDetailTab/MeetingDetail
 import MeetingStore from "../../../flux/Meeting/MeetingStore";
 import UserStore from "../../../flux/User/UserStore";
 import Header from '../../../components/Header/Header'
-
+import MeetingConstants from "../../../flux/Meeting/MeetingConstants";
 import styles from './styles';
 
 class MeetingDetailScreen extends React.Component {
@@ -25,9 +25,15 @@ class MeetingDetailScreen extends React.Component {
     };
 
     componentDidMount () {
+        UserStore.addChangeListener(this.loadUserItems);
+
         this.loadItem();
         this.loadUserItems();
     };
+
+    componentWillUnmount () {
+        UserStore.removeChangeListener(this.loadUserItems);
+    }
 
     loadItem () {
         const meetingId = this.props.navigation.state.params.meetingId;
@@ -40,7 +46,7 @@ class MeetingDetailScreen extends React.Component {
     loadUserItems () {
         const meetingId = this.props.navigation.state.params.meetingId;
 
-        UserStore.getAllItemsByMeetingId('@MeetingStore:meeting:id:'+ meetingId).then(userItems => {
+        UserStore.getAllItemsByMeetingId(MeetingConstants.STORE_KEY_ITEM + meetingId).then(userItems => {
             return this.setState({ userItems })
         });
     }
@@ -86,6 +92,7 @@ class MeetingDetailScreen extends React.Component {
                             userItems={userItems}
                             onUserItemPress={this.handleUserItemPress}
                             navigation={this.props.navigation}
+                            meetingId={meetingItem.id}
                         />
                     </Tab>
                     <Tab heading={ <TabHeading><Icon name="ios-paper" /></TabHeading>}>

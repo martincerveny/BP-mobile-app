@@ -1,15 +1,20 @@
 import React from 'react';
 import { Container, Content, Text, Icon, Left, Separator, ListItem, List, Right, Input, Item, Thumbnail, Body } from 'native-base';
 import styles from './styles';
+import {FileSystem} from "expo";
 
 const UserDetailTab = ({ userItem }) => (
             <Container style={ styles.container }>
                 <Content>
                     <ListItem>
-                        <Thumbnail square size={80} source={require('../../../resources/images/person-flat.png')} />
-                            <Body>
-                        <Text>{userItem.name}</Text>
-                        <Text note>{userItem.age}</Text>
+                        {
+                            userItem.image == ''
+                                ? (<Thumbnail size={80} source={require('./../../../resources/images/person-flat.png')} />)
+                                : (<Thumbnail size={80} source={{uri: FileSystem.documentDirectory + userItem.image}} />)
+                        }
+                        <Body>
+                            <Text>{userItem.firstName} {userItem.lastName}</Text>
+                            <Text note>{userItem.age}</Text>
                         </Body>
                     </ListItem>
                     <Separator bordered>

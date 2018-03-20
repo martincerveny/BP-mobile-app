@@ -50,7 +50,7 @@ class UserDetailScreen extends Component {
         return (
             <Container>
                 <Header
-                    title={userItem.name}
+                    title={ userItem.firstName + ' ' + userItem.lastName }
                     left={
                         <Button transparent onPress={this.goBack}>
                             <Icon style={{ color: '#fff'}} name="arrow-round-back" />
