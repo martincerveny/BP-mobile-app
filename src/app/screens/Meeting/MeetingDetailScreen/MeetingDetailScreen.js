@@ -96,7 +96,7 @@ class MeetingDetailScreen extends React.Component {
                         />
                     </Tab>
                     <Tab heading={ <TabHeading><Icon name="ios-paper" /></TabHeading>}>
-                        <NoteListItem />
+                        {/*<NoteListItem />*/}
                     </Tab>
                 </Tabs>
             </Container>

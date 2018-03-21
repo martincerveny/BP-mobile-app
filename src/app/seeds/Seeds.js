@@ -97,19 +97,51 @@ let user6 = {
     note: 'Text poznamky',
 };
 
+let note1 = {
+    id: 1,
+    meetingId: 'a6a112da-028f-1308-86c7-67b7fc8d659a',
+    userId: '64bc3f6f-2695-5140-e913-7cc67ffc344a',
+    text: 'Test poznamky'
+}
+
+let note2 = {
+    id: 2,
+    meetingId: 'a6a112da-028f-1308-86c7-67b7fc8d659a',
+    userId: '64bc3f6f-2695-5140-e913-7cc67ffc344a',
+    text: 'Toto je dalsia testovacia poznamka'
+}
+
+let note3 = {
+    id: 3,
+    meetingId: 'a6a112da-028f-1308-86c7-67b7fc8d659a',
+    userId: '881bd389-88cc-1168-3482-327359ef761c',
+    text: 'Text'
+}
+
+let note4 = {
+    id: 4,
+    meetingId: '61a8d918-bab9-9130-c483-f4991c89bf10',
+    userId: '30c6cd62-f3a4-d34f-ee3d-2073b7a25371',
+    text: 'Test'
+}
+
 const Seeds = {
     seed () {
+        AsyncStorage.setItem('@NoteStore:note:id:1', JSON.stringify(note1));
+        AsyncStorage.setItem('@NoteStore:note:id:2', JSON.stringify(note2));
+        AsyncStorage.setItem('@NoteStore:note:id:3', JSON.stringify(note3));
+        AsyncStorage.setItem('@NoteStore:note:id:4', JSON.stringify(note4));
 
-        AsyncStorage.setItem('@MeetingStore:meeting:id:1', JSON.stringify(meeting1));
-        AsyncStorage.setItem('@MeetingStore:meeting:id:2', JSON.stringify(meeting2));
-        AsyncStorage.setItem('@MeetingStore:meeting:id:3', JSON.stringify(meeting3));
-
-        AsyncStorage.setItem('@UserStore:user:id:1', JSON.stringify(user1));
-        AsyncStorage.setItem('@UserStore:user:id:2', JSON.stringify(user2));
-        AsyncStorage.setItem('@UserStore:user:id:3', JSON.stringify(user3));
-        AsyncStorage.setItem('@UserStore:user:id:4', JSON.stringify(user4));
-        AsyncStorage.setItem('@UserStore:user:id:5', JSON.stringify(user5));
-        AsyncStorage.setItem('@UserStore:user:id:6', JSON.stringify(user6));
+        // AsyncStorage.setItem('@MeetingStore:meeting:id:1', JSON.stringify(meeting1));
+        // AsyncStorage.setItem('@MeetingStore:meeting:id:2', JSON.stringify(meeting2));
+        // AsyncStorage.setItem('@MeetingStore:meeting:id:3', JSON.stringify(meeting3));
+        //
+        // AsyncStorage.setItem('@UserStore:user:id:1', JSON.stringify(user1));
+        // AsyncStorage.setItem('@UserStore:user:id:2', JSON.stringify(user2));
+        // AsyncStorage.setItem('@UserStore:user:id:3', JSON.stringify(user3));
+        // AsyncStorage.setItem('@UserStore:user:id:4', JSON.stringify(user4));
+        // AsyncStorage.setItem('@UserStore:user:id:5', JSON.stringify(user5));
+        // AsyncStorage.setItem('@UserStore:user:id:6', JSON.stringify(user6));
     }
 } ;
 

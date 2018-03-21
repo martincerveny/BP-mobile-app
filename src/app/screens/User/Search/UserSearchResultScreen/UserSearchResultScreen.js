@@ -8,6 +8,7 @@ import { createUserItem } from './../../../../flux/User/UserActions'
 import styles from './styles';
 import FacebookApiFetchService from "../../../../services/FacebookApi/FacebookApiFetchService";
 import MeetingConstants from "../../../../flux/Meeting/MeetingConstants";
+import AppUtils from "../../../../utils/AppUtils";
 
 class UserSearchResultScreen extends React.Component {
     constructor (props) {
@@ -44,19 +45,9 @@ class UserSearchResultScreen extends React.Component {
         WebBrowser.openBrowserAsync(url);
     }
 
-    generateId() {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-        }
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-    }
-
-
     handleCreateUserItem (item) {
         const meetingId = this.props.navigation.state.params.meetingId
-        let userId = this.generateId();
+        let userId = AppUtils.generateId();
         let path = userId + '.png';
 
         FileSystem.downloadAsync(

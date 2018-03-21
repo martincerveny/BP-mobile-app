@@ -9,6 +9,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import styles from './styles';
 import Header from '../../../components/Header/Header'
 import { createMeetingItem } from './../../../flux/Meeting/MeetingActions'
+import AppUtils from "../../../utils/AppUtils";
 
 
 
@@ -18,7 +19,7 @@ class MeetingCreateScreen extends React.Component {
         let time = new Date().toLocaleTimeString();
 
         this.state = {
-            id: this.generateId(),
+            id: AppUtils.generateId(),
             name: '',
             date: new Date().toLocaleDateString(),
             time: time.substring(0, time.indexOf(':', time.indexOf(':')+1)),
@@ -47,15 +48,6 @@ class MeetingCreateScreen extends React.Component {
 
     goBack () {
         this.props.navigation.goBack()
-    }
-
-    generateId() {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-        }
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     }
 
     handleCreateItem () {

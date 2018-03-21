@@ -1,23 +1,36 @@
 import React, {Component} from 'react';
-import { Container, Icon, Text, Card, CardItem, Left, Body, Content, Thumbnail, ListItem, Input, Button } from 'native-base';
+import { Container, Icon, Content, Button } from 'native-base';
 import Header from '../../../../components/Header/Header'
-import styles from './styles';
 import MeetingStore from "../../../../flux/Meeting/MeetingStore";
+import { ListView} from 'react-native'
+import MeetingConstants from "../../../../flux/Meeting/MeetingConstants";
+import UserStore from "../../../../flux/User/UserStore";
+import UserCard from "../../../../components/UserCard/UserCard";
+import styles from './styles';
 
 class NextMeetingDetailScreen extends Component {
     constructor (props) {
         super(props);
         this.state = {
             meetingItem: '',
+            userItems: '',
         };
 
         this.goBack = this.goBack.bind(this);
         this.loadItem = this.loadItem.bind(this);
+        this.loadUserItems = this.loadUserItems.bind(this);
     };
 
     componentDidMount () {
+        UserStore.addChangeListener(this.loadUserItems);
+
         this.loadItem();
+        this.loadUserItems();
     };
+
+    componentWillUnmount () {
+        UserStore.removeChangeListener(this.loadUserItems);
+    }
 
     goBack () {
         this.props.navigation.goBack()
@@ -31,6 +44,14 @@ class NextMeetingDetailScreen extends Component {
         });
 
     };
+
+    loadUserItems () {
+        const meetingId = this.props.navigation.state.params.meetingId;
+
+        UserStore.getAllItemsByMeetingId(MeetingConstants.STORE_KEY_ITEM + meetingId).then(userItems => {
+            return this.setState({ userItems })
+        });
+    }
 
     render() {
         const { meetingItem, userItems } = this.state;
@@ -46,42 +67,16 @@ class NextMeetingDetailScreen extends Component {
                     }
                 />
                 <Content>
-                    <Card>
-                        <CardItem >
-                            <Left>
-                                <Thumbnail square size={50} source={require('../../../../../resources/images/person-flat.png')} />
-                                <Body>
-                                    <Text>Jan Novotný</Text>
-                                </Body>
-                            </Left>
-                        </CardItem>
-                        <ListItem style={{ height: 60}}>
-                            <Body>
-                                <Input style={{ marginLeft: 10, marginTop: 5}} placeholder="Poznámka 1"/>
-                            </Body>
-                        </ListItem>
-                        <ListItem style={{ height: 60}}>
-                            <Body>
-                            <Input style={{ marginLeft: 10, marginTop: 5}} placeholder="Poznámka 2"/>
-                            </Body>
-                        </ListItem>
-                        <Button iconLeft transparent primary>
-                            <Icon name='ios-add-circle' style={{ color: '#2ecc71'}}/>
-                        </Button>
-                    </Card>
-                    <Card>
-                        <CardItem >
-                            <Left>
-                                <Thumbnail square size={50} source={require('../../../../../resources/images/person-flat.png')} />
-                                <Body>
-                                <Text>Peter Green</Text>
-                                </Body>
-                            </Left>
-                        </CardItem>
-                        <Button iconLeft transparent primary>
-                            <Icon name='ios-add-circle' style={{ color: '#2ecc71'}}/>
-                        </Button>
-                    </Card>
+                    <ListView
+                        enableEmptySections
+                        dataSource={new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(userItems)}
+                        renderRow={userItem => (
+                            <UserCard
+                                item={userItem}
+                                meetingId={meetingItem.id}
+                            />
+                        )}
+                    />
                 </Content>
             </Container>
         );

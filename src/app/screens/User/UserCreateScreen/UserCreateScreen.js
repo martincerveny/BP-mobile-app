@@ -1,21 +1,19 @@
 import React, {Component} from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import {
     Container, Content, Text, Icon, Left, Separator, ListItem, List, Right, Input, Body, Label, Button, Picker,
     Toast
 } from 'native-base';
 import Header from '../../../components/Header/Header'
-
 import styles from './styles';
-import MeetingConstants from "../../../flux/Meeting/MeetingConstants";
-import {createMeetingItem} from "../../../flux/Meeting/MeetingActions";
 import {createUserItem} from "../../../flux/User/UserActions";
+import AppUtils from "../../../utils/AppUtils";
 
 class UserCreateScreen extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            id: this.generateId(),
+            id: AppUtils.generateId(),
             firstName: '',
             lastName: '',
             age: '',
@@ -28,15 +26,6 @@ class UserCreateScreen extends Component {
 
     goBack () {
         this.props.navigation.goBack()
-    }
-
-    generateId() {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-        }
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     }
 
     handleCreateItem () {
