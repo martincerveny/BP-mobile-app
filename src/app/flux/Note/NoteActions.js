@@ -1,5 +1,6 @@
 import Dispatcher from './../Dispatcher';
 import NoteConstants from './NoteConstants';
+import MeetingConstants from "../Meeting/MeetingConstants";
 
 /**
  * Creates item.
@@ -14,6 +15,20 @@ function createNoteItem (data) {
     });
 }
 
+/**
+ * Deletes item.
+ *
+ * @param {array} data - Note data.
+ * @returns {undefined}
+ */
+function deleteNoteItem (data) {
+    Dispatcher({
+        type: NoteConstants.NOTE_DELETE,
+        data: data
+    });
+}
+
 export {
     createNoteItem,
+    deleteNoteItem
 }

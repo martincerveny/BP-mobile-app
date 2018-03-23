@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import { View } from 'react-native';
 import {
-    Container, Content, Text, Icon, Left, Separator, ListItem, List, Right, Input, Body, Label, Button, Picker,
-    Toast
-} from 'native-base';
+    Container, Content, Text, Separator, ListItem, Input, Body, Label, Button, Toast} from 'native-base';
 import Header from '../../../components/Header/Header'
 import styles from './styles';
 import {createUserItem} from "../../../flux/User/UserActions";
@@ -25,7 +23,7 @@ class UserCreateScreen extends Component {
     }
 
     goBack () {
-        this.props.navigation.goBack()
+        this.props.modalVisible(false);
     }
 
     handleCreateItem () {
@@ -49,7 +47,8 @@ class UserCreateScreen extends Component {
             duration: 3000,
             type: 'success'
         });
-        this.props.navigation.navigate("user.list")
+
+        this.goBack();
     }
 
     render() {
@@ -59,7 +58,7 @@ class UserCreateScreen extends Component {
                     title='Vytvoriť osobu'
                     left={
                         <Button transparent onPress={this.goBack}>
-                            <Icon style={{ color: '#fff'}} name="arrow-round-back" />
+                            <Text style={ styles.cancelText }>Zrušiť</Text>
                         </Button>
                     }
                 />

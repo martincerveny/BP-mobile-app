@@ -1,19 +1,27 @@
 import React, {Component} from 'react';
+import { Modal } from 'react-native';
 import Header from '../../../components/Header/Header'
-import { Container, Content, List, ListItem, Left, Body, Right, Thumbnail, Text, Badge, Button, Icon } from 'native-base';
+import { Container, Content, Button, Icon } from 'native-base';
 import styles from './styles';
 import MeetingStore from "../../../flux/Meeting/MeetingStore";
 import MeetingList from '../../../components/MeetingList/MeetingList';
+import MeetingCreateScreen from '../MeetingCreateScreen/MeetingCreateScreen';
 
 class MeetingListScreen extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            items: []
+            items: [],
+            modalVisible: false,
         };
 
         this.loadItems = this.loadItems.bind(this);
         this.handleItemPress = this.handleItemPress.bind(this);
+        this.setModalVisible = this.setModalVisible.bind(this);
+    }
+
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
     }
 
     componentDidMount () {
@@ -43,7 +51,7 @@ class MeetingListScreen extends Component {
                 <Header
                     title='Zoznam schôdzok'
                     left={
-                        <Button transparent onPress={() => this.props.navigation.navigate("meeting.create")}>
+                        <Button transparent onPress={() => {this.setModalVisible(true);}}>
                             <Icon style={{ color: '#fff'}} name="add" />
                         </Button>
                     }
@@ -55,9 +63,18 @@ class MeetingListScreen extends Component {
                 />
                 <Content>
                     <MeetingList
-                    items={items}
-                    onItemPress={this.handleItemPress}
+                        items={items}
+                        onItemPress={this.handleItemPress}
                     />
+                    <Modal
+                        animationType="slide"
+                        transparent={false}
+                        visible={this.state.modalVisible}
+                    >
+                        <MeetingCreateScreen
+                            modalVisible={this.setModalVisible}
+                        />
+                    </Modal>
                 </Content>
             </Container>
         );

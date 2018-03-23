@@ -19,7 +19,7 @@ const MeetingNavigation = StackNavigator({
     'meeting.list': { screen: MeetingListScreen },
     'meeting.detail': { screen: MeetingDetailScreen },
     'meeting.create': { screen: MeetingCreateScreen },
-    'meeting.update': { screen: MeetingUpdateScreen },
+    // 'meeting.update': { screen: MeetingUpdateScreen },
 
     //user
     'user.detail': { screen: UserDetailScreen },

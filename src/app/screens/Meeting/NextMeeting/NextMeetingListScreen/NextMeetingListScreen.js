@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { ScrollView, View, TouchableOpacity } from 'react-native';
-import { Container, Content, List, ListItem, Card, CardItem } from 'native-base';
+import { ScrollView, View } from 'react-native';
+import { Container, Text } from 'native-base';
 import Header from '../../../../components/Header/Header'
 import styles from './styles';
 import MeetingStore from "../../../../flux/Meeting/MeetingStore";
@@ -42,7 +42,7 @@ class NextMeetingListScreen extends Component {
         return (
             <Container>
                 <Header
-                    title='Nasledujúce schôdzky'
+                    title='Ďalšie schôdzky'
                 />
                 <View style={ styles.container }>
                     <ScrollView>

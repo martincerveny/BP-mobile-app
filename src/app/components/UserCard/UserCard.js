@@ -4,7 +4,7 @@ import {FileSystem} from "expo";
 import NoteList from '../NoteList/NoteList';
 import NoteStore from "../../flux/Note/NoteStore";
 import AppUtils from "../../utils/AppUtils";
-import { createNoteItem } from '../../flux/Note/NoteActions';
+import {createNoteItem, deleteNoteItem} from '../../flux/Note/NoteActions';
 
 import styles from './styles';
 
@@ -18,6 +18,7 @@ class UserCard extends React.Component {
 
         this.loadNoteItems = this.loadNoteItems.bind(this);
         this.handleCreateNoteItem = this.handleCreateNoteItem.bind(this);
+        this.handleDeleteItem = this.handleDeleteItem.bind(this);
     }
 
     componentDidMount () {
@@ -45,12 +46,19 @@ class UserCard extends React.Component {
             userId: this.state.item.getId(),
             text: ''
         };
-
+        console.log('vytvaram novy item ---  ' + noteItem.id)
         createNoteItem(noteItem);
+    }
+
+    handleDeleteItem (id) {
+        console.log('mazem item ---  ' + this.props.item.getId())
+
+        deleteNoteItem(id);
     }
 
     render () {
         const { item, noteItems } = this.state;
+
         return (
             <Card>
                 <CardItem>
@@ -68,6 +76,9 @@ class UserCard extends React.Component {
 
                 <NoteList
                     items={noteItems}
+                    meetingId={this.props.meetingId}
+                    userId={this.state.item.getId()}
+                    onDeleteItemPress={this.handleDeleteItem}
                 />
 
                 <Button iconLeft transparent primary onPress={this.handleCreateNoteItem}>

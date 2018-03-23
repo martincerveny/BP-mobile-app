@@ -1,15 +1,72 @@
 import React from 'react';
-import { List, ListItem, Body, Input} from 'native-base';
+import { List, ListItem, Body, Input, Button, Icon, Text } from 'native-base';
 import styles from './styles';
+import {createNoteItem} from "../../flux/Note/NoteActions";
 
-const NoteListItem = ({ item }) => (
-    <List>
-        <ListItem style={ styles.listItem }>
-            <Body>
-                <Input style={ styles.input } value={ item.getText()}/>
-            </Body>
-        </ListItem>
-    </List>
-);
+class NoteListItem extends React.Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            item: this.props.item,
+            text: this.props.item.getText()
+    };
+
+        this.handleSaveItem = this.handleSaveItem.bind(this);
+    }
+    //
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     // console.log(nextState)
+    //     if (this.props.item.id !== nextProps.item.id) {
+    //         this.setState({
+    //             item: this.props.item,
+    //             text: this.props.item.getText()
+    //         });
+    //         return true;
+    //     }
+    //     if (this.state.item.id !== nextState.item.id) {
+    //         this.setState({
+    //             item: this.props.item,
+    //             text: this.props.item.getText()
+    //         });
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    handleSaveItem () {
+        let noteItem = {
+            id: this.props.item.getId(),
+            meetingId: this.props.meetingId,
+            userId: this.props.userId,
+            text: this.state.text
+        };
+        console.log('saveujem item ---  ' + noteItem.id);
+
+        createNoteItem(noteItem);
+    }
+
+    render () {
+        return (
+            <List>
+                <ListItem style={styles.listItem}>
+                    <Body>
+                        <Input
+                            style={styles.input}
+                            onChangeText={(text) => this.setState({text})}
+                            value={this.state.text}
+                            autoCorrect={false}
+                            onBlur={this.handleSaveItem}
+                            placeholder={this.state.item.getId()}
+                        />
+                    </Body>
+                    <Button iconRight transparent danger onPress={() => this.props.deleteItemPress(this.props.item.getId())}>
+                        <Icon name='ios-remove-circle'/>
+                    </Button>
+                </ListItem>
+            </List>
+        );
+    }
+
+};
 
 export default NoteListItem;

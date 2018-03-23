@@ -1,5 +1,6 @@
 export default {
     NOTE_EVENT_CHANGE: 'NOTE_EVENT_CHANGE',
     NOTE_CREATE: 'USER_NOTE_CREATECREATE',
+    NOTE_DELETE: 'NOTE_DELETE',
     STORE_KEY_ITEM: '@NoteStore:note:id:'
 }

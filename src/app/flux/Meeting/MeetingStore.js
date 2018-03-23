@@ -70,7 +70,7 @@ const MeetingStore = {
                 _deleteItem(payload.data)
                     .then(() => { })
                     .catch(() => { });
-                break
+                break;
         }
     },
 
@@ -122,7 +122,7 @@ async function _createItem (data) {
  * @private
  */
 async function _deleteItem (data) {
-    AsyncStorage.removeItem(MeetingConstants.STORE_KEY_ITEM + data.id);
+    AsyncStorage.removeItem(MeetingConstants.STORE_KEY_ITEM + data);
     MeetingStore.emitChangeListener()
 }
 

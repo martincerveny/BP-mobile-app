@@ -127,10 +127,12 @@ let note4 = {
 
 const Seeds = {
     seed () {
-        AsyncStorage.setItem('@NoteStore:note:id:1', JSON.stringify(note1));
-        AsyncStorage.setItem('@NoteStore:note:id:2', JSON.stringify(note2));
-        AsyncStorage.setItem('@NoteStore:note:id:3', JSON.stringify(note3));
-        AsyncStorage.setItem('@NoteStore:note:id:4', JSON.stringify(note4));
+
+        // AsyncStorage.clear()
+        // AsyncStorage.setItem('@NoteStore:note:id:1', JSON.stringify(note1));
+        // AsyncStorage.setItem('@NoteStore:note:id:2', JSON.stringify(note2));
+        // AsyncStorage.setItem('@NoteStore:note:id:3', JSON.stringify(note3));
+        // AsyncStorage.setItem('@NoteStore:note:id:4', JSON.stringify(note4));
 
         // AsyncStorage.setItem('@MeetingStore:meeting:id:1', JSON.stringify(meeting1));
         // AsyncStorage.setItem('@MeetingStore:meeting:id:2', JSON.stringify(meeting2));

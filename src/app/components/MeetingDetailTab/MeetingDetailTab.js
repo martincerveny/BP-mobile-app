@@ -9,12 +9,12 @@ const MeetingDetailTab = ({ meetingItem }) => (
             <Separator bordered>
                 <Text>INFORMÁCIE</Text>
             </Separator>
-            <ListItem >
+            <ListItem>
                 <Left>
                     <Icon active name="calendar" style={{ fontSize: 20}}/>
                     <Text>Dátum</Text>
                 </Left>
-                <Right>
+                <Right style={ styles.listItemRight }>
                     <Text>{meetingItem.date}</Text>
                 </Right>
             </ListItem>
@@ -23,7 +23,7 @@ const MeetingDetailTab = ({ meetingItem }) => (
                     <Icon active name="time" style={{ fontSize: 20}}/>
                     <Text>Čas</Text>
                 </Left>
-                <Right>
+                <Right style={ styles.listItemRight }>
                     <Text> {meetingItem.time} </Text>
                 </Right>
             </ListItem>
@@ -32,7 +32,7 @@ const MeetingDetailTab = ({ meetingItem }) => (
                     <Icon active name="navigate" style={{ fontSize: 20}}/>
                     <Text>Miesto</Text>
                 </Left>
-                <Right>
+                <Right style={ styles.listItemRight }>
                     <Text>{meetingItem.place}</Text>
                 </Right>
             </ListItem>
@@ -41,7 +41,7 @@ const MeetingDetailTab = ({ meetingItem }) => (
                     <Icon active name="people" style={{ fontSize: 20}}/>
                     <Text>Počet ľudí</Text>
                 </Left>
-                <Right>
+                <Right style={ styles.listItemRight }>
                     <Text>{meetingItem.peopleCount}</Text>
                 </Right>
             </ListItem>

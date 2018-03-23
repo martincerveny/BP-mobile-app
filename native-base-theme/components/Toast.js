@@ -19,6 +19,7 @@ export default (variables = variable) => {
     justifyContent: "space-between",
     alignItems: "center",
     padding: 10,
+    marginBottom: 25,
     minHeight: 50,
     "NativeBase.Text": {
       color: "#fff",

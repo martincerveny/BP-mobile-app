@@ -1,12 +1,14 @@
 import React from 'react';
-import { Container, Tab, Tabs, TabHeading, Icon, Text, Button } from 'native-base';
+import _ from 'lodash';
+import { Modal } from 'react-native';
+import { Container, Tab, Tabs, TabHeading, Icon, Button } from 'native-base';
 import MeetingDetailUserListTab from '../../../components/MeetingDetailUserListTab/MeetingDetailUserListTab';
-import NoteListItem from '../../../components/NoteListItem/NoteListItem';
 import MeetingDetailTab from '../../../components/MeetingDetailTab/MeetingDetailTab';
 import MeetingStore from "../../../flux/Meeting/MeetingStore";
 import UserStore from "../../../flux/User/UserStore";
 import Header from '../../../components/Header/Header'
 import MeetingConstants from "../../../flux/Meeting/MeetingConstants";
+import MeetingUpdateScreen from "../MeetingUpdateScreen/MeetingUpdateScreen";
 import styles from './styles';
 
 class MeetingDetailScreen extends React.Component {
@@ -14,38 +16,47 @@ class MeetingDetailScreen extends React.Component {
         super(props);
         this.state = {
             meetingItem: '',
-            userItems: []
+            userItems: [],
+            modalVisible: false,
         };
 
         this.goBack = this.goBack.bind(this);
         this.loadItem = this.loadItem.bind(this);
         this.loadUserItems = this.loadUserItems.bind(this);
         this.handleUserItemPress = this.handleUserItemPress.bind(this);
-        this.handleUpdateItemPress = this.handleUpdateItemPress.bind(this);
+        this.setModalVisible = this.setModalVisible.bind(this);
     };
+
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
+    }
 
     componentDidMount () {
         UserStore.addChangeListener(this.loadUserItems);
-
+        MeetingStore.addChangeListener(this.loadItem);
         this.loadItem();
         this.loadUserItems();
     };
 
     componentWillUnmount () {
         UserStore.removeChangeListener(this.loadUserItems);
+        MeetingStore.removeChangeListener(this.loadItem);
     }
 
     loadItem () {
         const meetingId = this.props.navigation.state.params.meetingId;
         MeetingStore.getItemById(meetingId).then(meetingItem => {
+            // presmerovanie po zmazani a vypnuti modalneho okna
+            if (_.isEmpty(meetingItem)) {
+                this.goBack();
+            }
+
             return this.setState({ meetingItem })
         });
-
     };
 
     loadUserItems () {
         const meetingId = this.props.navigation.state.params.meetingId;
-
         UserStore.getAllItemsByMeetingId(MeetingConstants.STORE_KEY_ITEM + meetingId).then(userItems => {
             return this.setState({ userItems })
         });
@@ -57,10 +68,6 @@ class MeetingDetailScreen extends React.Component {
 
     handleUserItemPress (id) {
         this.props.navigation.navigate("user.detail", { userId: id})
-    }
-
-    handleUpdateItemPress (id) {
-        this.props.navigation.navigate("meeting.update", { meetingId: id})
     }
 
     render () {
@@ -76,11 +83,22 @@ class MeetingDetailScreen extends React.Component {
                         </Button>
                     }
                     right={
-                        <Button transparent onPress={() => this.handleUpdateItemPress(meetingItem.getId())}>
+                        <Button transparent onPress={() => {this.setModalVisible(true)}}>
                             <Icon style={{ color: '#fff'}} name="create" />
                         </Button>
                     }
                 />
+                <Modal
+                    animationType="fade"
+                    transparent={false}
+                    visible={this.state.modalVisible}
+                >
+                    <MeetingUpdateScreen
+                        navigation={this.props.navigation}
+                        modalVisible={this.setModalVisible}
+                        meetingItem={meetingItem}
+                    />
+                </Modal>
                 <Tabs>
                     <Tab heading={ <TabHeading><Icon name="ios-keypad" /></TabHeading>}>
                        <MeetingDetailTab

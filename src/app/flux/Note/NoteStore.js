@@ -3,7 +3,6 @@ import { AsyncStorage } from 'react-native';
 import NoteItem from "./NoteItem";
 import Bullet from "bullet-pubsub";
 import NoteConstants from "../Note/NoteConstants";
-import UserStore from "../User/UserStore";
 
 /**
  * Regexp for match the item's key stored in cache.
@@ -71,6 +70,11 @@ const NoteStore = {
                     .then(() => { })
                     .catch(() => { });
                 break;
+            case NoteConstants.NOTE_DELETE:
+                _deleteItem(payload.data)
+                    .then(() => { })
+                    .catch(() => { });
+                break
         }
     },
 
@@ -113,6 +117,17 @@ const NoteStore = {
 async function _createItem (data) {
     AsyncStorage.setItem(NoteConstants.STORE_KEY_ITEM + data.id, JSON.stringify(data));
     NoteStore.emitChangeListener();
+}
+
+/**
+ * Deletes Note Item
+ * @param id
+ * @returns {Promise<void>}
+ * @private
+ */
+async function _deleteItem (id) {
+    AsyncStorage.removeItem(NoteConstants.STORE_KEY_ITEM + id);
+    NoteStore.emitChangeListener()
 }
 
 /**

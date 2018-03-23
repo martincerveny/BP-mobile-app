@@ -14,12 +14,12 @@ import styles from './styles'
  */
 const Header = ({ left = null, title = null, subtitle = null, right = null}) => (
     <NativeHeader style={styles.default} iosBarStyle="light-content">
-      <Left>{left}</Left>
+      <Left style={{flex: 2}}>{left}</Left>
       <Body style={{flex: 3}}>
         {title ? <Title style={{ color: '#fff' }}>{title}</Title> : null}
         {subtitle ? <Subtitle style={{ color: '#fff' }}>{subtitle}</Subtitle> : null}
       </Body>
-      <Right>{right}</Right>
+      <Right style={{flex: 2}}>{right}</Right>
     </NativeHeader>
 );
 

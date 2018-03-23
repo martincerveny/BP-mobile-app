@@ -1,17 +1,11 @@
 import React from 'react';
-import { View, DatePickerIOS, TouchableOpacity } from 'react-native';
-import {
-    Container, Content, Text, Icon, Left, ListItem, List, Right, Input, Body, Label, Button,
-    Toast
-} from 'native-base';
+import { View } from 'react-native';
+import {Container, Content, Text, ListItem, Input, Label, Button, Toast, Separator} from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-
 import styles from './styles';
 import Header from '../../../components/Header/Header'
 import { createMeetingItem } from './../../../flux/Meeting/MeetingActions'
 import AppUtils from "../../../utils/AppUtils";
-
-
 
 class MeetingCreateScreen extends React.Component {
     constructor (props) {
@@ -37,7 +31,7 @@ class MeetingCreateScreen extends React.Component {
 
     _handleDatePicked = (dateTime) => {
         let time = dateTime.toLocaleTimeString();
-
+        // console.log(dateTime);
         this.setState({
             date: dateTime.toLocaleDateString(),
             time: time.substring(0, time.indexOf(':', time.indexOf(':')+1))
@@ -47,7 +41,7 @@ class MeetingCreateScreen extends React.Component {
     };
 
     goBack () {
-        this.props.navigation.goBack()
+        this.props.modalVisible(false);
     }
 
     handleCreateItem () {
@@ -67,7 +61,8 @@ class MeetingCreateScreen extends React.Component {
             duration: 3000,
             type: 'success'
         });
-        this.props.navigation.navigate("meeting.list")
+
+        this.goBack();
     }
 
     render() {
@@ -77,11 +72,14 @@ class MeetingCreateScreen extends React.Component {
                     title='Vytvoriť schôdzku'
                     left={
                         <Button transparent onPress={this.goBack}>
-                            <Icon style={{ color: '#fff'}} name="arrow-round-back" />
+                            <Text style={ styles.cancelText}>Zrušiť</Text>
                         </Button>
                     }
                 />
                 <Content>
+                    <Separator bordered>
+                        <Text>INFORMÁCIE</Text>
+                    </Separator>
                     <ListItem last>
                         <Label >Názov:</Label>
                             <Input onChangeText={(name) => this.setState({name})} style={{ height: 30, paddingLeft: 10}}/>

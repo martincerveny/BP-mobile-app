@@ -12,7 +12,7 @@ const config = {
 const UserNavigation = StackNavigator({
     'user.list': {screen: UserListScreen },
     'user.detail': {screen: UserDetailScreen},
-    'user.create': { screen: UserCreateScreen },
+    // 'user.create': { screen: UserCreateScreen },
 
     //meeting
     'meeting.detail': { screen: MeetingDetailScreen },
