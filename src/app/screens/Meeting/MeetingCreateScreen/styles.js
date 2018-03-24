@@ -19,4 +19,7 @@ export default StyleSheet.create({
     formItem: {
         height: 50
     },
+    listItem: {
+        height: 70
+    }
 });

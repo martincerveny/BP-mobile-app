@@ -3,7 +3,7 @@ import { Icon, Text, Left, Separator, ListItem, Right, Input, Content, Container
 
 import styles from './styles';
 
-const MeetingDetailTab = ({ meetingItem }) => (
+const MeetingDetailTab = ({ meetingItem, peopleCount }) => (
     <Container>
         <Content>
             <Separator bordered>
@@ -15,7 +15,7 @@ const MeetingDetailTab = ({ meetingItem }) => (
                     <Text>Dátum</Text>
                 </Left>
                 <Right style={ styles.listItemRight }>
-                    <Text>{meetingItem.date}</Text>
+                    <Text>{meetingItem && meetingItem.getDate()}</Text>
                 </Right>
             </ListItem>
             <ListItem>
@@ -24,7 +24,7 @@ const MeetingDetailTab = ({ meetingItem }) => (
                     <Text>Čas</Text>
                 </Left>
                 <Right style={ styles.listItemRight }>
-                    <Text> {meetingItem.time} </Text>
+                    <Text>{meetingItem && meetingItem.getTime()}</Text>
                 </Right>
             </ListItem>
             <ListItem>
@@ -33,7 +33,7 @@ const MeetingDetailTab = ({ meetingItem }) => (
                     <Text>Miesto</Text>
                 </Left>
                 <Right style={ styles.listItemRight }>
-                    <Text>{meetingItem.place}</Text>
+                    <Text>{meetingItem && meetingItem.getPlace()}</Text>
                 </Right>
             </ListItem>
             <ListItem last>
@@ -42,13 +42,13 @@ const MeetingDetailTab = ({ meetingItem }) => (
                     <Text>Počet ľudí</Text>
                 </Left>
                 <Right style={ styles.listItemRight }>
-                    <Text>{meetingItem.peopleCount}</Text>
+                    <Text>{peopleCount}</Text>
                 </Right>
             </ListItem>
             <Separator bordered>
                 <Text>POZNÁMKA</Text>
             </Separator>
-            <Text style={{ paddingLeft: 15, paddingTop: 10}}>{meetingItem.note}</Text>
+            <Text style={{ paddingLeft: 15, paddingTop: 10}}>{meetingItem && meetingItem.getNote()}</Text>
         </Content>
     </Container>
 );

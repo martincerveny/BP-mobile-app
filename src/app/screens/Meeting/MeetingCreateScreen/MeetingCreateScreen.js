@@ -91,13 +91,13 @@ class MeetingCreateScreen extends React.Component {
                     <Separator bordered>
                         <Text>INFORMÁCIE</Text>
                     </Separator>
-                    <ListItem>
+                    <ListItem style={ styles.listItem }>
                         <Left>
                             <Icon active name="ios-information-circle-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 43, marginLeft: 5}}/>
                             <Input placeholder='Názov' autoCorrect={false} onChangeText={(name) => this.setState({name})} style={{ height: 30, paddingLeft: 10}}/>
                         </Left>
                     </ListItem>
-                    <ListItem  onPress={this._showDatePicker}>
+                    <ListItem onPress={this._showDatePicker} style={ styles.listItem }>
                         <Left>
                             <Icon active name="ios-calendar-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 50, marginLeft: 5}}/>
                             <Label > {this.state.date}</Label>
@@ -112,7 +112,7 @@ class MeetingCreateScreen extends React.Component {
                             />
                         </Left>
                     </ListItem>
-                    <ListItem  onPress={this._showTimePicker}>
+                    <ListItem onPress={this._showTimePicker} style={ styles.listItem }>
                         <Left>
                             <Icon active name="ios-time-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 50, marginLeft: 5}}/>
                             <Label > {this.state.time}</Label>
@@ -127,7 +127,7 @@ class MeetingCreateScreen extends React.Component {
                             />
                         </Left>
                     </ListItem>
-                    <ListItem>
+                    <ListItem style={ styles.listItem }>
                         <Left>
                             <Icon active name="ios-pin-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 42, marginLeft: 8}}/>
                             <Input placeholder='Miesto' autoCorrect={false} onChangeText={(place) => this.setState({place})} style={{ height: 30, paddingLeft: 10}}/>

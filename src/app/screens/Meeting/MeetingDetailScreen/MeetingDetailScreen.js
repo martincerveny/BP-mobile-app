@@ -15,7 +15,7 @@ class MeetingDetailScreen extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            meetingItem: '',
+            meetingItem: null,
             userItems: [],
             modalVisible: false,
         };
@@ -51,14 +51,14 @@ class MeetingDetailScreen extends React.Component {
                 this.goBack();
             }
 
-            return this.setState({ meetingItem })
+            this.setState({ meetingItem })
         });
     };
 
     loadUserItems () {
         const meetingId = this.props.navigation.state.params.meetingId;
         UserStore.getAllItemsByMeetingId(MeetingConstants.STORE_KEY_ITEM + meetingId).then(userItems => {
-            return this.setState({ userItems })
+            this.setState({ userItems })
         });
     }
 
@@ -76,7 +76,7 @@ class MeetingDetailScreen extends React.Component {
         return (
             <Container>
                 <Header
-                    title={meetingItem.name}
+                    title={meetingItem && meetingItem.getName()}
                     left={
                         <Button transparent onPress={this.goBack}>
                             <Icon style={{ color: '#fff'}} name="arrow-round-back" />
@@ -103,6 +103,7 @@ class MeetingDetailScreen extends React.Component {
                     <Tab heading={ <TabHeading><Icon name="ios-keypad" /></TabHeading>}>
                        <MeetingDetailTab
                            meetingItem={meetingItem}
+                           peopleCount={userItems.length}
                        />
                     </Tab>
                     <Tab heading={ <TabHeading><Icon name="ios-people" /></TabHeading>}>
@@ -110,7 +111,7 @@ class MeetingDetailScreen extends React.Component {
                             userItems={userItems}
                             onUserItemPress={this.handleUserItemPress}
                             navigation={this.props.navigation}
-                            meetingId={meetingItem.id}
+                            meetingId={meetingItem && meetingItem.getId()}
                         />
                     </Tab>
                     <Tab heading={ <TabHeading><Icon name="ios-paper" /></TabHeading>}>

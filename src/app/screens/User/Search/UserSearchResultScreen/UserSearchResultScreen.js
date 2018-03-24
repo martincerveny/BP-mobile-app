@@ -4,7 +4,7 @@ import Header from '../../../../components/Header/Header'
 import SearchResultList from '../../../../components/SearchResultList/SearchResultList'
 import { ActivityIndicator, View } from 'react-native';
 import { WebBrowser, FileSystem } from 'expo';
-import { createUserItem } from './../../../../flux/User/UserActions'
+import { createOrUpdateUserItem } from './../../../../flux/User/UserActions'
 import styles from './styles';
 import FacebookApiFetchService from "../../../../services/FacebookApi/FacebookApiFetchService";
 import MeetingConstants from "../../../../flux/Meeting/MeetingConstants";
@@ -67,7 +67,7 @@ class UserSearchResultScreen extends React.Component {
             note: '',
         };
 
-        createUserItem(userItem);
+        createOrUpdateUserItem(userItem);
         Toast.show({
             text: 'Užívateľ bol pridaný.',
             position: 'bottom',

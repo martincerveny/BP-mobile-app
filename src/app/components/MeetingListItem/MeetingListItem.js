@@ -5,7 +5,7 @@ import styles from './styles';
 const MeetingListItem = ({ item, onPress }) => (
     <List>
         <ListItem button onPress={() => onPress(item.getId())} style={ styles.listItem }>
-            <Body style={{ flex: 1}}>
+            <Body style={{ flex: 2}}>
                 <Text>{item.getName()}</Text>
             </Body>
             <Right style={{ flex: 1}}>

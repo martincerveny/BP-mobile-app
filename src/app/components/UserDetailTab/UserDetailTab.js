@@ -6,43 +6,54 @@ import {FileSystem} from "expo";
 const UserDetailTab = ({ userItem }) => (
             <Container style={ styles.container }>
                 <Content>
+                    <Separator bordered>
+                        <Text>ZÁKLADNÉ INFORMÁCIE</Text>
+                    </Separator>
                     <ListItem>
                         {
-                            userItem.image == ''
+                            userItem && userItem.getImage() == ''
                                 ? (<Thumbnail size={80} source={require('./../../../resources/images/person-flat.png')} />)
-                                : (<Thumbnail size={80} source={{uri: FileSystem.documentDirectory + userItem.image}} />)
+                                : (<Thumbnail size={80} source={{uri: FileSystem.documentDirectory + (userItem && userItem.getImage())}}/>)
                         }
                         <Body>
-                            <Text>{userItem.firstName} {userItem.lastName}</Text>
-                            <Text note>{userItem.age}</Text>
+                            <Text>{userItem && userItem.getFirstName()} {userItem && userItem.getLastName()}</Text>
                         </Body>
                     </ListItem>
                     <Separator bordered>
-                        <Text>INFORMÁCIE</Text>
+                        <Text>ROZŠÍRENÉ INFORMÁCIE</Text>
                     </Separator>
                     <ListItem >
                         <Left>
-                            <Icon active name="home" style={{ fontSize: 20}}/>
+                            <Icon active name="ios-card" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 30, marginLeft: 5 }}/>
+                            <Text>Vek</Text>
+                        </Left>
+                        <Right style={ styles.listItemRight }>
+                            <Text>{userItem && userItem.getAge()}</Text>
+                        </Right>
+                    </ListItem>
+                    <ListItem >
+                        <Left>
+                            <Icon active name="ios-home-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 30, marginLeft: 5 }}/>
                             <Text>Bydlisko</Text>
                         </Left>
-                        <Right>
-                            <Text>{userItem.address}</Text>
+                        <Right style={ styles.listItemRight }>
+                            <Text>{userItem && userItem.getAddress()}</Text>
                         </Right>
                     </ListItem>
                     <ListItem>
                         <Left>
-                            <Icon active name="briefcase" style={{ fontSize: 20}}/>
+                            <Icon active name="ios-briefcase-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 30, marginLeft: 5 }}/>
                             <Text>Firma</Text>
                         </Left>
-                        <Right>
-                            <Text>{userItem.company}</Text>
+                        <Right style={ styles.listItemRight }>
+                            <Text>{userItem && userItem.getCompany()}</Text>
                         </Right>
                     </ListItem>
 
                     <Separator bordered>
                         <Text>POZNÁMKA</Text>
                     </Separator>
-                    <Text style={{ paddingLeft: 15, paddingTop: 10}}>{userItem.note}</Text>
+                    <Text style={{ paddingLeft: 15, paddingTop: 10}}>{userItem && userItem.getNote()}</Text>
                 </Content>
             </Container>
 );

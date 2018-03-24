@@ -7,7 +7,6 @@ import {
 import Header from '../../../components/Header/Header'
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { deleteMeetingItem } from './../../../flux/Meeting/MeetingActions'
-
 import styles from './styles';
 import {createOrUpdateMeetingItem} from "../../../flux/Meeting/MeetingActions";
 
@@ -15,7 +14,6 @@ class MeetingUpdateScreen extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            meetingItem: this.props.meetingItem,
             name: this.props.meetingItem.getName(),
             place: this.props.meetingItem.getPlace(),
             note: this.props.meetingItem.getNote(),
@@ -84,7 +82,7 @@ class MeetingUpdateScreen extends React.Component {
     }
 
     handleDeleteItem () {
-        deleteMeetingItem(this.state.meetingItem.id);
+        deleteMeetingItem(this.props.meetingItem.getId());
         this.goBack();
         Toast.show({
             text: 'Schôdzka bola zmazaná.',
@@ -110,12 +108,10 @@ class MeetingUpdateScreen extends React.Component {
     }
 
     render () {
-        const { meetingItem } = this.state;
-
         return (
             <Container>
                 <Header
-                    title={meetingItem.name}
+                    title='Upraviť'
                     left={
                         <Button transparent onPress={this.goBack}>
                             <Text style={ styles.cancelText }>Zrušiť</Text>
@@ -128,15 +124,15 @@ class MeetingUpdateScreen extends React.Component {
                     }
                 />
                 <Content>
-                    <Separator bordered>
-                        <Text>INFORMÁCIE</Text>
-                    </Separator>
                     <Form>
+                        <Separator bordered>
+                            <Text>INFORMÁCIE</Text>
+                        </Separator>
                         <Item floatingLabel style={ styles.formItem }>
                             <Label >Názov</Label>
                             <Input autoCorrect={false} value={ this.state.name } onChangeText={(name) => this.setState({name})}/>
                         </Item>
-                        <ListItem onPress={this._showDatePicker} style={ styles.formItem }>
+                        <ListItem onPress={this._showDatePicker} style={{ height: 70}}>
                                 <Label > {this.state.date}</Label>
                                 <DateTimePicker
                                     isVisible={this.state.isDatePickerVisible}
@@ -149,7 +145,7 @@ class MeetingUpdateScreen extends React.Component {
                                     // date={new Date(this.state.year, this.state.month, this.state.day, this.state.hour, this.state.minute)}
                                 />
                         </ListItem>
-                        <ListItem onPress={this._showTimePicker} style={ styles.formItem }>
+                        <ListItem onPress={this._showTimePicker} style={{ height: 70 }}>
                             <Label > {this.state.time}</Label>
                             <DateTimePicker
                                 isVisible={this.state.isTimePickerVisible}
@@ -165,11 +161,11 @@ class MeetingUpdateScreen extends React.Component {
                             <Label>Miesto</Label>
                             <Input autoCorrect={false} value={ this.state.place } onChangeText={(place) => this.setState({place})}/>
                         </Item>
-                        <Separator bordered>
+                        <Separator bordered style={{ marginTop: -1}}>
                             <Text>POZNÁMKA</Text>
                         </Separator>
                         <Item>
-                            <Input autoCorrect={false} placeholder='Zadajte poznámku' multiline={true} numberOfLines={4} onChangeText={(note) => this.setState({note})} style={{ height: 200}}/>
+                            <Input autoCorrect={false} value={ this.state.note } placeholder='Zadajte poznámku' multiline={true} numberOfLines={4} onChangeText={(note) => this.setState({note})} style={{ height: 150}}/>
                         </Item>
                     </Form>
                     <View style={ styles.buttonContainer }>

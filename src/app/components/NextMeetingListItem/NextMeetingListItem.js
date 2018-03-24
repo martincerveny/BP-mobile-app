@@ -1,50 +1,82 @@
 import React from 'react';
-import { Content, List, ListItem, Thumbnail, Text, Body, Input, Right, Card, CardItem, Icon, Left } from 'native-base';
+import { Content, Text, Body, Card, CardItem, Icon, Left } from 'native-base';
 import {TouchableOpacity, View} from 'react-native';
-
+import MeetingConstants from "../../flux/Meeting/MeetingConstants";
+import UserStore from "../../flux/User/UserStore";
 import styles from './styles';
 
-const NextMeetingListItem = ({ item, onPress }) => (
-    <Content>
-        <Card>
-            <CardItem style={{ backgroundColor: '#e74c3c'}}>
-                <Text style={{ color: 'white'}}>{item.getDate()}</Text>
-            </CardItem>
-        </Card>
-        <TouchableOpacity button activeOpacity={0.5} onPress={() => onPress(item.getId())}>
-            <Card>
-                <CardItem >
-                    <Left>
-                        <Body>
-                        <Text>{item.getName()}</Text>
-                        <Text note>{item.getDate()}</Text>
-                        </Body>
-                    </Left>
-                </CardItem>
-                <CardItem style={{ justifyContent: 'space-between', flexDirection: 'row', flex: 1}}>
-                    <View>
-                        <Left>
-                            <Icon active name="ios-time-outline" style={{ fontSize: 30, color: '#e74c3c'}}/>
-                            <Text>{item.getTime()}</Text>
+class NextMeetingListItem extends React.Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            userItems: []
+        };
 
-                        </Left>
-                    </View>
-                    <View>
-                        <Left>
-                            <Icon style={{ fontSize: 30, color: '#e74c3c'}} active name="ios-pin-outline" />
-                            <Text>{item.getPlace()}</Text>
-                        </Left>
-                    </View>
-                    <View>
-                        <Left>
-                            <Icon style={{ fontSize: 30, color: '#e74c3c'}}  active name="ios-people-outline" />
-                            <Text></Text>
-                        </Left>
-                    </View>
-                </CardItem>
-            </Card>
-        </TouchableOpacity>
-    </Content>
-);
+        this.loadUserItems = this.loadUserItems.bind(this);
+    }
+
+    componentDidMount () {
+        UserStore.addChangeListener(this.loadUserItems);
+        this.loadUserItems();
+    }
+
+    componentWillUnmount () {
+        UserStore.removeChangeListener(this.loadUserItems);
+    }
+
+    loadUserItems () {
+        const meetingId = this.props.item.getId();
+        UserStore.getAllItemsByMeetingId(MeetingConstants.STORE_KEY_ITEM + meetingId).then(userItems => {
+            this.setState({ userItems })
+        });
+    }
+
+    render () {
+        const { userItems } = this.state;
+
+        return(
+            <Content>
+                <Card>
+                    <CardItem style={{ backgroundColor: '#e74c3c'}}>
+                        <Text style={{ color: 'white'}}>{this.props.item.getDate()}</Text>
+                    </CardItem>
+                </Card>
+                <TouchableOpacity button activeOpacity={0.5} onPress={() => this.props.onPress(this.props.item.getId())}>
+                    <Card>
+                        <CardItem >
+                            <Left>
+                                <Body>
+                                <Text style={{ fontSize: 17 }}>{this.props.item.getName()}</Text>
+                                <Text note>{this.props.item.getDate()}</Text>
+                                </Body>
+                            </Left>
+                        </CardItem>
+                        <CardItem style={{ justifyContent: 'space-between', flexDirection: 'row', flex: 1}}>
+                            <View>
+                                <Left>
+                                    <Icon active name="ios-time-outline" style={{ fontSize: 30, color: '#e74c3c'}}/>
+                                    <Text>{this.props.item.getTime()}</Text>
+
+                                </Left>
+                            </View>
+                            <View>
+                                <Left>
+                                    <Icon style={{ fontSize: 30, color: '#e74c3c'}} active name="ios-pin-outline" />
+                                    <Text>{this.props.item.getPlace()}</Text>
+                                </Left>
+                            </View>
+                            <View>
+                                <Left>
+                                    <Icon style={{ fontSize: 30, color: '#e74c3c'}}  active name="ios-people-outline" />
+                                    <Text>{userItems.length}</Text>
+                                </Left>
+                            </View>
+                        </CardItem>
+                    </Card>
+                </TouchableOpacity>
+            </Content>
+        );
+    }
+}
 
 export default NextMeetingListItem;

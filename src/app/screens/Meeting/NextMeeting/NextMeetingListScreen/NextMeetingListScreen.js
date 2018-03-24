@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { ScrollView, View } from 'react-native';
-import { Container, Text } from 'native-base';
+import { Container } from 'native-base';
 import Header from '../../../../components/Header/Header'
 import styles from './styles';
 import MeetingStore from "../../../../flux/Meeting/MeetingStore";

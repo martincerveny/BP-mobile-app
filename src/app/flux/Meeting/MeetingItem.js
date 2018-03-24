@@ -1,3 +1,6 @@
+import MeetingConstants from "./MeetingConstants";
+import UserStore from "../User/UserStore";
+
 /**
  * MeetingItem
  */
@@ -26,5 +29,6 @@ class MeetingItem {
         return this.note;
     }
 }
+
 
 export default MeetingItem;

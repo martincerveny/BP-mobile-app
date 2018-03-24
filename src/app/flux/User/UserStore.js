@@ -65,8 +65,13 @@ const UserStore = {
      */
     dispatchIndex: (payload) => {
         switch (payload.type) {
-            case UserConstants.USER_CREATE:
-                _createItem(payload.data)
+            case UserConstants.USER_CREATE_UPDATE:
+                _createOrUpdateItem(payload.data)
+                    .then(() => { })
+                    .catch(() => { });
+                break;
+            case UserConstants.USER_DELETE:
+                _deleteItem(payload.data)
                     .then(() => { })
                     .catch(() => { });
                 break;
@@ -104,14 +109,25 @@ const UserStore = {
 };
 
 /**
- * Creates Meeting Item
+ * Creates User Item
  * @param data
  * @returns {Promise<void>}
  * @private
  */
-async function _createItem (data) {
+async function _createOrUpdateItem (data) {
     AsyncStorage.setItem(UserConstants.STORE_KEY_ITEM + data.id, JSON.stringify(data));
     UserStore.emitChangeListener();
+}
+
+/**
+ * Deletes User Item
+ * @param data
+ * @returns {Promise<void>}
+ * @private
+ */
+async function _deleteItem (data) {
+    AsyncStorage.removeItem(UserConstants.STORE_KEY_ITEM + data);
+    UserStore.emitChangeListener()
 }
 
 /**

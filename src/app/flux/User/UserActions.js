@@ -2,18 +2,32 @@ import Dispatcher from './../Dispatcher';
 import UserConstants from './UserConstants';
 
 /**
- * Creates item.
+ * Creates or updates item.
  *
  * @param {array} data - User data.
  * @returns {undefined}
  */
-function createUserItem (data) {
+function createOrUpdateUserItem (data) {
     Dispatcher({
-        type: UserConstants.USER_CREATE,
+        type: UserConstants.USER_CREATE_UPDATE,
+        data: data
+    });
+}
+
+/**
+ * Deletes item.
+ *
+ * @param {array} data - User data.
+ * @returns {undefined}
+ */
+function deleteUserItem (data) {
+    Dispatcher({
+        type: UserConstants.USER_DELETE,
         data: data
     });
 }
 
 export {
-    createUserItem,
+    createOrUpdateUserItem,
+    deleteUserItem
 }

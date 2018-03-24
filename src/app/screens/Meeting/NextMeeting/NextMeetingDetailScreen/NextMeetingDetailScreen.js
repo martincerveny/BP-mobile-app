@@ -12,7 +12,7 @@ class NextMeetingDetailScreen extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            meetingItem: '',
+            meetingItem: null,
             userItems: '',
         };
 
@@ -61,7 +61,7 @@ class NextMeetingDetailScreen extends Component {
         return (
             <Container>
                 <Header
-                    title={meetingItem.name}
+                    title={meetingItem && meetingItem.getName()}
                     left={
                         <Button transparent onPress={this.goBack}>
                             <Icon style={{ color: '#fff'}} name="arrow-round-back" />
@@ -75,7 +75,7 @@ class NextMeetingDetailScreen extends Component {
                         renderRow={userItem => (
                             <UserCard
                                 item={userItem}
-                                meetingId={meetingItem.id}
+                                meetingId={meetingItem && meetingItem.getId()}
                             />
                         )}
                     />

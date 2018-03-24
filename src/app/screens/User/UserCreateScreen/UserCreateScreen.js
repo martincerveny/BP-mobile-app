@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import { View } from 'react-native';
 import {
-    Container, Content, Text, Separator, ListItem, Input, Body, Label, Button, Toast} from 'native-base';
+    Container, Content, Text, Separator, ListItem, Input, Body, Label, Button, Toast, Form, Item
+} from 'native-base';
 import Header from '../../../components/Header/Header'
 import styles from './styles';
-import {createUserItem} from "../../../flux/User/UserActions";
+import {createOrUpdateUserItem} from "../../../flux/User/UserActions";
 import AppUtils from "../../../utils/AppUtils";
 
 class UserCreateScreen extends Component {
@@ -39,7 +40,7 @@ class UserCreateScreen extends Component {
             note: ''
         };
 
-        createUserItem(userItem);
+        createOrUpdateUserItem(userItem);
         Toast.show({
             text: 'Užívateľ bol vytvorený.',
             position: 'bottom',
@@ -63,47 +64,40 @@ class UserCreateScreen extends Component {
                     }
                 />
                 <Content>
+                    <Form>
                     <Separator bordered>
                         <Text>ZÁKLADNÉ INFORMÁCIE</Text>
                     </Separator>
-                    <ListItem last>
-                        <Label >Meno:</Label>
-                        <Body>
-                            <Input onChangeText={(firstName) => this.setState({firstName})} style={{ height: 30, paddingLeft: 10}}/>
-                        </Body>
-                    </ListItem>
-                    <ListItem last>
-                        <Label >Priezvisko:</Label>
-                        <Body>
-                            <Input onChangeText={(lastName) => this.setState({lastName})} style={{ height: 30, paddingLeft: 10}}/>
-                        </Body>
-                    </ListItem>
-                    <ListItem last>
-                        <Label >Vek:</Label>
-                        <Body>
-                            <Input onChangeText={(age) => this.setState({age})} style={{ height: 30, paddingLeft: 10}}/>
-                        </Body>
-                    </ListItem>
-                    <Separator bordered>
+                    <Item floatingLabel style={ styles.formItem }>
+                        <Label>Meno:</Label>
+                        <Input autoCorrect={false} onChangeText={(firstName) => this.setState({firstName})}/>
+                    </Item>
+                    <Item floatingLabel style={ styles.formItem }>
+                        <Label>Priezvisko:</Label>
+                        <Input autoCorrect={false} onChangeText={(lastName) => this.setState({lastName})}/>
+                    </Item>
+                    <Separator bordered style={{ marginTop: -1}}>
                         <Text>ROZŠÍRENÉ INFORMÁCIE</Text>
                     </Separator>
-                    <ListItem last>
-                        <Label >Bydlisko:</Label>
-                        <Body>
-                            <Input onChangeText={(address) => this.setState({address})} style={{ height: 30, paddingLeft: 10}}/>
-                        </Body>
-                    </ListItem>
-                    <ListItem last>
-                        <Label >Firma:</Label>
-                        <Body>
-                            <Input onChangeText={(company) => this.setState({company})} style={{ height: 30, paddingLeft: 10}}/>
-                        </Body>
-                    </ListItem>
+                    <Item floatingLabel style={ styles.formItem }>
+                        <Label>Vek:</Label>
+                        <Input autoCorrect={false} onChangeText={(age) => this.setState({age})}/>
+                    </Item>
+                    <Item floatingLabel style={ styles.formItem }>
+                        <Label>Bydlisko:</Label>
+                        <Input autoCorrect={false} onChangeText={(address) => this.setState({address})}/>
+                    </Item>
+                    <Item floatingLabel style={ styles.formItem }>
+                        <Label>Firma:</Label>
+                        <Input autoCorrect={false} onChangeText={(company) => this.setState({company})}/>
+                    </Item>
+                    </Form>
                     <View style={ styles.buttonContainer }>
                         <Button danger onPress={this.handleCreateItem}>
                             <Text>Uložiť </Text>
                         </Button>
                     </View>
+
                 </Content>
             </Container>
         );
