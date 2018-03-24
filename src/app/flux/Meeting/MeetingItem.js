@@ -22,10 +22,6 @@ class MeetingItem {
         return this.place;
     }
 
-    getPeopleCount() {
-        return this.peopleCount;
-    }
-
     getNote() {
         return this.note;
     }

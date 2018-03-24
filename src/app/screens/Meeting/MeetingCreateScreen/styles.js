@@ -15,5 +15,8 @@ export default StyleSheet.create({
     },
     cancelText: {
         color: 'white',
-    }
+    },
+    formItem: {
+        height: 50
+    },
 });

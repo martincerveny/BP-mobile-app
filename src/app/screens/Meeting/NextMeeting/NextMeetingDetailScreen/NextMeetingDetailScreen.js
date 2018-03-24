@@ -23,6 +23,7 @@ class NextMeetingDetailScreen extends Component {
 
     componentDidMount () {
         UserStore.addChangeListener(this.loadUserItems);
+        MeetingStore.addChangeListener(this.loadItem);
 
         this.loadItem();
         this.loadUserItems();
@@ -30,6 +31,7 @@ class NextMeetingDetailScreen extends Component {
 
     componentWillUnmount () {
         UserStore.removeChangeListener(this.loadUserItems);
+        MeetingStore.removeChangeListener(this.loadItem);
     }
 
     goBack () {

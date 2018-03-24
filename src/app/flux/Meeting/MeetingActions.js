@@ -2,14 +2,14 @@ import Dispatcher from './../Dispatcher';
 import MeetingConstants from './MeetingConstants';
 
 /**
- * Creates item.
+ * Creates or updates item.
  *
  * @param {array} data - Meeting data.
  * @returns {undefined}
  */
-function createMeetingItem (data) {
+function createOrUpdateMeetingItem (data) {
     Dispatcher({
-        type: MeetingConstants.MEETING_CREATE,
+        type: MeetingConstants.MEETING_CREATE_UPDATE,
         data: data
     });
 }
@@ -28,6 +28,6 @@ function deleteMeetingItem (data) {
 }
 
 export {
-    createMeetingItem,
+    createOrUpdateMeetingItem,
     deleteMeetingItem
 }

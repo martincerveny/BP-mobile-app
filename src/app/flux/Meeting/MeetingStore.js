@@ -61,8 +61,8 @@ const MeetingStore = {
      */
     dispatchIndex: (payload) => {
         switch (payload.type) {
-            case MeetingConstants.MEETING_CREATE:
-                _createItem(payload.data)
+            case MeetingConstants.MEETING_CREATE_UPDATE:
+                _createOrUpdateItem(payload.data)
                     .then(() => { })
                     .catch(() => { });
                 break;
@@ -105,12 +105,12 @@ const MeetingStore = {
 };
 
 /**
- * Creates Meeting Item
+ * Creates or updates Meeting Item
  * @param data
  * @returns {Promise<void>}
  * @private
  */
-async function _createItem (data) {
+async function _createOrUpdateItem (data) {
     AsyncStorage.setItem(MeetingConstants.STORE_KEY_ITEM + data.id, JSON.stringify(data));
     MeetingStore.emitChangeListener()
 }

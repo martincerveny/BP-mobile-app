@@ -58,7 +58,7 @@ class UserCreateScreen extends Component {
                     title='Vytvoriť osobu'
                     left={
                         <Button transparent onPress={this.goBack}>
-                            <Text style={ styles.cancelText }>Zrušiť</Text>
+                            <Text style={ styles.cancelText}>Zrušiť</Text>
                         </Button>
                     }
                 />

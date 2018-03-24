@@ -26,8 +26,14 @@ class UserDetailScreen extends Component {
     }
 
     componentDidMount () {
+        MeetingStore.addChangeListener(this.loadItem);
         this.loadItem();
+
     };
+
+    componentWillUnmount () {
+        MeetingStore.removeChangeListener(this.loadItem);
+    }
 
     loadItem () {
         const userId = this.props.navigation.state.params.userId;

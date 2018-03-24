@@ -1,6 +1,6 @@
 import React from 'react';
 import { Content, List, ListItem, Thumbnail, Text, Body, Input, Right, Card, CardItem, Icon, Left } from 'native-base';
-import { TouchableOpacity } from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 
 import styles from './styles';
 
@@ -21,21 +21,26 @@ const NextMeetingListItem = ({ item, onPress }) => (
                         </Body>
                     </Left>
                 </CardItem>
-                <CardItem style={{ marginLeft: 25}}>
-                    <Left>
-                        <Icon style={{ fontSize: 20}} active name="time" />
-                        <Text>{item.getTime()}</Text>
+                <CardItem style={{ justifyContent: 'space-between', flexDirection: 'row', flex: 1}}>
+                    <View>
+                        <Left>
+                            <Icon active name="ios-time-outline" style={{ fontSize: 30, color: '#e74c3c'}}/>
+                            <Text>{item.getTime()}</Text>
 
-                    </Left>
-                    <Left>
-                        <Icon style={{ fontSize: 20}} active name="navigate" />
-                        <Text>{item.getPlace()}</Text>
-
-                    </Left>
-                    <Left>
-                        <Icon style={{ fontSize: 20}}  active name="people" />
-                        <Text>{item.getPeopleCount()}</Text>
-                    </Left>
+                        </Left>
+                    </View>
+                    <View>
+                        <Left>
+                            <Icon style={{ fontSize: 30, color: '#e74c3c'}} active name="ios-pin-outline" />
+                            <Text>{item.getPlace()}</Text>
+                        </Left>
+                    </View>
+                    <View>
+                        <Left>
+                            <Icon style={{ fontSize: 30, color: '#e74c3c'}}  active name="ios-people-outline" />
+                            <Text></Text>
+                        </Left>
+                    </View>
                 </CardItem>
             </Card>
         </TouchableOpacity>

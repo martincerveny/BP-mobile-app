@@ -11,7 +11,7 @@ const MeetingDetailTab = ({ meetingItem }) => (
             </Separator>
             <ListItem>
                 <Left>
-                    <Icon active name="calendar" style={{ fontSize: 20}}/>
+                    <Icon active name="ios-calendar-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 30, marginLeft: 5 }}/>
                     <Text>Dátum</Text>
                 </Left>
                 <Right style={ styles.listItemRight }>
@@ -20,7 +20,7 @@ const MeetingDetailTab = ({ meetingItem }) => (
             </ListItem>
             <ListItem>
                 <Left>
-                    <Icon active name="time" style={{ fontSize: 20}}/>
+                    <Icon active name="ios-time-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 30, marginLeft: 5  }}/>
                     <Text>Čas</Text>
                 </Left>
                 <Right style={ styles.listItemRight }>
@@ -29,7 +29,7 @@ const MeetingDetailTab = ({ meetingItem }) => (
             </ListItem>
             <ListItem>
                 <Left>
-                    <Icon active name="navigate" style={{ fontSize: 20}}/>
+                    <Icon active name="ios-pin-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 27, marginLeft: 8  }}/>
                     <Text>Miesto</Text>
                 </Left>
                 <Right style={ styles.listItemRight }>
@@ -38,7 +38,7 @@ const MeetingDetailTab = ({ meetingItem }) => (
             </ListItem>
             <ListItem last>
                 <Left>
-                    <Icon active name="people" style={{ fontSize: 20}}/>
+                    <Icon active name="ios-people-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 30, marginLeft: 5  }}/>
                     <Text>Počet ľudí</Text>
                 </Left>
                 <Right style={ styles.listItemRight }>

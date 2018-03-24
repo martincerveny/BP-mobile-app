@@ -5,7 +5,7 @@ export default StyleSheet.create({
         color: 'white',
     },
     formItem: {
-        height: 50
+        height: 60
     },
     buttonContainer: {
         flex: 1,

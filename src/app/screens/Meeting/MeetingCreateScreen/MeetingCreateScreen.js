@@ -1,10 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
-import {Container, Content, Text, ListItem, Input, Label, Button, Toast, Separator} from 'native-base';
+import {Container, Content, Text, ListItem, Input, Label, Button, Toast, Separator, Icon, Left} from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import styles from './styles';
 import Header from '../../../components/Header/Header'
-import { createMeetingItem } from './../../../flux/Meeting/MeetingActions'
+import { createOrUpdateMeetingItem } from './../../../flux/Meeting/MeetingActions'
 import AppUtils from "../../../utils/AppUtils";
 
 class MeetingCreateScreen extends React.Component {
@@ -18,26 +18,35 @@ class MeetingCreateScreen extends React.Component {
             date: new Date().toLocaleDateString(),
             time: time.substring(0, time.indexOf(':', time.indexOf(':')+1)),
             place: '',
-            isDateTimePickerVisible: false,
-
+            isDatePickerVisible: false,
+            isTimePickerVisible: false,
         };
+
         this.goBack = this.goBack.bind(this)
         this.handleCreateItem = this.handleCreateItem.bind(this);
     };
 
-    _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+    _showDatePicker = () => this.setState({ isDatePickerVisible: true });
+    _hideDatePicker = () => this.setState({ isDatePickerVisible: false });
 
-    _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+    _showTimePicker = () => this.setState({ isTimePickerVisible: true });
+    _hideTimePicker = () => this.setState({ isTimePickerVisible: false });
 
-    _handleDatePicked = (dateTime) => {
-        let time = dateTime.toLocaleTimeString();
-        // console.log(dateTime);
+    _handleDatePicked = (date) => {
         this.setState({
-            date: dateTime.toLocaleDateString(),
-            time: time.substring(0, time.indexOf(':', time.indexOf(':')+1))
+            date: date.toLocaleDateString(),
+        });
+        this._hideDatePicker();
+    };
+
+    _handleTimePicked = (time) => {
+        let timeParse = time.toLocaleTimeString();
+
+        this.setState({
+            time: timeParse.substring(0, timeParse.indexOf(':', timeParse.indexOf(':')+1))
         });
 
-        this._hideDateTimePicker();
+        this._hideTimePicker();
     };
 
     goBack () {
@@ -51,9 +60,11 @@ class MeetingCreateScreen extends React.Component {
             date: this.state.date,
             time: this.state.time,
             place: this.state.place,
+            note: ''
         };
 
-        createMeetingItem(meetingItem);
+        createOrUpdateMeetingItem(meetingItem);
+
         Toast.show({
             text: 'Schôdzka bola vytvorená.',
             position: 'bottom',
@@ -80,30 +91,50 @@ class MeetingCreateScreen extends React.Component {
                     <Separator bordered>
                         <Text>INFORMÁCIE</Text>
                     </Separator>
-                    <ListItem last>
-                        <Label >Názov:</Label>
-                            <Input onChangeText={(name) => this.setState({name})} style={{ height: 30, paddingLeft: 10}}/>
+                    <ListItem>
+                        <Left>
+                            <Icon active name="ios-information-circle-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 43, marginLeft: 5}}/>
+                            <Input placeholder='Názov' autoCorrect={false} onChangeText={(name) => this.setState({name})} style={{ height: 30, paddingLeft: 10}}/>
+                        </Left>
                     </ListItem>
-                    <ListItem last onPress={this._showDateTimePicker}>
-                        <Label>Dátum a čas:</Label>
-                        <Label > {this.state.date}, {this.state.time}</Label>
+                    <ListItem  onPress={this._showDatePicker}>
+                        <Left>
+                            <Icon active name="ios-calendar-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 50, marginLeft: 5}}/>
+                            <Label > {this.state.date}</Label>
                             <DateTimePicker
-                                isVisible={this.state.isDateTimePickerVisible}
+                                isVisible={this.state.isDatePickerVisible}
                                 onConfirm={this._handleDatePicked}
-                                onCancel={this._hideDateTimePicker}
+                                onCancel={this._hideDatePicker}
                                 cancelTextIOS={'Zrušiť'}
                                 confirmTextIOS={'Potvrdiť'}
                                 titleIOS={'Vybrať dátum'}
-                                mode={'datetime'}
+                                mode={'date'}
                             />
-
+                        </Left>
                     </ListItem>
-                    <ListItem last>
-                        <Label >Miesto:</Label>
-                            <Input onChangeText={(place) => this.setState({place})} style={{ height: 30, paddingLeft: 10}}/>
+                    <ListItem  onPress={this._showTimePicker}>
+                        <Left>
+                            <Icon active name="ios-time-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 50, marginLeft: 5}}/>
+                            <Label > {this.state.time}</Label>
+                            <DateTimePicker
+                                isVisible={this.state.isTimePickerVisible}
+                                onConfirm={this._handleTimePicked}
+                                onCancel={this._hideTimePicker}
+                                cancelTextIOS={'Zrušiť'}
+                                confirmTextIOS={'Potvrdiť'}
+                                titleIOS={'Vybrať čas'}
+                                mode={'time'}
+                            />
+                        </Left>
+                    </ListItem>
+                    <ListItem>
+                        <Left>
+                            <Icon active name="ios-pin-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 42, marginLeft: 8}}/>
+                            <Input placeholder='Miesto' autoCorrect={false} onChangeText={(place) => this.setState({place})} style={{ height: 30, paddingLeft: 10}}/>
+                        </Left>
                     </ListItem>
                     <View style={ styles.buttonContainer }>
-                        <Button  danger onPress={this.handleCreateItem}>
+                        <Button danger onPress={this.handleCreateItem}>
                             <Text>Uložiť </Text>
                         </Button>
                     </View>

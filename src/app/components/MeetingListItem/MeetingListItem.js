@@ -4,11 +4,11 @@ import styles from './styles';
 
 const MeetingListItem = ({ item, onPress }) => (
     <List>
-        <ListItem  button onPress={() => onPress(item.getId())} style={ styles.listItem }>
-            <Body>
+        <ListItem button onPress={() => onPress(item.getId())} style={ styles.listItem }>
+            <Body style={{ flex: 1}}>
                 <Text>{item.getName()}</Text>
             </Body>
-            <Right>
+            <Right style={{ flex: 1}}>
                 <Text note>{item.getDate()}</Text>
             </Right>
         </ListItem>
