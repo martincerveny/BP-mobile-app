@@ -38,7 +38,6 @@ class UserDetailScreen extends Component {
         UserStore.addChangeListener(this.loadItem);
         MeetingStore.addChangeListener(this.loadItem);
         this.loadItem();
-
     };
 
     componentWillUnmount () {

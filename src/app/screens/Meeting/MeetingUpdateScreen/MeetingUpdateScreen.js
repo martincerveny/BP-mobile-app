@@ -2,13 +2,19 @@ import React from 'react';
 import _ from 'lodash';
 import {
     Container, Text, Button, Toast, Separator, Content, Label, Input, View, Form, Item,
-    ListItem
+    ListItem, ActionSheet
 } from 'native-base';
 import Header from '../../../components/Header/Header'
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { deleteMeetingItem } from './../../../flux/Meeting/MeetingActions'
 import styles from './styles';
 import {createOrUpdateMeetingItem} from "../../../flux/Meeting/MeetingActions";
+import {FileSystem} from "expo";
+import {deleteUserItem} from "../../../flux/User/UserActions";
+
+var ACTION_SHEET_DELETE_ITEM = ['Vymazať schôdzku', 'Zrušiť'];
+var DESTRUCTIVE_INDEX_DELETE_ITEM = 0;
+var CANCEL_INDEX_DELETE_ITEM = 1;
 
 class MeetingUpdateScreen extends React.Component {
     constructor (props) {
@@ -21,6 +27,7 @@ class MeetingUpdateScreen extends React.Component {
             time: this.props.meetingItem.getTime(),
             isDatePickerVisible: false,
             isTimePickerVisible: false,
+            deleteItemClicked: null
             // day: '',
             // month: '',
             // year: '',
@@ -82,15 +89,28 @@ class MeetingUpdateScreen extends React.Component {
     }
 
     handleDeleteItem () {
-        deleteMeetingItem(this.props.meetingItem.getId());
-        this.goBack();
-        Toast.show({
-            text: 'Schôdzka bola zmazaná.',
-            position: 'bottom',
-            buttonText: 'OK',
-            duration: 3000,
-            type: 'success'
-        });
+        ActionSheet.show(
+            {
+                options: ACTION_SHEET_DELETE_ITEM,
+                cancelButtonIndex: CANCEL_INDEX_DELETE_ITEM,
+                destructiveButtonIndex: DESTRUCTIVE_INDEX_DELETE_ITEM,
+            },
+            buttonIndex => {
+                this.setState({ deleteItemClicked: ACTION_SHEET_DELETE_ITEM[buttonIndex] });
+
+                if (this.state.deleteItemClicked === 'Vymazať schôdzku') {
+                    deleteMeetingItem(this.props.meetingItem.getId());
+                    this.goBack();
+                    Toast.show({
+                        text: 'Schôdzka bola zmazaná.',
+                        position: 'bottom',
+                        buttonText: 'OK',
+                        duration: 3000,
+                        type: 'success'
+                    });
+                }
+            }
+        );
     }
 
     handleUpdateItem () {

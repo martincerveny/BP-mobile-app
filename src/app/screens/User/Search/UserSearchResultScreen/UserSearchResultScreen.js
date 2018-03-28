@@ -9,6 +9,7 @@ import styles from './styles';
 import FacebookApiFetchService from "../../../../services/FacebookApi/FacebookApiFetchService";
 import MeetingConstants from "../../../../flux/Meeting/MeetingConstants";
 import AppUtils from "../../../../utils/AppUtils";
+import { deleteFacebookItem } from "../../../../flux/Facebook/FacebookActions";
 
 class UserSearchResultScreen extends React.Component {
     constructor (props) {
@@ -37,7 +38,21 @@ class UserSearchResultScreen extends React.Component {
         }
 
         FacebookApiFetchService.getUsers(this.props.navigation.state.params.token, this.props.navigation.state.params.term).then(items => {
-            this.setState({ items })
+            // v pripade ulozenia neplatneho tokenu sa zmaze z AsyncStorage, a je vynutene nove prihlasenie
+            if (items === false) {
+                deleteFacebookItem();
+                Toast.show({
+                    text: 'Je potrebné sa prihlásiť.',
+                    position: 'bottom',
+                    buttonText: 'OK',
+                    duration: 3000,
+                    type: 'danger'
+                });
+                this.goBack();
+            } else {
+                this.setState({ items })
+            }
+
         });
     }
 
@@ -45,12 +60,12 @@ class UserSearchResultScreen extends React.Component {
         WebBrowser.openBrowserAsync(url);
     }
 
-    handleCreateUserItem (item) {
+    async handleCreateUserItem (item) {
         const meetingId = this.props.navigation.state.params.meetingId
         let userId = AppUtils.generateId();
         let path = userId + '.png';
 
-        FileSystem.downloadAsync(
+        await FileSystem.downloadAsync(
             item.picture.data.url,
             FileSystem.documentDirectory + path
         );

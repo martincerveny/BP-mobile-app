@@ -44,7 +44,6 @@ class NextMeetingDetailScreen extends Component {
         MeetingStore.getItemById(meetingId).then(meetingItem => {
             return this.setState({ meetingItem })
         });
-
     };
 
     loadUserItems () {

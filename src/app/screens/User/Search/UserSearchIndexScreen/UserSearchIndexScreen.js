@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {View } from 'react-native';
-import { StyleProvider, Container, Content, Form, Item, Input, Button, Text, Icon } from 'native-base';
+import { Container, Content, Form, Item, Input, Button, Text, Icon } from 'native-base';
 import Header from '../../../../components/Header/Header'
-import FacebookApiFetchService from '../../../../services/FacebookApi/FacebookApiFetchService'
-
+import { createFacebookItem } from "../../../../flux/Facebook/FacebookActions";
 import styles from './styles';
+import FacebookStore from "../../../../flux/Facebook/FacebookStore";
 
 const APP_ID = '247167225824874';
 
@@ -19,6 +19,7 @@ class UserSearchIndexScreen extends Component {
         this.goBack = this.goBack.bind(this);
         this.logIn = this.logIn.bind(this);
         this.handleButtonPress = this.handleButtonPress.bind(this);
+        this.loadItem = this.loadItem.bind(this);
     };
 
     goBack () {
@@ -26,21 +27,42 @@ class UserSearchIndexScreen extends Component {
     }
 
     componentDidMount() {
-        this.setState({token : 'EAADgzBqyBmoBAHTmrPsT9IREYPXuGwlFvXQNKCglqyehOxVdWt5rKZBKCYGLTx1SI96tFG2fTYL9ke0zcZBpd711r01mWZCuvpH0JI4tMx0hZBLGJvQuHdB8WDH0vRKy6thsMDNea8qebwVNZAkk8qwRxFZCYkCUmZA9ZAaWymZA8NeuUF1jWLCsGENIAnqvHQupNVMZAzxLPSZAAZDZD'})
+        FacebookStore.addChangeListener(this.loadItem);
+        this.loadItem();
     }
 
+    componentWillUnmount () {
+        FacebookStore.removeChangeListener(this.loadItem);
+    }
+
+    // nacita token z AsyncStorage
+    loadItem () {
+        FacebookStore.getItem().then(facebookItem => {
+            this.setState({ token: facebookItem.token });
+        });
+    }
+
+    // prihlasenie k FB
     async logIn() {
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(APP_ID, {
             permissions: ['public_profile'],
         });
 
         if (type === 'success') {
+
+            //ulozi token do AsyncStorage po prihlaseni
+            let facebookItem = {
+                token: token,
+            };
+
+            createFacebookItem(facebookItem);
             this.setState({ token });
             this.handleButtonPress();
         }
     }
 
     handleButtonPress () {
+        console.log(this.state.token);
         this.props.navigation.navigate("user.search.result", { token: this.state.token, term: this.state.term, meetingId: this.props.navigation.state.params.meetingId })
     }
 

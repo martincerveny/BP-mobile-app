@@ -11,7 +11,7 @@ const UserDetailTab = ({ userItem }) => (
                     </Separator>
                     <ListItem>
                         {
-                            userItem && userItem.getImage() == ''
+                            userItem && userItem.getImage() == null
                                 ? (<Thumbnail size={80} source={require('./../../../resources/images/person-flat.png')} />)
                                 : (<Thumbnail size={80} source={{uri: FileSystem.documentDirectory + (userItem && userItem.getImage())}}/>)
                         }

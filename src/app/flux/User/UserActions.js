@@ -29,5 +29,5 @@ function deleteUserItem (data) {
 
 export {
     createOrUpdateUserItem,
-    deleteUserItem
+    deleteUserItem,
 }

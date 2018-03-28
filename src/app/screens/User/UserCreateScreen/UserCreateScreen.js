@@ -36,8 +36,8 @@ class UserCreateScreen extends Component {
             age: this.state.age,
             address: this.state.address,
             company: this.state.company,
-            image: '',
-            note: ''
+            image: null,
+            note: null
         };
 
         createOrUpdateUserItem(userItem);
@@ -81,7 +81,7 @@ class UserCreateScreen extends Component {
                     </Separator>
                     <Item floatingLabel style={ styles.formItem }>
                         <Label>Vek:</Label>
-                        <Input autoCorrect={false} onChangeText={(age) => this.setState({age})}/>
+                        <Input keyboardType='numeric' autoCorrect={false} onChangeText={(age) => this.setState({age})}/>
                     </Item>
                     <Item floatingLabel style={ styles.formItem }>
                         <Label>Bydlisko:</Label>

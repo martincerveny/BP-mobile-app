@@ -7,7 +7,7 @@ const UserListItem = ({ item, onPress }) => (
     <List>
         <ListItem  button onPress={() => onPress(item.getId())}>
             {
-                item.getImage() == ''
+                item.getImage() == null
                 ? (<Thumbnail size={80} source={require('./../../../resources/images/person-flat.png')} />)
                 : (<Thumbnail size={80} source={{uri: FileSystem.documentDirectory + item.getImage()}} />)
             }
