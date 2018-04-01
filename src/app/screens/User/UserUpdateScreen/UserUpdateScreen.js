@@ -98,6 +98,7 @@ class UserUpdateScreen extends Component {
     handleImageActionSheet () {
         // v pripade, ze uzivatel este nema pridanu fotku
         if (this.props.userItem.getImage() == null) {
+
             ActionSheet.show(
                 {
                     options: ACTION_SHEET_ADD_IMAGE,

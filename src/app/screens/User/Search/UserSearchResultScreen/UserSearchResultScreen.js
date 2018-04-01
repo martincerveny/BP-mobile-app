@@ -25,7 +25,7 @@ class UserSearchResultScreen extends React.Component {
     };
 
     goBack () {
-        this.props.navigation.goBack()
+        this.props.modalVisible(false);
     }
 
     componentDidMount () {
@@ -33,11 +33,11 @@ class UserSearchResultScreen extends React.Component {
     }
 
     getSearchResults () {
-        if (this.props.navigation.state.params.term === '') {
+        if (this.props.term === '') {
             return this.setState({ items: '' });
         }
 
-        FacebookApiFetchService.getUsers(this.props.navigation.state.params.token, this.props.navigation.state.params.term).then(items => {
+        FacebookApiFetchService.getUsers(this.props.token, this.props.term).then(items => {
             // v pripade ulozenia neplatneho tokenu sa zmaze z AsyncStorage, a je vynutene nove prihlasenie
             if (items === false) {
                 deleteFacebookItem();
@@ -52,7 +52,6 @@ class UserSearchResultScreen extends React.Component {
             } else {
                 this.setState({ items })
             }
-
         });
     }
 
@@ -61,7 +60,7 @@ class UserSearchResultScreen extends React.Component {
     }
 
     async handleCreateUserItem (item) {
-        const meetingId = this.props.navigation.state.params.meetingId
+        const meetingId = this.props.meetingId;
         let userId = AppUtils.generateId();
         let path = userId + '.png';
 
@@ -90,7 +89,7 @@ class UserSearchResultScreen extends React.Component {
             duration: 3000,
             type: 'success'
         });
-        this.props.navigation.goBack()
+        this.goBack()
     }
 
     render () {
@@ -102,7 +101,7 @@ class UserSearchResultScreen extends React.Component {
                     title='Výsledky hľadania'
                     left={
                         <Button transparent onPress={this.goBack}>
-                            <Icon style={{ color: '#fff'}} name="arrow-round-back" />
+                            <Text style={ styles.cancelText}>Zrušiť</Text>
                         </Button>
                     }
                 />

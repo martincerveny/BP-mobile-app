@@ -24,7 +24,7 @@ const UserStore = {
     },
 
     /**
-     * Gets all items from the store.
+     * Gets all userItems from the store.
      *
      * @returns {Promise.<Array.<UserItem>>} - Returns a Promise object.
      */
@@ -34,7 +34,7 @@ const UserStore = {
     },
 
     /**
-     * Return all items by MeetingId.
+     * Return all userItems by MeetingId.
      *
      * @param meetingId
      * @returns {Promise.<Array.<UserItem>>} - Returns a Promise object.
@@ -46,6 +46,21 @@ const UserStore = {
                     return element === meetingId;
                 }
             ))
+    },
+
+    /**
+     * Return all userItems excluded MeetingId.
+     *
+     * @param meetingId
+     * @returns {Promise.<Array.<UserItem>>} - Returns a Promise object.
+     */
+    async getAllItemsExcludeMeetingId (meetingId) {
+        return (await AsyncStorage.multiGet(await UserStore.keys()))
+            .map(result => _mapToItem(JSON.parse(result[1])))
+            // .filter(item => item.getMeetingIds().find(element => {
+            //         element != meetingId
+            //     }
+            // ))
     },
 
     /**

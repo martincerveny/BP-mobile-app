@@ -7,6 +7,7 @@ import Header from '../../../components/Header/Header'
 import styles from './styles';
 import {createOrUpdateUserItem} from "../../../flux/User/UserActions";
 import AppUtils from "../../../utils/AppUtils";
+import MeetingConstants from "../../../flux/Meeting/MeetingConstants";
 
 class UserCreateScreen extends Component {
     constructor (props) {
@@ -28,6 +29,8 @@ class UserCreateScreen extends Component {
     }
 
     handleCreateItem () {
+        const meetingId = this.props.meetingId;
+
         let userItem = {
             id: this.state.id,
             meetingIds: [],
@@ -39,6 +42,11 @@ class UserCreateScreen extends Component {
             image: null,
             note: null
         };
+
+        // v pripade ze sa vytvara uzivatel v ramci schodzky
+        if (meetingId) {
+            userItem.meetingIds.push(MeetingConstants.STORE_KEY_ITEM + meetingId);
+        }
 
         createOrUpdateUserItem(userItem);
         Toast.show({

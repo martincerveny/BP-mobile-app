@@ -6,8 +6,8 @@ import styles from './styles';
 
 const MeetingList = ({ items, onItemPress }) => (
     <ListView
-        enableEmptySections
         dataSource={new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(items)}
+        renderHeader='test'
         renderRow={item => (
             <MeetingListItem
                 item={item}

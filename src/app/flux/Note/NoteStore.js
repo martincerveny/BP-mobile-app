@@ -24,7 +24,7 @@ const NoteStore = {
     },
 
     /**
-     * Gets all items from the store.
+     * Gets all userItems from the store.
      *
      * @returns {Promise.<Array.<NoteItem>>} - Returns a Promise object.
      */
@@ -34,7 +34,7 @@ const NoteStore = {
     },
 
     /**
-     * Return all items by MeetingId and UserId.
+     * Return all userItems by MeetingId and UserId.
      *
      * @param meetingId
      * @param userId

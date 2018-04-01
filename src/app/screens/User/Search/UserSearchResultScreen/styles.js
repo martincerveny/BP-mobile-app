@@ -16,5 +16,8 @@ export default StyleSheet.create({
     noResultsText: {
         textAlign: "center",
         fontSize: 18,
-    }
+    },
+    cancelText: {
+        color: 'white',
+    },
 });

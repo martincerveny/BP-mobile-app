@@ -6,7 +6,7 @@ import styles from './styles';
 const MeetingDetailUserListTab = ({ userItems, onUserItemPress, navigation, meetingId }) => (
     <Container style={ styles.container }>
         <Content>
-            <Button style={{ marginLeft: 145, marginTop: 10, marginBottom: 10 }} iconLeft danger onPress={() => {navigation.navigate('user.search.index', { meetingId: meetingId})}}>
+            <Button style={{ marginLeft: 136, marginTop: 10, marginBottom: 10 }} iconLeft danger onPress={() => {navigation.navigate('user.search.index', { meetingId: meetingId})}}>
                 <Icon name='add' />
                 <Text>Pridať</Text>
             </Button>

@@ -24,7 +24,7 @@ const MeetingStore = {
     },
 
     /**
-     * Gets all items from the store.
+     * Gets all userItems from the store.
      *
      * @returns {Promise.<Array.<MeetingItem>>} - Returns a Promise object.
      */
@@ -34,7 +34,7 @@ const MeetingStore = {
     },
 
     /**
-     * Gets all items from the store by array of meetingIds.
+     * Gets all userItems from the store by array of meetingIds.
      *
      * @param {Array} meetingIds - array of meetingIds
      * @returns {Promise.<Array.<MeetingItem>>} - Returns a Promise object.
