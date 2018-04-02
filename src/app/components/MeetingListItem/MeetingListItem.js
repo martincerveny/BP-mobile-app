@@ -1,5 +1,5 @@
 import React from 'react';
-import { Content, List, ListItem, Thumbnail, Text, Body, Input, Right } from 'native-base';
+import { List, ListItem, Text, Body, Right } from 'native-base';
 import styles from './styles';
 
 const MeetingListItem = ({ item, onPress }) => (

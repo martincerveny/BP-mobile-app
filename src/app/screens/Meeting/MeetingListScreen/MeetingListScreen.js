@@ -6,6 +6,7 @@ import styles from './styles';
 import MeetingStore from "../../../flux/Meeting/MeetingStore";
 import MeetingList from '../../../components/MeetingList/MeetingList';
 import MeetingCreateScreen from '../MeetingCreateScreen/MeetingCreateScreen';
+import _ from 'lodash';
 
 class MeetingListScreen extends Component {
     constructor (props) {
@@ -35,6 +36,19 @@ class MeetingListScreen extends Component {
 
     loadItems () {
         MeetingStore.getAllItems().then(items => {
+            // for (let i = 0; i < items.length; i++) {
+            //     let sectionData = [
+            //         {
+            //             data: [
+            //                 {
+            //
+            //                 }
+            //             ],
+            //             title: ''
+            //         }
+            //     ]
+            // }
+
             return this.setState({ items })
         });
     }
@@ -45,6 +59,51 @@ class MeetingListScreen extends Component {
 
     render () {
         const { items } = this.state;
+
+        // let testItems = [
+        //     {
+        //       data: [
+        //           {
+        //               "date": "1. 4. 2018",
+        //               "id": "16a68c5b-f1d5-126b-db9b-545c48bc603a",
+        //               "name": "Test",
+        //               "note": "",
+        //               "place": "",
+        //               "time": "20:30",
+        //           },
+        //           {
+        //               "date": "1. 4. 2018",
+        //               "id": "e4fd3897-8e79-b7ab-5267-f564ba53c156",
+        //               "name": "Nova",
+        //               "note": "",
+        //               "place": "",
+        //               "time": "22:08",
+        //           },
+        //       ],
+        //         title: 'test'
+        //     },
+        //     {
+        //         data: [
+        //             {
+        //                 "date": "1. 4. 2018",
+        //                 "id": "16a68c5b-f1d5-126b-db9b-545c48bc603a",
+        //                 "name": "Test",
+        //                 "note": "",
+        //                 "place": "",
+        //                 "time": "20:30",
+        //             },
+        //             {
+        //                 "date": "1. 4. 2018",
+        //                 "id": "e4fd3897-8e79-b7ab-5267-f564ba53c156",
+        //                 "name": "Nova",
+        //                 "note": "",
+        //                 "place": "",
+        //                 "time": "22:08",
+        //             },
+        //         ],
+        //         title: 'test'
+        //     }
+        // ];
 
         return (
             <Container style={ styles.container }>

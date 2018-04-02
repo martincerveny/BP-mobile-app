@@ -36,11 +36,6 @@ class NextMeetingListItem extends React.Component {
 
         return(
             <Content>
-                <Card>
-                    <CardItem style={{ backgroundColor: '#e74c3c'}}>
-                        <Text style={{ color: 'white'}}>{this.props.item.getDate()}</Text>
-                    </CardItem>
-                </Card>
                 <TouchableOpacity button activeOpacity={0.5} onPress={() => this.props.onPress(this.props.item.getId())}>
                     <Card>
                         <CardItem >

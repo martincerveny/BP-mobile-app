@@ -1,20 +1,62 @@
 import React from 'react';
-import { ListView  } from 'react-native';
+import { SectionList} from 'react-native';
 import MeetingListItem from './../MeetingListItem/MeetingListItem';
+import {ListItem, Text} from "native-base";
 
 import styles from './styles';
 
-const MeetingList = ({ items, onItemPress }) => (
-    <ListView
-        dataSource={new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(items)}
-        renderHeader='test'
-        renderRow={item => (
-            <MeetingListItem
-                item={item}
-                onPress={onItemPress}
-            />
-        )}
-    />
-);
+const makeSections = (items) => {
+    //zoskupi podla prveho pismena nazvu - podla abecedy
+    const groupedItems = _.groupBy(items, item => item.getName().substr(0,1));
+
+    const ordered = {};
+
+    //zoradi podla abecedy
+    const orderedKeys = Object.keys(groupedItems).sort();
+
+    orderedKeys.forEach(function (key) {
+        ordered[key] = groupedItems[key]
+    });
+
+    let result = [];
+
+    // vytvori sekcie data a key pre sectionList
+    Object.keys(ordered).forEach(function (key) {
+        result.push({
+            key: key,
+            data: ordered[key]
+        })
+    });
+
+    return result;
+};
+
+const MeetingList = ({ items, onItemPress }) => {
+    const sections = makeSections(items);
+
+    return (
+        <SectionList
+            renderItem={({item, index}) => {
+                return (
+                    <MeetingListItem
+                        item={item}
+                        onPress={onItemPress}
+                        index={index}
+                    />
+                )
+            }}
+            renderSectionHeader={({section}) => {
+                return (
+                    <ListItem itemDivider style={{ marginTop: -1}}>
+                        <Text style={{ marginLeft: 10}}>{section.key}</Text>
+                    </ListItem>
+                )
+            }}
+            sections={sections}
+            keyExtractor={(item, index) => index}
+        >
+        </SectionList>
+    )
+};
 
 export default MeetingList;
