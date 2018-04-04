@@ -67,7 +67,6 @@ class UserDetailScreen extends Component {
 
     render () {
         const { userItem, meetingItems } = this.state;
-
         return (
             <Container>
                 <Header

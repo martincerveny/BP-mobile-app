@@ -9,7 +9,6 @@ import MeetingDetailScreen from "../screens/Meeting/MeetingDetailScreen/MeetingD
 import MeetingCreateScreen from "../screens/Meeting/MeetingCreateScreen/MeetingCreateScreen";
 import UserListScreen from "../screens/User/UserListScreen/UserListScreen";
 import UserAddListScreen from "../screens/User/UserAddFromListScreen/UserAddFromListScreen";
-import MeetingUpdateScreen from "../screens/Meeting/MeetingUpdateScreen/MeetingUpdateScreen";
 
 const config = {
     headerMode: 'none',
@@ -19,7 +18,6 @@ const MeetingNavigation = StackNavigator({
     'meeting.list': { screen: MeetingListScreen },
     'meeting.detail': { screen: MeetingDetailScreen },
     'meeting.create': { screen: MeetingCreateScreen },
-    // 'meeting.update': { screen: MeetingUpdateScreen },
 
     //user
     'user.detail': { screen: UserDetailScreen },

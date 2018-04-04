@@ -7,7 +7,7 @@ const MeetingDetailUserListTab = ({ userItems, onUserItemPress, navigation, meet
     <Container style={ styles.container }>
         <Content>
             <Button style={{ marginLeft: 136, marginTop: 10, marginBottom: 10 }} iconLeft danger onPress={() => {navigation.navigate('user.search.index', { meetingId: meetingId})}}>
-                <Icon name='add' />
+                <Icon name='md-person-add' />
                 <Text>Pridať</Text>
             </Button>
             <UserList

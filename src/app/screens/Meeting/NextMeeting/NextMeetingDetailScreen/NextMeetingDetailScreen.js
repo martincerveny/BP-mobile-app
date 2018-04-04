@@ -66,6 +66,11 @@ class NextMeetingDetailScreen extends Component {
                             <Icon style={{ color: '#fff'}} name="arrow-round-back" />
                         </Button>
                     }
+                    right={
+                        <Button transparent onPress={() => {this.props.navigation.navigate('user.search.index', { meetingId: meetingItem.getId()})}}>
+                            <Icon style={{ color: '#fff'}} name="md-person-add" />
+                        </Button>
+                    }
                 />
                 <Content>
                     <ListView
@@ -75,6 +80,7 @@ class NextMeetingDetailScreen extends Component {
                             <UserCard
                                 item={userItem}
                                 meetingId={meetingItem && meetingItem.getId()}
+                                navigation={this.props.navigation}
                             />
                         )}
                     />

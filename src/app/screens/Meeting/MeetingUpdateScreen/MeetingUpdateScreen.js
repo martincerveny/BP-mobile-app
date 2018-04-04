@@ -9,8 +9,8 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import { deleteMeetingItem } from './../../../flux/Meeting/MeetingActions'
 import styles from './styles';
 import {createOrUpdateMeetingItem} from "../../../flux/Meeting/MeetingActions";
-import {FileSystem} from "expo";
-import {deleteUserItem} from "../../../flux/User/UserActions";
+import MeetingConstants from "../../../flux/Meeting/MeetingConstants";
+import {createOrUpdateUserItem} from "../../../flux/User/UserActions";
 
 var ACTION_SHEET_DELETE_ITEM = ['Vymazať schôdzku', 'Zrušiť'];
 var DESTRUCTIVE_INDEX_DELETE_ITEM = 0;
@@ -89,6 +89,9 @@ class MeetingUpdateScreen extends React.Component {
     }
 
     handleDeleteItem () {
+        const userItems = this.props.userItems;
+        const meetingItem = this.props.meetingItem;
+
         ActionSheet.show(
             {
                 options: ACTION_SHEET_DELETE_ITEM,
@@ -99,7 +102,19 @@ class MeetingUpdateScreen extends React.Component {
                 this.setState({ deleteItemClicked: ACTION_SHEET_DELETE_ITEM[buttonIndex] });
 
                 if (this.state.deleteItemClicked === 'Vymazať schôdzku') {
+
+                    // zmaze IDcka schodzky z userov
+                    for (let i = 0; i < userItems.length; i++) {
+                        let index = userItems[i].meetingIds.indexOf(MeetingConstants.STORE_KEY_ITEM + meetingItem.getId());
+                        if (index > -1) {
+                            userItems[i].meetingIds.splice(index, 1);
+                        }
+
+                        createOrUpdateUserItem(userItems[i]);
+                    }
+
                     deleteMeetingItem(this.props.meetingItem.getId());
+
                     this.goBack();
                     Toast.show({
                         text: 'Schôdzka bola zmazaná.',

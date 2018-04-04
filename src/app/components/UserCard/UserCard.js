@@ -18,6 +18,7 @@ class UserCard extends React.Component {
 
         this.loadNoteItems = this.loadNoteItems.bind(this);
         this.handleCreateNoteItem = this.handleCreateNoteItem.bind(this);
+        this.handleUserItemPress = this.handleUserItemPress.bind(this);
         this.handleDeleteItem = this.handleDeleteItem.bind(this);
     }
 
@@ -56,6 +57,10 @@ class UserCard extends React.Component {
         deleteNoteItem(id);
     }
 
+    handleUserItemPress (id) {
+        this.props.navigation.navigate("user.detail", { userId: id})
+    }
+
     render () {
         const { item, noteItems } = this.state;
 
@@ -63,14 +68,15 @@ class UserCard extends React.Component {
             <Card>
                 <CardItem>
                     <Left>
-                        {
-                            item.getImage() == null
-                                ? (<Thumbnail size={80} source={require('./../../../resources/images/person-flat.png')} />)
-                                : (<Thumbnail size={80} source={{uri: FileSystem.documentDirectory + item.getImage()}} />)
-                        }
-                        <Body>
-                        <Text>{item.getFirstName()} {item.getLastName()}</Text>
-                        </Body>
+                        <Button transparent onPress={() => this.handleUserItemPress(item.getId())}>
+                            {
+                                item.getImage() == null
+                                    ? (<Thumbnail size={80} source={require('./../../../resources/images/person-flat.png')} />)
+                                    : (<Thumbnail size={80} source={{uri: FileSystem.documentDirectory + item.getImage()}} />)
+                            }
+                                <Text style={{ color: '#000', fontSize: 16}}>{item.getFirstName()} {item.getLastName()}</Text>
+                        </Button>
+
                     </Left>
                 </CardItem>
 

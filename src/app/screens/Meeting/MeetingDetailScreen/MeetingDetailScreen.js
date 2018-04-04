@@ -97,6 +97,7 @@ class MeetingDetailScreen extends React.Component {
                         navigation={this.props.navigation}
                         modalVisible={this.setModalVisible}
                         meetingItem={meetingItem}
+                        userItems={userItems}
                     />
                 </Modal>
                 <Tabs>
