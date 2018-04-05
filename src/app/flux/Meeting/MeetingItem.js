@@ -1,6 +1,3 @@
-import MeetingConstants from "./MeetingConstants";
-import UserStore from "../User/UserStore";
-
 /**
  * MeetingItem
  */

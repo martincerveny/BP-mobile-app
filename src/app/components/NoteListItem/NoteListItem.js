@@ -13,25 +13,7 @@ class NoteListItem extends React.Component {
 
         this.handleSaveItem = this.handleSaveItem.bind(this);
     }
-    //
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     // console.log(nextState)
-    //     if (this.props.item.id !== nextProps.item.id) {
-    //         this.setState({
-    //             item: this.props.item,
-    //             text: this.props.item.getText()
-    //         });
-    //         return true;
-    //     }
-    //     if (this.state.item.id !== nextState.item.id) {
-    //         this.setState({
-    //             item: this.props.item,
-    //             text: this.props.item.getText()
-    //         });
-    //         return true;
-    //     }
-    //     return false;
-    // }
+
 
     handleSaveItem () {
         let noteItem = {
@@ -56,7 +38,7 @@ class NoteListItem extends React.Component {
                             value={this.state.text}
                             autoCorrect={false}
                             onBlur={this.handleSaveItem}
-                            placeholder={this.state.item.getId()}
+                            // placeholder={this.state.item.getId()}
                         />
                     </Body>
                     <Button iconRight transparent danger onPress={() => this.props.deleteItemPress(this.props.item.getId())}>

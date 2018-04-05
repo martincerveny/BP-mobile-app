@@ -58,7 +58,7 @@ class NextMeetingDetailScreen extends Component {
         const { meetingItem, userItems } = this.state;
 
         return (
-            <Container>
+            <Container style={ styles.container }>
                 <Header
                     title={meetingItem && meetingItem.getName()}
                     left={

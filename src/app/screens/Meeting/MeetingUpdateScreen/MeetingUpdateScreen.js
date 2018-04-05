@@ -108,9 +108,9 @@ class MeetingUpdateScreen extends React.Component {
                         let index = userItems[i].meetingIds.indexOf(MeetingConstants.STORE_KEY_ITEM + meetingItem.getId());
                         if (index > -1) {
                             userItems[i].meetingIds.splice(index, 1);
-                        }
+                            createOrUpdateUserItem(userItems[i]);
 
-                        createOrUpdateUserItem(userItems[i]);
+                        }
                     }
 
                     deleteMeetingItem(this.props.meetingItem.getId());

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Content, Button, Text, Icon } from 'native-base';
-import UserList from '../../components/UserList/UserList'
 import styles from './styles';
+import UserSwipableList from "../UserSwipableList/UserSwipableList";
 
 const MeetingDetailUserListTab = ({ userItems, onUserItemPress, navigation, meetingId }) => (
     <Container style={ styles.container }>
@@ -10,9 +10,10 @@ const MeetingDetailUserListTab = ({ userItems, onUserItemPress, navigation, meet
                 <Icon name='md-person-add' />
                 <Text>Pridať</Text>
             </Button>
-            <UserList
+            <UserSwipableList
                 items={userItems}
                 onItemPress={onUserItemPress}
+                meetingId={meetingId}
             />
         </Content>
     </Container>

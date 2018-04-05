@@ -71,7 +71,7 @@ class UserCard extends React.Component {
                         <Button transparent onPress={() => this.handleUserItemPress(item.getId())}>
                             {
                                 item.getImage() == null
-                                    ? (<Thumbnail size={80} source={require('./../../../resources/images/person-flat.png')} />)
+                                    ? (<Thumbnail size={80} source={require('../../../resources/assets/images/person-flat.png')} />)
                                     : (<Thumbnail size={80} source={{uri: FileSystem.documentDirectory + item.getImage()}} />)
                             }
                                 <Text style={{ color: '#000', fontSize: 16}}>{item.getFirstName()} {item.getLastName()}</Text>

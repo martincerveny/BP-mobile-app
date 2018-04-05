@@ -72,7 +72,6 @@ class MeetingDetailScreen extends React.Component {
 
     render () {
         const { meetingItem, userItems } = this.state;
-
         return (
             <Container>
                 <Header
@@ -100,7 +99,7 @@ class MeetingDetailScreen extends React.Component {
                         userItems={userItems}
                     />
                 </Modal>
-                <Tabs>
+                <Tabs locked='true'>
                     <Tab heading={ <TabHeading><Icon name="ios-keypad" /></TabHeading>}>
                        <MeetingDetailTab
                            meetingItem={meetingItem}
