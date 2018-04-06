@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
-import { Modal } from 'react-native';
+import Modal from 'expo/src/modal/Modal';
+import ModalHost from 'expo/src/modal/ModalHost';
 import { Container, Tab, Tabs, TabHeading, Icon, Button } from 'native-base';
 import MeetingDetailUserListTab from '../../../components/MeetingDetailUserListTab/MeetingDetailUserListTab';
 import MeetingDetailTab from '../../../components/MeetingDetailTab/MeetingDetailTab';
@@ -73,52 +74,55 @@ class MeetingDetailScreen extends React.Component {
     render () {
         const { meetingItem, userItems } = this.state;
         return (
-            <Container>
-                <Header
-                    title={meetingItem && meetingItem.getName()}
-                    left={
-                        <Button transparent onPress={this.goBack}>
-                            <Icon style={{ color: '#fff'}} name="arrow-round-back" />
-                        </Button>
-                    }
-                    right={
-                        <Button transparent onPress={() => {this.setModalVisible(true)}}>
-                            <Icon style={{ color: '#fff'}} name="create" />
-                        </Button>
-                    }
-                />
-                <Modal
-                    animationType="fade"
-                    transparent={false}
-                    visible={this.state.modalVisible}
-                >
-                    <MeetingUpdateScreen
-                        navigation={this.props.navigation}
-                        modalVisible={this.setModalVisible}
-                        meetingItem={meetingItem}
-                        userItems={userItems}
+            <ModalHost>
+                <Container>
+                    <Header
+                        title={meetingItem && meetingItem.getName()}
+                        left={
+                            <Button transparent onPress={this.goBack}>
+                                <Icon style={{ color: '#fff'}} name="arrow-round-back" />
+                            </Button>
+                        }
+                        right={
+                            <Button transparent onPress={() => {this.setModalVisible(true)}}>
+                                <Icon style={{ color: '#fff'}} name="create" />
+                            </Button>
+                        }
                     />
-                </Modal>
-                <Tabs locked='true'>
-                    <Tab heading={ <TabHeading><Icon name="ios-keypad" /></TabHeading>}>
-                       <MeetingDetailTab
-                           meetingItem={meetingItem}
-                           peopleCount={userItems.length}
-                       />
-                    </Tab>
-                    <Tab heading={ <TabHeading><Icon name="ios-people" /></TabHeading>}>
-                        <MeetingDetailUserListTab
-                            userItems={userItems}
-                            onUserItemPress={this.handleUserItemPress}
+
+                    <Modal
+                        animationType="fade"
+                        transparent={false}
+                        visible={this.state.modalVisible}
+                    >
+                        <MeetingUpdateScreen
                             navigation={this.props.navigation}
-                            meetingId={meetingItem && meetingItem.getId()}
+                            modalVisible={this.setModalVisible}
+                            meetingItem={meetingItem}
+                            userItems={userItems}
                         />
-                    </Tab>
-                    <Tab heading={ <TabHeading><Icon name="ios-paper" /></TabHeading>}>
-                        {/*<NoteListItem />*/}
-                    </Tab>
-                </Tabs>
-            </Container>
+                    </Modal>
+                    <Tabs locked='true'>
+                        <Tab heading={ <TabHeading><Icon name="ios-keypad" /></TabHeading>}>
+                           <MeetingDetailTab
+                               meetingItem={meetingItem}
+                               peopleCount={userItems.length}
+                           />
+                        </Tab>
+                        <Tab heading={ <TabHeading><Icon name="ios-people" /></TabHeading>}>
+                            <MeetingDetailUserListTab
+                                userItems={userItems}
+                                onUserItemPress={this.handleUserItemPress}
+                                navigation={this.props.navigation}
+                                meetingId={meetingItem && meetingItem.getId()}
+                            />
+                        </Tab>
+                        <Tab heading={ <TabHeading><Icon name="ios-paper" /></TabHeading>}>
+                            {/*<NoteListItem />*/}
+                        </Tab>
+                    </Tabs>
+                </Container>
+            </ModalHost>
         );
     }
 }

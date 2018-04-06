@@ -65,7 +65,7 @@ class UserSearchIndexScreen extends React.Component {
     // prihlasenie k FB
     async logIn() {
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(APP_ID, {
-            permissions: ['public_profile'],
+            permissions: ['public_profile', 'email', 'user_friends'],
         });
 
         if (type === 'success') {

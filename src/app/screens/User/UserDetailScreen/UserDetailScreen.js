@@ -8,7 +8,8 @@ import UserStore from "../../../flux/User/UserStore";
 import MeetingStore from "../../../flux/Meeting/MeetingStore";
 import UserDetailMeetingListTab from '../../../components/UserDetailMeetingListTab/UserDetailMeetingListTab';
 import styles from './styles';
-import {Modal} from "react-native";
+import Modal from 'expo/src/modal/Modal';
+import ModalHost from 'expo/src/modal/ModalHost';
 import UserUpdateScreen from "../UserUpdateScreen/UserUpdateScreen";
 
 class UserDetailScreen extends Component {
@@ -68,48 +69,50 @@ class UserDetailScreen extends Component {
     render () {
         const { userItem, meetingItems } = this.state;
         return (
-            <Container>
-                <Header
-                    title={ userItem && userItem.firstName + ' ' + userItem.lastName }
-                    left={
-                        <Button transparent onPress={this.goBack}>
-                            <Icon style={{ color: '#fff'}} name="arrow-round-back" />
-                        </Button>
-                    }
-                    right={
-                            <Button transparent onPress={() => {this.setModalVisible(true)}}>
-                                <Icon style={{ color: '#fff'}} name="create" />
+            <ModalHost>
+                <Container>
+                    <Header
+                        title={ userItem && userItem.firstName + ' ' + userItem.lastName }
+                        left={
+                            <Button transparent onPress={this.goBack}>
+                                <Icon style={{ color: '#fff'}} name="arrow-round-back" />
                             </Button>
-                    }
-                />
-                <Modal
-                    animationType="fade"
-                    transparent={false}
-                    visible={this.state.modalVisible}
-                >
-                    <UserUpdateScreen
-                        navigation={this.props.navigation}
-                        modalVisible={this.setModalVisible}
-                        userItem={userItem}
+                        }
+                        right={
+                                <Button transparent onPress={() => {this.setModalVisible(true)}}>
+                                    <Icon style={{ color: '#fff'}} name="create" />
+                                </Button>
+                        }
                     />
-                </Modal>
-                <Tabs>
-                    <Tab heading={ <TabHeading><Icon name="ios-contact" /></TabHeading>}>
-                        <UserDetailTab
+                    <Modal
+                        animationType="fade"
+                        transparent={false}
+                        visible={this.state.modalVisible}
+                    >
+                        <UserUpdateScreen
+                            navigation={this.props.navigation}
+                            modalVisible={this.setModalVisible}
                             userItem={userItem}
                         />
-                    </Tab>
-                    <Tab heading={ <TabHeading><Icon name="list" /></TabHeading>}>
-                    <UserDetailMeetingListTab
-                        meetingItems={meetingItems}
-                        onMeetingItemPress={this.handleMeetingItemPress}
-                    />
-                    </Tab>
-                    <Tab heading={ <TabHeading><Icon name="paper" /></TabHeading>}>
-                        <UserNoteListItem />
-                    </Tab>
-                </Tabs>
-            </Container>
+                    </Modal>
+                    <Tabs>
+                        <Tab heading={ <TabHeading><Icon name="ios-contact" /></TabHeading>}>
+                            <UserDetailTab
+                                userItem={userItem}
+                            />
+                        </Tab>
+                        <Tab heading={ <TabHeading><Icon name="list" /></TabHeading>}>
+                        <UserDetailMeetingListTab
+                            meetingItems={meetingItems}
+                            onMeetingItemPress={this.handleMeetingItemPress}
+                        />
+                        </Tab>
+                        <Tab heading={ <TabHeading><Icon name="paper" /></TabHeading>}>
+                            <UserNoteListItem />
+                        </Tab>
+                    </Tabs>
+                </Container>
+            </ModalHost>
         );
     }
 }

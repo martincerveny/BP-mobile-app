@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Content, Text, Toast, Button, Icon } from 'native-base';
+import { Container, Content, Text, Toast, Button } from 'native-base';
 import Header from '../../../../components/Header/Header'
 import SearchResultList from '../../../../components/SearchResultList/SearchResultList'
 import { ActivityIndicator, View } from 'react-native';

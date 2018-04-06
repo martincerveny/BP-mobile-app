@@ -7,12 +7,12 @@ import styles from './styles';
 
 const makeSections = (items) => {
     //zoskupi podla datumu
-    const groupedItems = _.groupBy(items, item => item.getDate());
+    const groupedItems = _.groupBy(items, item => item.getDate().replace(/ /g,''));
 
     const ordered = {};
+    //zoradi podla datumu a vystrihne len prve 3 najblizsie datumy .slice(0,3)
 
-    //zoradi podla datumu a vystrihne len prve 3 najblizsie datumy
-    const orderedKeys = Object.keys(groupedItems).sort().slice(0,3);
+    const orderedKeys = Object.keys(groupedItems).sort();
 
     orderedKeys.forEach(function (key) {
         ordered[key] = groupedItems[key]

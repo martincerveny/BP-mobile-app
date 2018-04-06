@@ -40,18 +40,16 @@ class NextMeetingListScreen extends Component {
         const { items } = this.state;
 
         return (
-            <Container>
+            <Container style={ styles.container }>
                 <Header
                     title='Ďalšie schôdzky'
                 />
-                <View style={ styles.container }>
-                    <ScrollView>
-                        <NextMeetingList
-                            items={items}
-                            onItemPress={this.handleItemPress}
-                        />
-                    </ScrollView>
-                </View>
+                <ScrollView>
+                    <NextMeetingList
+                        items={items}
+                        onItemPress={this.handleItemPress}
+                    />
+                </ScrollView>
             </Container>
         )
     }
