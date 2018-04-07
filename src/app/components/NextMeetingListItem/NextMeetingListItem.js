@@ -24,7 +24,6 @@ class NextMeetingListItem extends React.Component {
         UserStore.removeChangeListener(this.loadUserItems);
     }
 
-    // @TODO ROVNAKY PROBLEM - toto asi potrebuje byt konstanta a nie trieda
     loadUserItems () {
         const meetingId = this.props.item.getId();
         UserStore.getAllItemsByMeetingId(MeetingConstants.STORE_KEY_ITEM + meetingId).then(userItems => {
@@ -36,7 +35,6 @@ class NextMeetingListItem extends React.Component {
         const { userItems } = this.state;
 
         return(
-            <Content>
                 <TouchableOpacity button activeOpacity={0.5} onPress={() => this.props.onPress(this.props.item.getId())}>
                     <Card>
                         <CardItem >
@@ -70,7 +68,6 @@ class NextMeetingListItem extends React.Component {
                         </CardItem>
                     </Card>
                 </TouchableOpacity>
-            </Content>
         );
     }
 }

@@ -45,7 +45,6 @@ class UserSwipableList extends React.Component {
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
         return (
-            <Content>
                 <List
                     dataSource={this.ds.cloneWithRows(this.state.listViewData)}
                     renderRow={item =>
@@ -61,7 +60,6 @@ class UserSwipableList extends React.Component {
                     rightOpenValue={-75}
                     disableRightSwipe='true'
                 />
-            </Content>
         );
     }
 };
