@@ -15,7 +15,7 @@ class MeetingCreateScreen extends React.Component {
         this.state = {
             id: AppUtils.generateId(),
             name: '',
-            date: new Date().toLocaleDateString(),
+            date: new Date().toLocaleDateString('de-DE', {year: 'numeric', month: '2-digit', day: '2-digit'}),
             time: time.substring(0, time.indexOf(':', time.indexOf(':')+1)),
             place: '',
             isDatePickerVisible: false,
@@ -34,7 +34,7 @@ class MeetingCreateScreen extends React.Component {
 
     _handleDatePicked = (date) => {
         this.setState({
-            date: date.toLocaleDateString(),
+            date: date.toLocaleDateString('de-DE', {year: 'numeric', month: '2-digit', day: '2-digit'}),
         });
         this._hideDatePicker();
     };

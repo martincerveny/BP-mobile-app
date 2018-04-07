@@ -69,7 +69,7 @@ class MeetingUpdateScreen extends React.Component {
 
     _handleDatePicked = (date) => {
         this.setState({
-            date: date.toLocaleDateString(),
+            date: date.toLocaleDateString('de-DE', {year: 'numeric', month: '2-digit', day: '2-digit'}),
         });
         this._hideDatePicker();
     };
