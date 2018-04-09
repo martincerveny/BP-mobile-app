@@ -11,6 +11,8 @@ import styles from './styles';
 import {createOrUpdateMeetingItem} from "../../../flux/Meeting/MeetingActions";
 import MeetingConstants from "../../../flux/Meeting/MeetingConstants";
 import {createOrUpdateUserItem} from "../../../flux/User/UserActions";
+import NoteStore from "../../../flux/Note/NoteStore";
+import {deleteNoteItem} from "../../../flux/Note/NoteActions";
 
 var ACTION_SHEET_DELETE_ITEM = ['Vymazať schôdzku', 'Zrušiť'];
 var DESTRUCTIVE_INDEX_DELETE_ITEM = 0;
@@ -112,6 +114,12 @@ class MeetingUpdateScreen extends React.Component {
 
                         }
                     }
+                    // zmazeme poznamky patriace schodzke
+                    NoteStore.getAllItemsByMeetingId(meetingItem.getId()).then(noteItems => {
+                        for(var i=0; i<noteItems.length; i++) {
+                            deleteNoteItem(noteItems[i].getId())
+                        }
+                    });
 
                     deleteMeetingItem(this.props.meetingItem.getId());
 

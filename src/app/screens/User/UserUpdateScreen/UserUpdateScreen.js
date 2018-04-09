@@ -8,6 +8,8 @@ import styles from './styles';
 import {createOrUpdateUserItem, deleteUserItem} from "../../../flux/User/UserActions";
 import { FileSystem, ImagePicker } from "expo";
 import AppUtils from "../../../utils/AppUtils";
+import NoteStore from "../../../flux/Note/NoteStore";
+import {deleteNoteItem} from "../../../flux/Note/NoteActions";
 
 var ACTION_SHEET_ADD_IMAGE = ['Odfotiť', 'Vybrať fotku', 'Zrušiť'];
 var ACTION_SHEET_EDIT_IMAGE = ['Odfotiť', 'Vybrať fotku', 'Vymazať fotku', 'Zrušiť'];
@@ -81,6 +83,15 @@ class UserUpdateScreen extends Component {
                         FileSystem.deleteAsync(FileSystem.documentDirectory + this.state.image)
                     }
 
+                    // zmazeme poznamky patriace userovi
+                    NoteStore.getAllItemsByUserId(this.props.userItem.getId()).then(noteItems => {
+                        console.log(noteItems);
+                        for(var i=0; i<noteItems.length; i++) {
+                            deleteNoteItem(noteItems[i].getId())
+                        }
+                    });
+
+                    //zmazeme usera
                     deleteUserItem(this.props.userItem.getId());
                     this.goBack();
                     Toast.show({

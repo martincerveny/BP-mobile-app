@@ -15,7 +15,7 @@ const config = {
 };
 
 const AppNavigation = TabNavigator({
-        'Najbližšie': {
+        'Najbližšie schôdzky': {
             screen: NextMeetingNavigation,
             navigationOptions: {
                 tabBarIcon: ({ tintColor }) => (

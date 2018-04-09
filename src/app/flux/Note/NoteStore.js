@@ -24,7 +24,7 @@ const NoteStore = {
     },
 
     /**
-     * Gets all userItems from the store.
+     * Gets all noteItems from the store.
      *
      * @returns {Promise.<Array.<NoteItem>>} - Returns a Promise object.
      */
@@ -34,7 +34,7 @@ const NoteStore = {
     },
 
     /**
-     * Return all userItems by UserId.
+     * Return all noteItems by UserId.
      *
      * @param userId
      * @returns {Promise.<Array.<UserItem>>} - Returns a Promise object.
@@ -47,7 +47,20 @@ const NoteStore = {
     },
 
     /**
-     * Return all userItems by MeetingId and UserId.
+     * Return all noteItems by UserId.
+     *
+     * @param meetingId
+     * @returns {Promise.<Array.<UserItem>>} - Returns a Promise object.
+     */
+    async getAllItemsByMeetingId (meetingId) {
+        return (await AsyncStorage.multiGet(await NoteStore.keys()))
+            .map(result => _mapToItem(JSON.parse(result[1])))
+            .filter(item => item.getMeetingId() === meetingId)
+
+    },
+
+    /**
+     * Return all noteItems by MeetingId and UserId.
      *
      * @param meetingId
      * @param userId

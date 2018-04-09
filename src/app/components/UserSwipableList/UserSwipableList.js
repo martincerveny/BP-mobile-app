@@ -58,19 +58,12 @@ class UserSwipableList extends React.Component {
                             onPress={this.props.onItemPress}
                         />
                     }
-                    renderLeftHiddenRow={ (data, secId, rowId, rowMap) => (
-                        <Button
-                            onPress={ _ => this.openRow(rowMap[`${secId}${rowId}`])}
-                        ></Button>)
-                    }
                     renderRightHiddenRow={(item, secId, rowId, rowMap) =>
                         <Button full danger onPress={_ => this.deleteRow(item, secId, rowId, rowMap)}>
                             <Icon active name="trash" />
                         </Button>}
                     rightOpenValue={-75}
-                    leftOpenValue={75}
-
-                    // disableRightSwipe='true'
+                    disableRightSwipe='true'
                 />
 
         );

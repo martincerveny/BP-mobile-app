@@ -102,7 +102,7 @@ class MeetingDetailScreen extends React.Component {
                             userItems={userItems}
                         />
                     </Modal>
-                    <Tabs locked='true'>
+                    <Tabs locked={true}>
                         <Tab heading={ <TabHeading><Icon name="ios-keypad" /></TabHeading>}>
                            <MeetingDetailTab
                                meetingItem={meetingItem}
