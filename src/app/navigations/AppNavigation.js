@@ -10,12 +10,12 @@ const config = {
     swipeEnabled: false,
     tabBarOptions: {
         activeTintColor: '#e74c3c',
-        showLabel: false
+        showLabel: true
     },
 };
 
 const AppNavigation = TabNavigator({
-        'nextMeeting': {
+        'Najbližšie': {
             screen: NextMeetingNavigation,
             navigationOptions: {
                 tabBarIcon: ({ tintColor }) => (
@@ -28,7 +28,7 @@ const AppNavigation = TabNavigator({
             },
         },
 
-        'meeting': {
+        'Schôdzky': {
             screen: MeetingNavigation,
             navigationOptions: {
                 tabBarIcon: ({ tintColor, focused }) => (
@@ -40,7 +40,7 @@ const AppNavigation = TabNavigator({
                 ),
             },
         },
-        'user': {
+        'Ľudia': {
             screen: UserNavigation,
             navigationOptions: {
                 tabBarIcon: ({ tintColor }) => (

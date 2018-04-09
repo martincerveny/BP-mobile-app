@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import _ from 'lodash';
 import { Container, Tab, Tabs, TabHeading, Icon, Button } from 'native-base';
 import UserDetailTab from '../../../components/UserDetailTab/UserDetailTab';
-import UserNoteListItem from '../../../components/UserNoteListItem/UserNoteListItem';
 import Header from '../../../components/Header/Header';
 import UserStore from "../../../flux/User/UserStore";
 import MeetingStore from "../../../flux/Meeting/MeetingStore";
@@ -11,6 +10,8 @@ import styles from './styles';
 import Modal from 'expo/src/modal/Modal';
 import ModalHost from 'expo/src/modal/ModalHost';
 import UserUpdateScreen from "../UserUpdateScreen/UserUpdateScreen";
+import UserDetailNoteListTab from "../../../components/UserDetailNoteListTab/UserDetailNoteListTab";
+import NoteStore from "../../../flux/Note/NoteStore";
 
 class UserDetailScreen extends Component {
     constructor (props) {
@@ -18,6 +19,7 @@ class UserDetailScreen extends Component {
         this.state = {
             userItem: null,
             meetingItems: [],
+            noteItems: [],
             modalVisible: false,
         };
 
@@ -38,12 +40,14 @@ class UserDetailScreen extends Component {
     componentDidMount () {
         UserStore.addChangeListener(this.loadItem);
         MeetingStore.addChangeListener(this.loadItem);
+        NoteStore.addChangeListener(this.loadItem);
         this.loadItem();
     };
 
     componentWillUnmount () {
         UserStore.removeChangeListener(this.loadItem);
         MeetingStore.removeChangeListener(this.loadItem);
+        NoteStore.removeChangeListener(this.loadItem);
     }
 
     loadItem () {
@@ -54,8 +58,13 @@ class UserDetailScreen extends Component {
                 this.goBack();
             } else {
                 MeetingStore.getAllItemsByMeetingIds(userItem.getMeetingIds()).then(meetingItems => {
-                    this.setState({ meetingItems })
+                    this.setState({ meetingItems });
                 });
+
+                NoteStore.getAllItemsByUserId(userItem.getId()).then(noteItems => {
+                    this.setState({ noteItems });
+                });
+
                 this.setState({ userItem })
             }
         });
@@ -67,7 +76,7 @@ class UserDetailScreen extends Component {
     }
 
     render () {
-        const { userItem, meetingItems } = this.state;
+        const { userItem, meetingItems, noteItems } = this.state;
         return (
             <ModalHost>
                 <Container>
@@ -108,7 +117,10 @@ class UserDetailScreen extends Component {
                         />
                         </Tab>
                         <Tab heading={ <TabHeading><Icon name="paper" /></TabHeading>}>
-                            <UserNoteListItem />
+                            <UserDetailNoteListTab
+                                meetingItems={meetingItems}
+                                noteItems={noteItems}
+                            />
                         </Tab>
                     </Tabs>
                 </Container>

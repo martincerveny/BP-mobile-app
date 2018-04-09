@@ -1,7 +1,7 @@
 import React from 'react';
 import {ListView, Alert } from 'react-native';
 import UserListItem from './../UserListItem/UserListItem';
-import {Button, Content, Icon, List} from "native-base";
+import {Button, Icon, List} from "native-base";
 import MeetingConstants from "../../flux/Meeting/MeetingConstants";
 import {createOrUpdateUserItem} from "../../flux/User/UserActions";
 import styles from './styles';
@@ -10,10 +10,10 @@ class UserSwipableList extends React.Component {
     constructor (props) {
         super(props);
 
-        this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-        this.state = {
-            listViewData: this.props.items,
-        };
+        // this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+        // this.state = {
+        //     listViewData: this.props.items,
+        // };
     }
 
     deleteRow(item, secId, rowId, rowMap) {
@@ -25,9 +25,9 @@ class UserSwipableList extends React.Component {
                 {text: 'OK',
                     onPress: () => {
                         rowMap[`${secId}${rowId}`].props.closeRow();
-                        const newData = [...this.state.listViewData];
-                        newData.splice(rowId, 1);
-                        this.setState({ listViewData: newData });
+                        // const newData = [...this.state.listViewData];
+                        // newData.splice(rowId, 1);
+                        // this.setState({ listViewData: newData });
 
                         // zmazat schodzku z uzivatela v AsyncStorage
                         let index = item.meetingIds.indexOf(MeetingConstants.STORE_KEY_ITEM + this.props.meetingId);
@@ -41,25 +41,38 @@ class UserSwipableList extends React.Component {
             { cancelable: false }
         );
     }
+    openRow = (rowRef) => {
+        // Use an internal method to manually swipe the row open to whatever value you pass
+        rowRef.manuallySwipeRow(50);
+    }
+
     render () {
-        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+        // const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
         return (
                 <List
-                    dataSource={this.ds.cloneWithRows(this.state.listViewData)}
+                    dataSource={new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(this.props.items)}
                     renderRow={item =>
                         <UserListItem
                             item={item}
                             onPress={this.props.onItemPress}
                         />
                     }
+                    renderLeftHiddenRow={ (data, secId, rowId, rowMap) => (
+                        <Button
+                            onPress={ _ => this.openRow(rowMap[`${secId}${rowId}`])}
+                        ></Button>)
+                    }
                     renderRightHiddenRow={(item, secId, rowId, rowMap) =>
                         <Button full danger onPress={_ => this.deleteRow(item, secId, rowId, rowMap)}>
                             <Icon active name="trash" />
                         </Button>}
                     rightOpenValue={-75}
-                    disableRightSwipe='true'
+                    leftOpenValue={75}
+
+                    // disableRightSwipe='true'
                 />
+
         );
     }
 };

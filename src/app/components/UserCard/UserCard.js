@@ -53,6 +53,7 @@ class UserCard extends React.Component {
 
     handleDeleteItem (id) {
         console.log('mazem item ---  ' + this.props.item.getId())
+        console.log('mazem item ---  ' + id)
 
         deleteNoteItem(id);
     }

@@ -6,16 +6,14 @@ import {Card, CardItem, Text} from "native-base";
 import styles from './styles';
 
 const makeSections = (items) => {
-    console.log(items)
     //zoskupi podla datumu
     const groupedItems = _.groupBy(items, item => item.getDate());
-
     const ordered = {};
 
     //vystrihne len prve 3 najblizsie datumy .slice(0,3)
     const orderedKeys = Object.keys(groupedItems);
 
-    //zoradenie podla datumu
+    //vytvorenie date objektov
     var arr = [];
     for(var i =0; i<orderedKeys.length; i++)
     {
@@ -25,6 +23,7 @@ const makeSections = (items) => {
         arr.push(new Date(date1[2], date1[1] - 1, date1[0]));
     }
 
+    //zoradenie podla datumu
     arr.sort(function(a,b){return a-b});  //asc
 
     // naformatuje naspat date object na localne zobrazenie datumu

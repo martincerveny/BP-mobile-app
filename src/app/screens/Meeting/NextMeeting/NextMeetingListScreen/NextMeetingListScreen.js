@@ -38,7 +38,6 @@ class NextMeetingListScreen extends Component {
 
     render () {
         const { items } = this.state;
-
         return (
             <Container style={ styles.container }>
                 <Header
