@@ -53,7 +53,7 @@ class UserListScreen extends React.Component {
                 <Header
                     title='Zoznam ľudí'
                     left={
-                        <Button transparent onPress={() => {this.setModalVisible(true);}}>
+                        <Button transparent onPress={() => {this.props.navigation.navigate('user.search.index', { meetingId: null})}}>
                             <Icon style={{ color: '#fff'}} name="add" />
                         </Button>
                     }
@@ -68,15 +68,15 @@ class UserListScreen extends React.Component {
                         items={items}
                         onItemPress={this.handleItemPress}
                     />
-                    <Modal
-                        animationType="slide"
-                        transparent={false}
-                        visible={this.state.modalVisible}
-                    >
-                        <UserCreateScreen
-                            modalVisible={this.setModalVisible}
-                        />
-                    </Modal>
+                    {/*<Modal*/}
+                        {/*animationType="slide"*/}
+                        {/*transparent={false}*/}
+                        {/*visible={this.state.modalVisible}*/}
+                    {/*>*/}
+                        {/*<UserCreateScreen*/}
+                            {/*modalVisible={this.setModalVisible}*/}
+                        {/*/>*/}
+                    {/*</Modal>*/}
                 </Content>
             </Container>
         );

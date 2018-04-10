@@ -113,11 +113,12 @@ class UserSearchIndexScreen extends React.Component {
                                         : (<Button iconLeft danger onPress={() => {this.setUserSearchResultModalVisible(true)}}><Icon name='search' /><Text>Vyhľadať</Text></Button>)
                                 }
 
+                                {
+                                    this.props.navigation.state.params.meetingId
+                                        ? (<Button iconLeft danger onPress={() => {this.setUserAddFromListModalVisible()}}><Icon name='list' /><Text>Zoznam</Text></Button>)
+                                        : null
+                                }
 
-                                <Button iconLeft danger onPress={() => {this.setUserAddFromListModalVisible()}}>
-                                    <Icon name='list' />
-                                    <Text>Zoznam</Text>
-                                </Button>
                             </View>
                         </Form>
                         <Modal

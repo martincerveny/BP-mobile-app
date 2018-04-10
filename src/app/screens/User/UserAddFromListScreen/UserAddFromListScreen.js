@@ -4,7 +4,6 @@ import Header from '../../../components/Header/Header'
 import UserStore from "../../../flux/User/UserStore";
 import UserList from '../../../components/UserList/UserList'
 import MeetingConstants from "../../../flux/Meeting/MeetingConstants";
-
 import styles from './styles';
 import {createOrUpdateUserItem} from "../../../flux/User/UserActions";
 
