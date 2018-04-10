@@ -101,9 +101,11 @@ class UserCreateScreen extends Component {
                     </Item>
                     </Form>
                     <View style={ styles.buttonContainer }>
-                        <Button danger onPress={this.handleCreateItem}>
-                            <Text>Uložiť </Text>
-                        </Button>
+                        {
+                            this.state.firstName.trim() !== "" && this.state.lastName.trim() !== ""
+                                ? (<Button danger onPress={this.handleCreateItem}><Text>Uložiť</Text></Button>)
+                                : (<Button disabled onPress={this.handleCreateItem}><Text>Uložiť</Text></Button>)
+                        }
                     </View>
 
                 </Content>

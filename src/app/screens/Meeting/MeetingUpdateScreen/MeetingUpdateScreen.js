@@ -161,9 +161,9 @@ class MeetingUpdateScreen extends React.Component {
                         </Button>
                     }
                     right={
-                        <Button transparent onPress={this.handleUpdateItem}>
-                            <Text style={ styles.cancelText }>Uložiť</Text>
-                        </Button>
+                            this.state.name.trim() !== ""
+                            ? (<Button transparent onPress={this.handleUpdateItem}><Text style={ styles.cancelText } >Uložiť</Text></Button>)
+                            : (<Button disabled transparent onPress={this.handleUpdateItem}><Text style={ styles.disabledButtonText }>Uložiť</Text></Button>)
                     }
                 />
                 <Content>

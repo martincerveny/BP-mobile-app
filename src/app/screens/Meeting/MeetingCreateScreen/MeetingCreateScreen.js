@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import { View } from 'react-native';
 import {Container, Content, Text, ListItem, Input, Label, Button, Toast, Separator, Icon, Left} from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
@@ -134,9 +135,11 @@ class MeetingCreateScreen extends React.Component {
                         </Left>
                     </ListItem>
                     <View style={ styles.buttonContainer }>
-                        <Button danger onPress={this.handleCreateItem}>
-                            <Text>Uložiť </Text>
-                        </Button>
+                        {
+                            this.state.name.trim() !== ""
+                                ? (<Button danger onPress={this.handleCreateItem}><Text>Uložiť</Text></Button>)
+                                : (<Button disabled onPress={this.handleCreateItem}><Text>Uložiť</Text></Button>)
+                        }
                     </View>
                 </Content>
             </Container>
