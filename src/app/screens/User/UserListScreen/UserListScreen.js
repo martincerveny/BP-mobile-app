@@ -1,10 +1,8 @@
 import React from 'react';
-import { Modal } from 'react-native';
 import { Container, Content, Button, Icon } from 'native-base';
 import Header from '../../../components/Header/Header'
 import UserStore from "../../../flux/User/UserStore";
 import UserList from '../../../components/UserList/UserList'
-import UserCreateScreen from '../UserCreateScreen/UserCreateScreen';
 
 import styles from './styles';
 
@@ -14,17 +12,12 @@ class UserListScreen extends React.Component {
         super(props);
         this.state = {
             items: [],
-            modalVisible: false,
         };
 
         this.loadItems = this.loadItems.bind(this);
         this.handleItemPress = this.handleItemPress.bind(this);
-        this.setModalVisible = this.setModalVisible.bind(this);
     };
 
-    setModalVisible(visible) {
-        this.setState({modalVisible: visible});
-    }
 
     componentWillUnmount () {
         UserStore.removeChangeListener(this.loadItems);
@@ -68,15 +61,6 @@ class UserListScreen extends React.Component {
                         items={items}
                         onItemPress={this.handleItemPress}
                     />
-                    {/*<Modal*/}
-                        {/*animationType="slide"*/}
-                        {/*transparent={false}*/}
-                        {/*visible={this.state.modalVisible}*/}
-                    {/*>*/}
-                        {/*<UserCreateScreen*/}
-                            {/*modalVisible={this.setModalVisible}*/}
-                        {/*/>*/}
-                    {/*</Modal>*/}
                 </Content>
             </Container>
         );
