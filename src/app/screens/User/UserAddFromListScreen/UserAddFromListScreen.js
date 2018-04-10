@@ -38,8 +38,18 @@ class UserAddFromListScreen extends React.Component {
     loadItems () {
         const meetingId = this.props.meetingId;
 
-        UserStore.getAllItemsExcludeMeetingId(MeetingConstants.STORE_KEY_ITEM + meetingId).then(userItems => {
-            return this.setState({ userItems })
+        UserStore.getAllItems(MeetingConstants.STORE_KEY_ITEM + meetingId).then(userItems => {
+            // vypiseme len tych ludi, ktori este niesu k danej schodzke priradeni
+            let userItemsArray = [];
+            for(var i=0; i<userItems.length; i++) {
+                // ak nenajde index vypise -1 -- cize dany clovek este ku schodzke nie je priradeny
+                let index = userItems[i].getMeetingIds().indexOf(MeetingConstants.STORE_KEY_ITEM + meetingId);
+                if (index === -1) {
+                    userItemsArray.push(userItems[i]);
+                }
+            }
+
+            return this.setState({ userItems: userItemsArray })
         });
     }
 

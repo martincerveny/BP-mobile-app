@@ -47,22 +47,6 @@ const UserStore = {
                 }
             ))
     },
-
-    /**
-     * Return all userItems excluded MeetingId.
-     *
-     * @param meetingId
-     * @returns {Promise.<Array.<UserItem>>} - Returns a Promise object.
-     */
-    async getAllItemsExcludeMeetingId (meetingId) {
-        return (await AsyncStorage.multiGet(await UserStore.keys()))
-            .map(result => _mapToItem(JSON.parse(result[1])))
-            // .filter(item => item.getMeetingIds().find(element => {
-            //         element != meetingId
-            //     }
-            // ))
-    },
-
     /**
      * Gets all keys with all IDs for this store.
      *
