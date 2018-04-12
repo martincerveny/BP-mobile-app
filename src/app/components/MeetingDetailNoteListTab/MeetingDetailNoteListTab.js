@@ -1,10 +1,9 @@
 import React from 'react';
-import { Container, Content, Button, Text, Icon } from 'native-base';
+import { Container, Text } from 'native-base';
 import styles from './styles';
-import UserSwipableList from "../UserSwipableList/UserSwipableList";
 import UserCardList from "../UserCardList/UserCardList";
 
-const MeetingDetailNoteListTab = ({ userItems, meetingItem, navigation, meetingId }) => (
+const MeetingDetailNoteListTab = ({ userItems, meetingItem, navigation }) => (
     <Container style={ styles.container }>
         {
             userItems != ''

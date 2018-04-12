@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import {Container, Icon, Content, Button, Text} from 'native-base';
 import Header from '../../../../components/Header/Header'
 import MeetingStore from "../../../../flux/Meeting/MeetingStore";
-import { ListView} from 'react-native'
 import MeetingConstants from "../../../../flux/Meeting/MeetingConstants";
 import UserStore from "../../../../flux/User/UserStore";
-import UserCardItem from "../../../../components/UserCardItem/UserCardItem";
 import styles from './styles';
 import UserCardList from "../../../../components/UserCardList/UserCardList";
 
