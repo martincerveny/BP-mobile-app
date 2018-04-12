@@ -34,7 +34,6 @@ const makeSections = (items) => {
 
 const UserList = ({ items, onItemPress }) => {
     const sections = makeSections(items);
-
     return (
         <SectionList
             renderItem={({item, index}) => {

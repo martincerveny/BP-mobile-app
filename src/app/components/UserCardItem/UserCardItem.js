@@ -8,7 +8,7 @@ import {createNoteItem, deleteNoteItem} from '../../flux/Note/NoteActions';
 
 import styles from './styles';
 
-class UserCard extends React.Component {
+class UserCardItem extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
@@ -97,4 +97,4 @@ class UserCard extends React.Component {
     }
 };
 
-export default UserCard;
+export default UserCardItem;

@@ -61,7 +61,8 @@ class NextMeetingListScreen extends Component {
         return (
             <Container style={ styles.container }>
                 <Header
-                    title='Ďalšie schôdzky'
+                    title='Najbližšie schôdzky'
+                    bodyFlex={4}
                 />
                 <ScrollView>
                     <NextMeetingList

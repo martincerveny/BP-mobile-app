@@ -1,16 +1,16 @@
 import React from 'react';
-import { Container, Content } from 'native-base';
+import {Container, Content, Text} from 'native-base';
 import MeetingList from '../../components/MeetingList/MeetingList'
 import styles from './styles';
 
+
 const UserDetailMeetingListTab = ({ meetingItems, onMeetingItemPress }) => (
     <Container style={ styles.container }>
-        <Content>
-            <MeetingList
-                items={meetingItems}
-                onItemPress={onMeetingItemPress}
-            />
-        </Content>
+            {
+                meetingItems != ''
+                    ? (<MeetingList items={meetingItems} onItemPress={onMeetingItemPress}/>)
+                    : (<Text style={ styles.noResultsText }>Osoba nie je priradená ku žiadnej schôdzke.</Text>)
+            }
     </Container>
 );
 

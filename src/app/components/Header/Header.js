@@ -1,5 +1,5 @@
 import React from 'react'
-import { Body, Header as NativeHeader, Left, Right, Subtitle, Title, View, Text } from 'native-base'
+import {Body, Button, Header as NativeHeader, Left, Right, Subtitle, Text, Title} from 'native-base'
 
 import styles from './styles'
 
@@ -12,10 +12,10 @@ import styles from './styles'
  * @param {(Array.<React.Component>|React.Component)} [right] - The right part of the header.
  * @returns {React.Component} - Header.
  */
-const Header = ({ left = null, title = null, subtitle = null, right = null}) => (
-    <NativeHeader style={styles.default} iosBarStyle="light-content">
+const Header = ({ left = null, title = null, subtitle = null, right = null, bodyFlex = 3, ...rest}) => (
+    <NativeHeader style={styles.default} iosBarStyle="light-content" {...rest}>
       <Left style={{flex: 2}}>{left}</Left>
-      <Body style={{flex: 3}}>
+      <Body style={{flex: bodyFlex}}>
         {title ? <Title style={{ color: '#fff' }}>{title}</Title> : null}
         {subtitle ? <Subtitle style={{ color: '#fff' }}>{subtitle}</Subtitle> : null}
       </Body>

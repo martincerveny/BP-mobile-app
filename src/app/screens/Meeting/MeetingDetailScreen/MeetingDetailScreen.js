@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import Modal from 'expo/src/modal/Modal';
 import ModalHost from 'expo/src/modal/ModalHost';
-import { Container, Tab, Tabs, TabHeading, Icon, Button } from 'native-base';
+import {Container, Tab, Tabs, TabHeading, Icon, Button, Text} from 'native-base';
 import MeetingDetailUserListTab from '../../../components/MeetingDetailUserListTab/MeetingDetailUserListTab';
 import MeetingDetailTab from '../../../components/MeetingDetailTab/MeetingDetailTab';
 import MeetingStore from "../../../flux/Meeting/MeetingStore";
@@ -11,6 +11,7 @@ import Header from '../../../components/Header/Header'
 import MeetingConstants from "../../../flux/Meeting/MeetingConstants";
 import MeetingUpdateScreen from "../MeetingUpdateScreen/MeetingUpdateScreen";
 import styles from './styles';
+import MeetingDetailNoteListTab from "../../../components/MeetingDetailNoteListTab/MeetingDetailNoteListTab";
 
 class MeetingDetailScreen extends React.Component {
     constructor (props) {
@@ -103,13 +104,13 @@ class MeetingDetailScreen extends React.Component {
                         />
                     </Modal>
                     <Tabs locked={true}>
-                        <Tab heading={ <TabHeading><Icon name="ios-keypad" /></TabHeading>}>
+                        <Tab heading={ <TabHeading><Icon name="ios-keypad" /><Text style={ styles.tabText }>Detail</Text></TabHeading>}>
                            <MeetingDetailTab
                                meetingItem={meetingItem}
                                peopleCount={userItems.length}
                            />
                         </Tab>
-                        <Tab heading={ <TabHeading><Icon name="ios-people" /></TabHeading>}>
+                        <Tab heading={ <TabHeading><Icon name="ios-people" /><Text style={ styles.tabText }>Účastníci</Text></TabHeading>}>
                             <MeetingDetailUserListTab
                                 userItems={userItems}
                                 onUserItemPress={this.handleUserItemPress}
@@ -117,8 +118,12 @@ class MeetingDetailScreen extends React.Component {
                                 meetingId={meetingItem && meetingItem.getId()}
                             />
                         </Tab>
-                        <Tab heading={ <TabHeading><Icon name="ios-paper" /></TabHeading>}>
-                            {/*<NoteListItem />*/}
+                        <Tab heading={ <TabHeading><Icon name="ios-paper" /><Text style={ styles.tabText }>Poznámky</Text></TabHeading>}>
+                            <MeetingDetailNoteListTab
+                                navigation={this.props.navigation}
+                                userItems={userItems}
+                                meetingItem={meetingItem}
+                            />
                         </Tab>
                     </Tabs>
                 </Container>

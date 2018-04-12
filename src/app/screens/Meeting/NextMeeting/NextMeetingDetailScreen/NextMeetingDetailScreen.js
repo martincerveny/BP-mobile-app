@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import { Container, Icon, Content, Button } from 'native-base';
+import {Container, Icon, Content, Button, Text} from 'native-base';
 import Header from '../../../../components/Header/Header'
 import MeetingStore from "../../../../flux/Meeting/MeetingStore";
 import { ListView} from 'react-native'
 import MeetingConstants from "../../../../flux/Meeting/MeetingConstants";
 import UserStore from "../../../../flux/User/UserStore";
-import UserCard from "../../../../components/UserCard/UserCard";
+import UserCardItem from "../../../../components/UserCardItem/UserCardItem";
 import styles from './styles';
+import UserCardList from "../../../../components/UserCardList/UserCardList";
 
 class NextMeetingDetailScreen extends Component {
     constructor (props) {
@@ -73,17 +74,17 @@ class NextMeetingDetailScreen extends Component {
                     }
                 />
                 <Content>
-                    <ListView
-                        enableEmptySections
-                        dataSource={new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(userItems)}
-                        renderRow={userItem => (
-                            <UserCard
-                                item={userItem}
-                                meetingId={meetingItem && meetingItem.getId()}
-                                navigation={this.props.navigation}
-                            />
-                        )}
-                    />
+                    {
+                        userItems != ''
+                            ? (
+                                <UserCardList
+                                    navigation={ this.props.navigation }
+                                    meetingItem={meetingItem}
+                                    userItems={userItems}
+                                />
+                            )
+                            : (<Text style={ styles.noResultsText }>Pridajte ľudí ku schôdzke.</Text>)
+                    }
                 </Content>
             </Container>
         );

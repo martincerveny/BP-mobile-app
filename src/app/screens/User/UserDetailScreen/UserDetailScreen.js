@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import { Container, Tab, Tabs, TabHeading, Icon, Button } from 'native-base';
+import {Container, Tab, Tabs, TabHeading, Icon, Button, Text} from 'native-base';
 import UserDetailTab from '../../../components/UserDetailTab/UserDetailTab';
 import Header from '../../../components/Header/Header';
 import UserStore from "../../../flux/User/UserStore";
@@ -105,18 +105,18 @@ class UserDetailScreen extends Component {
                         />
                     </Modal>
                     <Tabs>
-                        <Tab heading={ <TabHeading><Icon name="ios-contact" /></TabHeading>}>
+                        <Tab heading={ <TabHeading><Icon name="ios-contact" /><Text style={ styles.tabText }>Detail</Text></TabHeading>}>
                             <UserDetailTab
                                 userItem={userItem}
                             />
                         </Tab>
-                        <Tab heading={ <TabHeading><Icon name="list" /></TabHeading>}>
+                        <Tab heading={ <TabHeading><Icon name="ios-list" /><Text style={ styles.tabText }>Schôdzky</Text></TabHeading>}>
                         <UserDetailMeetingListTab
                             meetingItems={meetingItems}
                             onMeetingItemPress={this.handleMeetingItemPress}
                         />
                         </Tab>
-                        <Tab heading={ <TabHeading><Icon name="paper" /></TabHeading>}>
+                        <Tab heading={ <TabHeading><Icon name="ios-paper" /><Text style={ styles.tabText }>Poznámky</Text></TabHeading>}>
                             <UserDetailNoteListTab
                                 meetingItems={meetingItems}
                                 noteItems={noteItems}

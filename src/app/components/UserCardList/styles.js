@@ -5,8 +5,4 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: 'white'
     },
-    noResultsText: {
-        textAlign: "center",
-        marginTop: 20
-    },
 });

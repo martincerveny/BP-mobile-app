@@ -41,10 +41,6 @@ class UserSwipableList extends React.Component {
             { cancelable: false }
         );
     }
-    openRow = (rowRef) => {
-        // Use an internal method to manually swipe the row open to whatever value you pass
-        rowRef.manuallySwipeRow(50);
-    }
 
     render () {
         // const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
