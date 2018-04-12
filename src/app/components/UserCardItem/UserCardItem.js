@@ -1,10 +1,10 @@
 import React from 'react';
-import { Card, CardItem, Thumbnail, Text, Body, Left, Button, Icon } from 'native-base';
+import {Card, CardItem, Thumbnail, Text, Left, Button, Icon, Input, Right, Body} from 'native-base';
 import {FileSystem} from "expo";
 import NoteList from '../NoteList/NoteList';
 import NoteStore from "../../flux/Note/NoteStore";
 import AppUtils from "../../utils/AppUtils";
-import {createNoteItem, deleteNoteItem} from '../../flux/Note/NoteActions';
+import {createNoteItem} from '../../flux/Note/NoteActions';
 
 import styles from './styles';
 
@@ -12,14 +12,13 @@ class UserCardItem extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            item: this.props.item,
-            noteItems: ''
+            noteItems: '',
+            text: ''
         };
 
         this.loadNoteItems = this.loadNoteItems.bind(this);
         this.handleCreateNoteItem = this.handleCreateNoteItem.bind(this);
         this.handleUserItemPress = this.handleUserItemPress.bind(this);
-        this.handleDeleteItem = this.handleDeleteItem.bind(this);
     }
 
     componentDidMount () {
@@ -33,29 +32,28 @@ class UserCardItem extends React.Component {
 
     loadNoteItems () {
         const meetingId = this.props.meetingId;
-        const userId = this.state.item.getId();
+        const userId = this.props.item.getId();
 
         NoteStore.getAllItemsByMeetingIdUserId(meetingId, userId).then(noteItems => {
             return this.setState({ noteItems })
         });
     }
 
+    clearTextInput(fieldName) {
+        this.setState({ text: ''});
+        this.refs[fieldName].setNativeProps({text: ''});
+    }
+
     handleCreateNoteItem () {
         let noteItem = {
             id: AppUtils.generateId(),
             meetingId: this.props.meetingId,
-            userId: this.state.item.getId(),
-            text: ''
+            userId: this.props.item.getId(),
+            text: this.state.text
         };
-        console.log('vytvaram novy item ---  ' + noteItem.id)
         createNoteItem(noteItem);
-    }
 
-    handleDeleteItem (id) {
-        console.log('mazem item ---  ' + this.props.item.getId())
-        console.log('mazem item ---  ' + id)
-
-        deleteNoteItem(id);
+        this.clearTextInput(this.props.item.getId())
     }
 
     handleUserItemPress (id) {
@@ -63,7 +61,7 @@ class UserCardItem extends React.Component {
     }
 
     render () {
-        const { item, noteItems } = this.state;
+        const { noteItems } = this.state;
 
         return (
             <Card>
@@ -71,27 +69,33 @@ class UserCardItem extends React.Component {
                     <Left>
                         <Button transparent onPress={() => this.handleUserItemPress(item.getId())}>
                             {
-                                item.getImage() == null
+                                this.props.item.getImage() == null
                                     ? (<Thumbnail size={80} source={require('../../../resources/assets/images/person-flat.png')} />)
-                                    : (<Thumbnail size={80} source={{uri: FileSystem.documentDirectory + item.getImage()}} />)
+                                    : (<Thumbnail size={80} source={{uri: FileSystem.documentDirectory + this.props.item.getImage()}} />)
                             }
-                                <Text style={{ color: '#000', fontSize: 16}}>{item.getFirstName()} {item.getLastName()}</Text>
+                                <Text style={{ color: '#000', fontSize: 16}}>{this.props.item.getFirstName()} {this.props.item.getLastName()}</Text>
                         </Button>
-
                     </Left>
+                </CardItem>
+                <CardItem>
+                    <Left>
+                        <Input autoCorrect={false} ref={this.props.item.getId()} placeholder='Zadajte poznámku' onChangeText={(text) => this.setState({text})}/>
+                    </Left>
+                    {
+                        this.state.text.trim() !== ""
+                            ? (<Button transparent primary onPress={this.handleCreateNoteItem}>
+                                <Icon name='md-add-circle' style={ styles.addButton }/>
+                            </Button>)
+                            : null
+                    }
+
                 </CardItem>
 
                 <NoteList
                     items={noteItems}
                     meetingId={this.props.meetingId}
-                    userId={this.state.item.getId()}
-                    onDeleteItemPress={this.handleDeleteItem}
+                    userId={this.props.item.getId()}
                 />
-
-                <Button iconLeft transparent primary onPress={this.handleCreateNoteItem}>
-                    <Icon name='ios-add-circle' style={ styles.addButton }/>
-                    <Text>Pridať poznámku</Text>
-                </Button>
             </Card>
         );
     }
