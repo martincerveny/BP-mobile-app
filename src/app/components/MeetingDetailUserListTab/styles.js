@@ -6,4 +6,10 @@ export default StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: 'white',
     },
+    buttonContainer: {
+        marginTop: 10,
+        marginBottom: 10,
+        paddingLeft: 20,
+        paddingRight: 20
+    },
 });

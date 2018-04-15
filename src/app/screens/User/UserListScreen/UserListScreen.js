@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Content, Button, Icon } from 'native-base';
+import {Container, Content, Button, Icon, Text} from 'native-base';
 import Header from '../../../components/Header/Header'
 import UserStore from "../../../flux/User/UserStore";
 import UserList from '../../../components/UserList/UserList'
@@ -57,10 +57,14 @@ class UserListScreen extends React.Component {
                     }
                 />
                 <Content>
-                    <UserList
-                        items={items}
-                        onItemPress={this.handleItemPress}
-                    />
+                    {
+                        items.length > 0
+                            ? (<UserList
+                                items={items}
+                                onItemPress={this.handleItemPress}
+                            />)
+                            : (<Text style={ styles.noResultsText }>Žiadni ľudia</Text>)
+                    }
                 </Content>
             </Container>
         );

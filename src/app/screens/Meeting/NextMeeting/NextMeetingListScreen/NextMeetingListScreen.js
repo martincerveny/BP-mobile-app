@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { ScrollView, View } from 'react-native';
-import { Container } from 'native-base';
+import {Container, Text} from 'native-base';
 import Header from '../../../../components/Header/Header'
 import styles from './styles';
 import MeetingStore from "../../../../flux/Meeting/MeetingStore";
@@ -65,10 +65,14 @@ class NextMeetingListScreen extends Component {
                     bodyFlex={4}
                 />
                 <ScrollView>
-                    <NextMeetingList
-                        items={items}
-                        onItemPress={this.handleItemPress}
-                    />
+                    {
+                        items.length > 0
+                            ? (<NextMeetingList
+                                items={items}
+                                onItemPress={this.handleItemPress}
+                            />)
+                            : (<Text style={ styles.noResultsText}>Žiadne schôdzky</Text>)
+                    }
                 </ScrollView>
             </Container>
         )

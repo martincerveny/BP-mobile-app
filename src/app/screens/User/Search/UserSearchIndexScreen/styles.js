@@ -6,7 +6,6 @@ export default StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'stretch',
         justifyContent: 'center',
-        paddingTop: 30,
         backgroundColor: 'white',
         paddingLeft: 20,
         paddingRight: 20
@@ -14,12 +13,18 @@ export default StyleSheet.create({
     buttonContainer: {
         paddingTop: 20,
         flex: 1,
-        alignItems: 'center',
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-around'
-
+    },
+    addButtonContainer: {
+        paddingTop: 20,
+        flex: 1,
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
     },
     searchBox: {
+        marginTop: 30,
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'center',

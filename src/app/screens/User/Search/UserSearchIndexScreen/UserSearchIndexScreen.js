@@ -92,11 +92,6 @@ class UserSearchIndexScreen extends React.Component {
                             <Icon style={{ color: '#fff'}} name="arrow-round-back" />
                         </Button>
                     }
-                    right={
-                        <Button transparent onPress={() => {this.setUserCreateModalVisible()}}>
-                            <Icon style={{ color: '#fff'}} name="add" />
-                        </Button>
-                    }
                 />
                 <View style={ styles.container }>
                     <Content>
@@ -105,19 +100,27 @@ class UserSearchIndexScreen extends React.Component {
                                 <Item rounded style={{ width: 200}}>
                                     <Input autoFocus={true} autoCorrect={false} onChangeText={(term) => this.setState({term})} placeholder="Zadajte meno" />
                                 </Item>
-                            </View>
-                            <View style={ styles.buttonContainer }>
                                 {
                                     !this.state.token
-                                        ? (<Button iconLeft danger onPress={() => {this.logIn()}}><Icon name='search' /><Text>Vyhľadať</Text></Button>)
-                                        : (<Button iconLeft danger onPress={() => {this.setUserSearchResultModalVisible(true)}}><Icon name='search' /><Text>Vyhľadať</Text></Button>)
+                                        ? (<Button iconLeft transparent danger onPress={() => {this.logIn()}}><Icon style={{ fontSize: 30}} name='search' /></Button>)
+                                        : (<Button iconLeft danger transparent onPress={() => {this.setUserSearchResultModalVisible(true)}}><Icon name='search' /></Button>)
                                 }
+                            </View>
+                            <View style={ styles.buttonContainer }>
 
-                                {
-                                    this.props.navigation.state.params.meetingId
-                                        ? (<Button iconLeft danger onPress={() => {this.setUserAddFromListModalVisible()}}><Icon name='list' /><Text>Zoznam</Text></Button>)
-                                        : null
-                                }
+                                <Text style={{ textAlign: 'center'}}>alebo </Text>
+
+                                <View style={ styles.addButtonContainer }>
+                                    <Button danger block onPress={() => {this.setUserCreateModalVisible()}}>
+                                        <Text>Vytvoriť osobu</Text>
+                                    </Button>
+
+                                    {
+                                        this.props.navigation.state.params.meetingId
+                                            ? (<Button danger block style={{ marginTop: 20}} onPress={() => {this.setUserAddFromListModalVisible()}}><Text>Vybrať zo zoznamu</Text></Button>)
+                                            : null
+                                    }
+                                </View>
 
                             </View>
                         </Form>

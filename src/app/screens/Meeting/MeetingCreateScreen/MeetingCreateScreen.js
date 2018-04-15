@@ -1,6 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
-import { View } from 'react-native';
 import {Container, Content, Text, ListItem, Input, Label, Button, Toast, Separator, Icon, Left} from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import styles from './styles';
@@ -87,6 +85,11 @@ class MeetingCreateScreen extends React.Component {
                             <Text style={ styles.cancelText}>Zrušiť</Text>
                         </Button>
                     }
+                    right={
+                        this.state.name.trim() !== ""
+                            ? (<Button transparent onPress={this.handleCreateItem}><Text style={ styles.cancelText }>Uložiť</Text></Button>)
+                            : (<Button disabled transparent onPress={this.handleCreateItem}><Text style={ styles.disabledButtonText }>Uložiť</Text></Button>)
+                    }
                 />
                 <Content>
                     <Separator bordered>
@@ -134,13 +137,6 @@ class MeetingCreateScreen extends React.Component {
                             <Input placeholder='Miesto' autoCorrect={false} onChangeText={(place) => this.setState({place})} style={{ height: 30, paddingLeft: 10}}/>
                         </Left>
                     </ListItem>
-                    <View style={ styles.buttonContainer }>
-                        {
-                            this.state.name.trim() !== ""
-                                ? (<Button danger onPress={this.handleCreateItem}><Text>Uložiť</Text></Button>)
-                                : (<Button disabled onPress={this.handleCreateItem}><Text>Uložiť</Text></Button>)
-                        }
-                    </View>
                 </Content>
             </Container>
         );

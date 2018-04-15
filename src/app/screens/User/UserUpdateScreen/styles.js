@@ -5,7 +5,8 @@ export default StyleSheet.create({
         color: 'white',
     },
     disabledButtonText: {
-        color: '#bdc3c7'
+        color: 'white',
+        opacity: 0.7
     },
     formItem: {
         height: 60
@@ -13,8 +14,5 @@ export default StyleSheet.create({
     buttonContainer: {
         flex: 1,
         marginTop: 50,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
     },
 });

@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import { Modal } from 'react-native';
 import Header from '../../../components/Header/Header'
-import { Container, Content, Button, Icon } from 'native-base';
+import {Container, Content, Button, Icon, Text} from 'native-base';
 import styles from './styles';
 import MeetingStore from "../../../flux/Meeting/MeetingStore";
 import MeetingList from '../../../components/MeetingList/MeetingList';
 import MeetingCreateScreen from '../MeetingCreateScreen/MeetingCreateScreen';
+import _ from 'lodash';
 
 class MeetingListScreen extends Component {
     constructor (props) {
@@ -62,10 +63,16 @@ class MeetingListScreen extends Component {
                     }
                 />
                 <Content>
-                    <MeetingList
-                        items={items}
-                        onItemPress={this.handleItemPress}
-                    />
+                    {
+                        items.length > 0
+                            ? (<MeetingList
+                                items={items}
+                                onItemPress={this.handleItemPress}
+                            />)
+                            : (<Text style={ styles.noResultsText }>Žiadne schôdzky</Text>)
+                    }
+
+
                     <Modal
                         animationType="slide"
                         transparent={false}

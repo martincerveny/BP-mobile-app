@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import { View } from 'react-native';
 import {
-    Container, Content, Text, Separator, ListItem, Input, Body, Label, Button, Toast, Form, Item
+    Container, Content, Text, Separator, Input, Label, Button, Toast, Form, Item
 } from 'native-base';
 import Header from '../../../components/Header/Header'
 import styles from './styles';
@@ -70,44 +69,41 @@ class UserCreateScreen extends Component {
                             <Text style={ styles.cancelText}>Zrušiť</Text>
                         </Button>
                     }
+                    right={
+                        this.state.firstName.trim() !== "" && this.state.lastName.trim() !== ""
+                            ? (<Button transparent onPress={this.handleCreateItem}><Text style={ styles.cancelText }>Uložiť</Text></Button>)
+                            : (<Button disabled transparent onPress={this.handleCreateItem}><Text style={ styles.disabledButtonText }>Uložiť</Text></Button>)
+                    }
                 />
                 <Content>
                     <Form>
-                    <Separator bordered>
-                        <Text>ZÁKLADNÉ INFORMÁCIE</Text>
-                    </Separator>
-                    <Item floatingLabel style={ styles.formItem }>
-                        <Label>Meno:</Label>
-                        <Input autoCorrect={false} onChangeText={(firstName) => this.setState({firstName})}/>
-                    </Item>
-                    <Item floatingLabel style={ styles.formItem }>
-                        <Label>Priezvisko:</Label>
-                        <Input autoCorrect={false} onChangeText={(lastName) => this.setState({lastName})}/>
-                    </Item>
-                    <Separator bordered style={{ marginTop: -1}}>
-                        <Text>ROZŠÍRENÉ INFORMÁCIE</Text>
-                    </Separator>
-                    <Item floatingLabel style={ styles.formItem }>
-                        <Label>Vek:</Label>
-                        <Input keyboardType='numeric' autoCorrect={false} onChangeText={(age) => this.setState({age})}/>
-                    </Item>
-                    <Item floatingLabel style={ styles.formItem }>
-                        <Label>Bydlisko:</Label>
-                        <Input autoCorrect={false} onChangeText={(address) => this.setState({address})}/>
-                    </Item>
-                    <Item floatingLabel style={ styles.formItem }>
-                        <Label>Firma:</Label>
-                        <Input autoCorrect={false} onChangeText={(company) => this.setState({company})}/>
-                    </Item>
+                        <Separator bordered>
+                            <Text>ZÁKLADNÉ INFORMÁCIE</Text>
+                        </Separator>
+                        <Item floatingLabel style={ styles.formItem }>
+                            <Label>Meno:</Label>
+                            <Input autoCorrect={false} onChangeText={(firstName) => this.setState({firstName})}/>
+                        </Item>
+                        <Item floatingLabel style={ styles.formItem }>
+                            <Label>Priezvisko:</Label>
+                            <Input autoCorrect={false} onChangeText={(lastName) => this.setState({lastName})}/>
+                        </Item>
+                        <Separator bordered style={{ marginTop: -1}}>
+                            <Text>ROZŠÍRENÉ INFORMÁCIE</Text>
+                        </Separator>
+                        <Item floatingLabel style={ styles.formItem }>
+                            <Label>Vek:</Label>
+                            <Input keyboardType='numeric' autoCorrect={false} onChangeText={(age) => this.setState({age})}/>
+                        </Item>
+                        <Item floatingLabel style={ styles.formItem }>
+                            <Label>Bydlisko:</Label>
+                            <Input autoCorrect={false} onChangeText={(address) => this.setState({address})}/>
+                        </Item>
+                        <Item floatingLabel style={ styles.formItem }>
+                            <Label>Firma:</Label>
+                            <Input autoCorrect={false} onChangeText={(company) => this.setState({company})}/>
+                        </Item>
                     </Form>
-                    <View style={ styles.buttonContainer }>
-                        {
-                            this.state.firstName.trim() !== "" && this.state.lastName.trim() !== ""
-                                ? (<Button danger onPress={this.handleCreateItem}><Text>Uložiť</Text></Button>)
-                                : (<Button disabled onPress={this.handleCreateItem}><Text>Uložiť</Text></Button>)
-                        }
-                    </View>
-
                 </Content>
             </Container>
         );

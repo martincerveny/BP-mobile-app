@@ -1,15 +1,17 @@
 import React from 'react';
-import { Container, Content, Button, Text, Icon } from 'native-base';
+import {Container, Content, Button, Text, Icon, View} from 'native-base';
 import styles from './styles';
 import UserSwipableList from "../UserSwipableList/UserSwipableList";
 
 const MeetingDetailUserListTab = ({ userItems, onUserItemPress, navigation, meetingId }) => (
     <Container style={ styles.container }>
         <Content>
-            <Button style={{ marginLeft: 136, marginTop: 10, marginBottom: 10 }} iconLeft danger onPress={() => {navigation.navigate('user.search.index', { meetingId: meetingId})}}>
-                <Icon name='md-person-add' />
-                <Text>Pridať</Text>
-            </Button>
+            <View style={ styles.buttonContainer }>
+                <Button block iconLeft danger onPress={() => {navigation.navigate('user.search.index', { meetingId: meetingId})}}>
+                    <Icon name='md-person-add' />
+                    <Text>Pridať osobu ku schôdzke</Text>
+                </Button>
+            </View>
             <UserSwipableList
                 items={userItems}
                 onItemPress={onUserItemPress}

@@ -162,7 +162,7 @@ class MeetingUpdateScreen extends React.Component {
                     }
                     right={
                             this.state.name.trim() !== ""
-                            ? (<Button transparent onPress={this.handleUpdateItem}><Text style={ styles.cancelText } >Uložiť</Text></Button>)
+                            ? (<Button transparent onPress={this.handleUpdateItem}><Text style={ styles.cancelText }>Uložiť</Text></Button>)
                             : (<Button disabled transparent onPress={this.handleUpdateItem}><Text style={ styles.disabledButtonText }>Uložiť</Text></Button>)
                     }
                 />
@@ -212,8 +212,8 @@ class MeetingUpdateScreen extends React.Component {
                         </Item>
                     </Form>
                     <View style={ styles.buttonContainer }>
-                        <Button danger onPress={this.handleDeleteItem}>
-                            <Text>Zmazať</Text>
+                        <Button full danger onPress={this.handleDeleteItem}>
+                            <Text>Zmazať schôdzku</Text>
                         </Button>
                     </View>
                 </Content>

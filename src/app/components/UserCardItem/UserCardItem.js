@@ -67,7 +67,7 @@ class UserCardItem extends React.Component {
             <Card>
                 <CardItem>
                     <Left>
-                        <Button transparent onPress={() => this.handleUserItemPress(item.getId())}>
+                        <Button transparent onPress={() => this.handleUserItemPress(this.props.item.getId())}>
                             {
                                 this.props.item.getImage() == null
                                     ? (<Thumbnail size={80} source={require('../../../resources/assets/images/person-flat.png')} />)

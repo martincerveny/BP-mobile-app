@@ -6,13 +6,6 @@ export default StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'white'
     },
-    buttonContainer: {
-        flex: 1,
-        marginTop: 50,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     cancelText: {
         color: 'white',
     },
@@ -21,5 +14,9 @@ export default StyleSheet.create({
     },
     listItem: {
         height: 70
-    }
+    },
+    disabledButtonText: {
+        color: 'white',
+        opacity: 0.7
+    },
 });

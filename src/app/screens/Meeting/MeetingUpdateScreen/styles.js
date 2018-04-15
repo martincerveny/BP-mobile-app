@@ -1,11 +1,17 @@
 import {StyleSheet} from "react-native";
 
 export default StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingLeft: 20,
+        paddingRight: 20
+    },
     cancelText: {
         color: 'white',
     },
     disabledButtonText: {
-        color: '#bdc3c7'
+        color: 'white',
+        opacity: 0.7
     },
     formItem: {
         height: 60
@@ -13,8 +19,5 @@ export default StyleSheet.create({
     buttonContainer: {
         flex: 1,
         marginTop: 50,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
     },
 });

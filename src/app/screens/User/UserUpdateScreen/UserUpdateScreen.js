@@ -281,8 +281,8 @@ class UserUpdateScreen extends Component {
                         </Item>
                     </Form>
                     <View style={ styles.buttonContainer }>
-                        <Button danger onPress={this.handleDeleteItem}>
-                            <Text>Zmazať</Text>
+                        <Button full danger onPress={this.handleDeleteItem}>
+                            <Text>Zmazať osobu</Text>
                         </Button>
                     </View>
                 </Content>
