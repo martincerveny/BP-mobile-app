@@ -18,6 +18,5 @@ export default StyleSheet.create({
     },
     buttonContainer: {
         flex: 1,
-        marginTop: 50,
     },
 });

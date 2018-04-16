@@ -1,6 +1,6 @@
 import React from 'react';
 import {Modal, View} from 'react-native';
-import { Container, Content, Form, Item, Input, Button, Text, Icon } from 'native-base';
+import {Container, Content, Form, Item, Input, Button, Text, Icon, ListItem} from 'native-base';
 import Header from '../../../../components/Header/Header'
 import { createFacebookItem } from "../../../../flux/Facebook/FacebookActions";
 import styles from './styles';
@@ -96,20 +96,20 @@ class UserSearchIndexScreen extends React.Component {
                 <View style={ styles.container }>
                     <Content>
                         <Form>
+                            <Text style={{ textAlign: 'center', fontWeight: 'bold', marginTop: 20, fontSize: 17}}>Vyhľadať osobu</Text>
+
                             <View style={ styles.searchBox}>
-                                <Item rounded style={{ width: 200}}>
-                                    <Input autoFocus={true} autoCorrect={false} onChangeText={(term) => this.setState({term})} placeholder="Zadajte meno" />
+                                <Item regular style={{ width: 250}}>
+                                    <Input autoCorrect={false} onChangeText={(term) => this.setState({term})} placeholder="Zadajte meno" />
                                 </Item>
                                 {
                                     !this.state.token
-                                        ? (<Button iconLeft transparent danger onPress={() => {this.logIn()}}><Icon style={{ fontSize: 30}} name='search' /></Button>)
-                                        : (<Button iconLeft danger transparent onPress={() => {this.setUserSearchResultModalVisible(true)}}><Icon name='search' /></Button>)
+                                        ? (<Button full style={{ width: 52, height: 52}} danger onPress={() => {this.logIn()}}><Icon style={{ fontSize: 27}} name='search' /></Button>)
+                                        : (<Button full danger style={{ width: 52, height: 52}} onPress={() => {this.setUserSearchResultModalVisible(true)}}><Icon style={{ fontSize: 27}} name='search' /></Button>)
                                 }
                             </View>
+                            <Text style={{ textAlign: 'center', fontWeight: 'bold', marginTop: 35, fontSize: 17}}>alebo</Text>
                             <View style={ styles.buttonContainer }>
-
-                                <Text style={{ textAlign: 'center'}}>alebo </Text>
-
                                 <View style={ styles.addButtonContainer }>
                                     <Button danger block onPress={() => {this.setUserCreateModalVisible()}}>
                                         <Text>Vytvoriť osobu</Text>

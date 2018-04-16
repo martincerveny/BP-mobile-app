@@ -16,7 +16,6 @@ const makeSections = (noteItems, meetingItems) => {
 
     //zoskupi podla prveho pismena nazvu - podla abecedy
     const groupedItems = _.groupBy(merged, item => item.name);
-    // console.log(groupedItems)
     const ordered = {};
 
     //zoradi podla abecedy

@@ -24,7 +24,7 @@ export default StyleSheet.create({
         justifyContent: 'space-between'
     },
     searchBox: {
-        marginTop: 30,
+        marginTop: 20,
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'center',

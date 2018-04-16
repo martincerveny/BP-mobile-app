@@ -5,6 +5,8 @@ import {Button, Icon, List} from "native-base";
 import MeetingConstants from "../../flux/Meeting/MeetingConstants";
 import {createOrUpdateUserItem} from "../../flux/User/UserActions";
 import styles from './styles';
+import NoteStore from "../../flux/Note/NoteStore";
+import {deleteNoteItem} from "../../flux/Note/NoteActions";
 
 class UserSwipableList extends React.Component {
     constructor (props) {
@@ -33,8 +35,17 @@ class UserSwipableList extends React.Component {
                         let index = item.meetingIds.indexOf(MeetingConstants.STORE_KEY_ITEM + this.props.meetingId);
                         if (index > -1) {
                             item.meetingIds.splice(index, 1);
+
+                            // zmazeme vsetky poznamky usera v ramci schodzky
+                            NoteStore.getAllItemsByMeetingIdUserId(this.props.meetingId, item.getId()).then(noteItems => {
+                                for(var i=0; i<noteItems.length; i++) {
+                                    deleteNoteItem(noteItems[i].getId())
+                                }
+                            });
+
                             createOrUpdateUserItem(item);
                         }
+
                     }
                 },
             ],

@@ -85,7 +85,6 @@ class UserUpdateScreen extends Component {
 
                     // zmazeme poznamky patriace userovi
                     NoteStore.getAllItemsByUserId(this.props.userItem.getId()).then(noteItems => {
-                        console.log(noteItems);
                         for(var i=0; i<noteItems.length; i++) {
                             deleteNoteItem(noteItems[i].getId())
                         }
@@ -277,8 +276,10 @@ class UserUpdateScreen extends Component {
                             <Text>POZNÁMKA</Text>
                         </Separator>
                         <Item>
-                            <Input autoCorrect={false} value={ this.state.note } placeholder='Zadajte poznámku' multiline={true} numberOfLines={4} onChangeText={(note) => this.setState({note})} style={{ height: 150}}/>
+                            <Input autoCorrect={false} value={ this.state.note } placeholder='Zadajte poznámku' multiline={true} numberOfLines={5} onChangeText={(note) => this.setState({note})} style={{ height: 115}}/>
                         </Item>
+                        <Separator bordered style={{ marginTop: -1}}>
+                        </Separator>
                     </Form>
                     <View style={ styles.buttonContainer }>
                         <Button full danger onPress={this.handleDeleteItem}>
