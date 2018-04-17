@@ -4,7 +4,7 @@ import SearchResultListItem from './../SearchResultListItem/SearchResultListItem
 
 import styles from './styles';
 
-const SearchResultList = ({ items, onItemPress, createItemOnPress }) => (
+const SearchResultList = ({ items, createItemOnPress, onItemPress }) => (
     <ListView
         enableEmptySections
         dataSource={new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(items)}

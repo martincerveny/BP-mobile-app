@@ -8,4 +8,9 @@ export default StyleSheet.create({
     cancelText: {
         color: 'white',
     },
+    noResultsText: {
+        marginTop: 200,
+        textAlign: "center",
+        fontSize: 18,
+    },
 });

@@ -7,7 +7,7 @@ import {ListItem, Text} from "native-base";
 
 const makeSections = (items) => {
     //zoskupi podla prveho pismena nazvu - podla abecedy
-    const groupedItems = _.groupBy(items, item => item.getFirstName().substr(0,1));
+    const groupedItems = _.groupBy(items, item => item.getFirstName().substr(0,1).toUpperCase());
 
     const ordered = {};
 

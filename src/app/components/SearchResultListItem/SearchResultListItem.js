@@ -3,12 +3,13 @@ import { Button, List, ListItem, Thumbnail, Text, Body, Left, Right, Icon } from
 
 import styles from './styles';
 
-const SearchResultListItem = ({ item, onPress, createOnPress }) => (
+const SearchResultListItem = ({ item, createOnPress, onPress }) => (
     <List>
-        <ListItem button onPress={() => onPress(item.link)}>
-            <Thumbnail source={{uri: item.picture.data.url}} />
+        <ListItem button onPress={() => onPress(item.screen_name)}>
+            <Thumbnail source={{uri: item.profile_image_url}} />
             <Body>
                 <Text style={{ color: 'black'}}>{item.name}</Text>
+                <Text note>{item.location}</Text>
             </Body>
             <Right>
                 <Button transparent onPress={() => createOnPress(item)}>

@@ -85,10 +85,14 @@ class UserAddFromListScreen extends React.Component {
                     }
                 />
                 <Content>
-                    <UserList
-                        items={userItems}
-                        onItemPress={this.handleItemPress}
-                    />
+                    {
+                        userItems.length > 0
+                            ? (<UserList
+                                items={userItems}
+                                onItemPress={this.handleItemPress}
+                            />)
+                            : (<Text style={ styles.noResultsText }>Žiadne osoby</Text>)
+                    }
                 </Content>
             </Container>
         );

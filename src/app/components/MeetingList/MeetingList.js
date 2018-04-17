@@ -7,8 +7,7 @@ import styles from './styles';
 
 const makeSections = (items) => {
     //zoskupi podla prveho pismena nazvu - podla abecedy
-    const groupedItems = _.groupBy(items, item => item.getName().substr(0,1));
-
+    const groupedItems = _.groupBy(items, item => item.getName().substr(0,1).toUpperCase());
     const ordered = {};
 
     //zoradi podla abecedy

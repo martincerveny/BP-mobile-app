@@ -3,13 +3,12 @@ import { Container, Content, Text, Toast, Button } from 'native-base';
 import Header from '../../../../components/Header/Header'
 import SearchResultList from '../../../../components/SearchResultList/SearchResultList'
 import { ActivityIndicator, View } from 'react-native';
-import { WebBrowser, FileSystem } from 'expo';
+import { FileSystem, WebBrowser } from 'expo';
 import { createOrUpdateUserItem } from './../../../../flux/User/UserActions'
 import styles from './styles';
-import FacebookApiFetchService from "../../../../services/FacebookApi/FacebookApiFetchService";
+import TwitterApiFetchService from "../../../../services/TwitterApi/TwitterApiFetchService";
 import MeetingConstants from "../../../../flux/Meeting/MeetingConstants";
 import AppUtils from "../../../../utils/AppUtils";
-import { deleteFacebookItem } from "../../../../flux/Facebook/FacebookActions";
 
 class UserSearchResultScreen extends React.Component {
     constructor (props) {
@@ -37,25 +36,14 @@ class UserSearchResultScreen extends React.Component {
             return this.setState({ items: '' });
         }
 
-        FacebookApiFetchService.getUsers(this.props.token, this.props.term).then(items => {
-            // v pripade ulozenia neplatneho tokenu sa zmaze z AsyncStorage, a je vynutene nove prihlasenie
-            if (items === false) {
-                deleteFacebookItem();
-                Toast.show({
-                    text: 'Je potrebné sa prihlásiť.',
-                    position: 'bottom',
-                    buttonText: 'OK',
-                    duration: 3000,
-                    type: 'danger'
-                });
-                this.goBack();
-            } else {
-                this.setState({ items })
-            }
+        TwitterApiFetchService.getUsers(this.props.term).then(items => {
+            console.log(items)
+            this.setState({ items })
         });
     }
 
-    handleItemPress (url) {
+    handleItemPress (screenName) {
+        let url = 'http://www.twitter.com/' + screenName;
         WebBrowser.openBrowserAsync(url);
     }
 
@@ -65,23 +53,26 @@ class UserSearchResultScreen extends React.Component {
         let path = userId + '.png';
 
         await FileSystem.downloadAsync(
-            item.picture.data.url,
+            item.profile_image_url,
             FileSystem.documentDirectory + path
         );
+
+        let nameArray = item.name.split(" ", 2);
 
         let userItem = {
             id: userId,
             meetingIds: [MeetingConstants.STORE_KEY_ITEM + meetingId],
-            firstName: item.first_name,
-            lastName: item.last_name,
+            firstName: nameArray[0] ? nameArray[0] : '',
+            lastName: nameArray[1] ? nameArray[1] : '',
             image: path,
             age: '',
-            address: '',
+            address: item.location,
             company: '',
             note: '',
         };
 
         createOrUpdateUserItem(userItem);
+
         Toast.show({
             text: 'Užívateľ bol pridaný.',
             position: 'bottom',

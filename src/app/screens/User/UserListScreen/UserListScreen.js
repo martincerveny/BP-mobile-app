@@ -63,7 +63,7 @@ class UserListScreen extends React.Component {
                                 items={items}
                                 onItemPress={this.handleItemPress}
                             />)
-                            : (<Text style={ styles.noResultsText }>Žiadni ľudia</Text>)
+                            : (<Text style={ styles.noResultsText }>Žiadne osoby</Text>)
                     }
                 </Content>
             </Container>
