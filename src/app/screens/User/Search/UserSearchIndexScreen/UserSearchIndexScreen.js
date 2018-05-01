@@ -68,13 +68,13 @@ class UserSearchIndexScreen extends React.Component {
                                 <Text style={{ textAlign: 'center', fontWeight: 'bold', marginTop: 35, fontSize: 17}}>alebo</Text>
                                 <View style={ styles.buttonContainer }>
                                     <View style={ styles.addButtonContainer }>
-                                        <Button danger block onPress={() => {this.setUserCreateModalVisible()}}>
+                                        <Button danger block onPress={() => {this.setUserCreateModalVisible(true)}}>
                                             <Text>Vytvoriť osobu</Text>
                                         </Button>
 
                                         {
                                             this.props.navigation.state.params.meetingId
-                                                ? (<Button danger block style={{ marginTop: 20}} onPress={() => {this.setUserAddFromListModalVisible()}}><Text>Vybrať zo zoznamu</Text></Button>)
+                                                ? (<Button danger block style={{ marginTop: 20}} onPress={() => {this.setUserAddFromListModalVisible(true)}}><Text>Vybrať zo zoznamu</Text></Button>)
                                                 : null
                                         }
                                     </View>

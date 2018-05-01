@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { Modal } from 'react-native';
 import Header from '../../../components/Header/Header'
-import {Container, Content, Button, Icon, Text} from 'native-base';
+import {Container, Content, Button, Icon, Text, Item, Input} from 'native-base';
+import { SearchBar } from 'react-native-elements'
 import styles from './styles';
 import MeetingStore from "../../../flux/Meeting/MeetingStore";
 import MeetingList from '../../../components/MeetingList/MeetingList';

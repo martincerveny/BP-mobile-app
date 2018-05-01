@@ -84,7 +84,7 @@ class UserCardItem extends React.Component {
                     {
                         this.state.text.trim() !== ""
                             ? (<Button transparent primary onPress={this.handleCreateNoteItem}>
-                                <Icon name='md-add-circle' style={ styles.addButton }/>
+                                <Icon name='ios-checkmark-circle' style={ styles.addButton }/>
                             </Button>)
                             : null
                     }

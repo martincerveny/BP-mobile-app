@@ -10,6 +10,9 @@ import TwitterApiFetchService from "../../../../services/TwitterApi/TwitterApiFe
 import MeetingConstants from "../../../../flux/Meeting/MeetingConstants";
 import AppUtils from "../../../../utils/AppUtils";
 
+const DEFAULT_IMAGE_URL = 'http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png';
+const TWITTER_URL = 'http://www.twitter.com/';
+
 class UserSearchResultScreen extends React.Component {
     constructor (props) {
         super(props);
@@ -36,14 +39,22 @@ class UserSearchResultScreen extends React.Component {
             return this.setState({ items: '' });
         }
 
+        //vyhladame ludi
         TwitterApiFetchService.getUsers(this.props.term).then(items => {
-            console.log(items)
-            this.setState({ items })
+            let userItems = [];
+
+            for (let i=0; i < items.length; i++) {
+                // uzivatelov bez fotky vynechame
+                if (items[i].profile_image_url !== DEFAULT_IMAGE_URL) {
+                    userItems.push(items[i]);
+                }
+            }
+            this.setState({ items: userItems })
         });
     }
 
     handleItemPress (screenName) {
-        let url = 'http://www.twitter.com/' + screenName;
+        let url = TWITTER_URL + screenName;
         WebBrowser.openBrowserAsync(url);
     }
 

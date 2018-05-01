@@ -1,11 +1,11 @@
 import twitter from 'react-native-twitter';
-import TwitterApiConstants from "./TwitterApiConstants";
+import TwitterApiKeys from "./TwitterApiKeys";
 
 let tokens = {
-    consumerKey: TwitterApiConstants.CONSUMER_KEY,
-    consumerSecret: TwitterApiConstants.CONSUMER_SECRET,
-    accessToken: TwitterApiConstants.ACCESS_TOKEN,
-    accessTokenSecret: TwitterApiConstants.ACCESS_TOKEN_SECRET
+    consumerKey: TwitterApiKeys.CONSUMER_KEY,
+    consumerSecret: TwitterApiKeys.CONSUMER_SECRET,
+    accessToken: TwitterApiKeys.ACCESS_TOKEN,
+    accessTokenSecret: TwitterApiKeys.ACCESS_TOKEN_SECRET
 };
 
 const {rest} = twitter(tokens);
