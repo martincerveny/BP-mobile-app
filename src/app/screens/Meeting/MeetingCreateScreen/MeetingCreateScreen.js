@@ -6,6 +6,7 @@ import Header from '../../../components/Header/Header'
 import { createOrUpdateMeetingItem } from './../../../flux/Meeting/MeetingActions'
 import AppUtils from "../../../utils/AppUtils";
 
+// obrazovka vytvarania schodzok
 class MeetingCreateScreen extends React.Component {
     constructor (props) {
         super(props);
@@ -97,13 +98,13 @@ class MeetingCreateScreen extends React.Component {
                     </Separator>
                     <ListItem style={ styles.listItem }>
                         <Left>
-                            <Icon active name="ios-information-circle-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 43, marginLeft: 5}}/>
-                            <Input placeholder='Názov' autoCorrect={false} onChangeText={(name) => this.setState({name})} style={{ height: 30, paddingLeft: 10}}/>
+                            <Icon active name="ios-information-circle-outline" style={ styles.icon }/>
+                            <Input placeholder='Názov' autoCorrect={false} onChangeText={(name) => this.setState({name})} style={ styles.input}/>
                         </Left>
                     </ListItem>
                     <ListItem onPress={this._showDatePicker} style={ styles.listItem }>
                         <Left>
-                            <Icon active name="ios-calendar-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 50, marginLeft: 5}}/>
+                            <Icon active name="ios-calendar-outline" style={ styles.datePickerIcon}/>
                             <Label > {this.state.date}</Label>
                             <DateTimePicker
                                 isVisible={this.state.isDatePickerVisible}
@@ -118,7 +119,7 @@ class MeetingCreateScreen extends React.Component {
                     </ListItem>
                     <ListItem onPress={this._showTimePicker} style={ styles.listItem }>
                         <Left>
-                            <Icon active name="ios-time-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 50, marginLeft: 5}}/>
+                            <Icon active name="ios-time-outline" style={ styles.datePickerIcon}/>
                             <Label > {this.state.time}</Label>
                             <DateTimePicker
                                 isVisible={this.state.isTimePickerVisible}
@@ -133,8 +134,8 @@ class MeetingCreateScreen extends React.Component {
                     </ListItem>
                     <ListItem style={ styles.listItem }>
                         <Left>
-                            <Icon active name="ios-pin-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 42, marginLeft: 8}}/>
-                            <Input placeholder='Miesto' autoCorrect={false} onChangeText={(place) => this.setState({place})} style={{ height: 30, paddingLeft: 10}}/>
+                            <Icon active name="ios-pin-outline" style={ styles.icon}/>
+                            <Input placeholder='Miesto' autoCorrect={false} onChangeText={(place) => this.setState({place})} style={ styles.input }/>
                         </Left>
                     </ListItem>
                 </Content>

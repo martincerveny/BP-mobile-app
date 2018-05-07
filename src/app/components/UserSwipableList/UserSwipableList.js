@@ -4,18 +4,15 @@ import UserListItem from './../UserListItem/UserListItem';
 import {Button, Icon, List} from "native-base";
 import MeetingConstants from "../../flux/Meeting/MeetingConstants";
 import {createOrUpdateUserItem} from "../../flux/User/UserActions";
-import styles from './styles';
 import NoteStore from "../../flux/Note/NoteStore";
 import {deleteNoteItem} from "../../flux/Note/NoteActions";
+import styles from './styles';
 
+// swipe list, ktory umoznuje mazanie uzivatela zo schodzky
+// nachadza sa na karte schodzky pri zozname ucastnikov
 class UserSwipableList extends React.Component {
     constructor (props) {
         super(props);
-
-        // this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-        // this.state = {
-        //     listViewData: this.props.items,
-        // };
     }
 
     deleteRow(item, secId, rowId, rowMap) {
@@ -27,9 +24,6 @@ class UserSwipableList extends React.Component {
                 {text: 'OK',
                     onPress: () => {
                         rowMap[`${secId}${rowId}`].props.closeRow();
-                        // const newData = [...this.state.listViewData];
-                        // newData.splice(rowId, 1);
-                        // this.setState({ listViewData: newData });
 
                         // zmazat schodzku z uzivatela v AsyncStorage
                         let index = item.meetingIds.indexOf(MeetingConstants.STORE_KEY_ITEM + this.props.meetingId);
@@ -54,8 +48,6 @@ class UserSwipableList extends React.Component {
     }
 
     render () {
-        // const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-
         return (
                 <List
                     dataSource={new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(this.props.items)}

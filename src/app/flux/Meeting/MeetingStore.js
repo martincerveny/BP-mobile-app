@@ -69,7 +69,7 @@ const MeetingStore = {
             case MeetingConstants.MEETING_DELETE:
                 _deleteItem(payload.data)
                     .then(() => { })
-                    .catch(() => { });
+                     .catch(() => { });
                 break;
         }
     },

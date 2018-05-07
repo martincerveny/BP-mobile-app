@@ -13,6 +13,7 @@ import MeetingUpdateScreen from "../MeetingUpdateScreen/MeetingUpdateScreen";
 import styles from './styles';
 import MeetingDetailNoteListTab from "../../../components/MeetingDetailNoteListTab/MeetingDetailNoteListTab";
 
+//obrazovka detailu schodzky
 class MeetingDetailScreen extends React.Component {
     constructor (props) {
         super(props);
@@ -45,6 +46,7 @@ class MeetingDetailScreen extends React.Component {
         MeetingStore.removeChangeListener(this.loadItem);
     }
 
+    //nacitanie schodzky
     loadItem () {
         const meetingId = this.props.navigation.state.params.meetingId;
         MeetingStore.getItemById(meetingId).then(meetingItem => {
@@ -57,6 +59,7 @@ class MeetingDetailScreen extends React.Component {
         });
     };
 
+    //nacitanie ucastnikov schodzky
     loadUserItems () {
         const meetingId = this.props.navigation.state.params.meetingId;
         UserStore.getAllItemsByMeetingId(MeetingConstants.STORE_KEY_ITEM + meetingId).then(userItems => {
@@ -81,12 +84,12 @@ class MeetingDetailScreen extends React.Component {
                         title={meetingItem && meetingItem.getName()}
                         left={
                             <Button transparent onPress={this.goBack}>
-                                <Icon style={{ color: '#fff'}} name="arrow-round-back" />
+                                <Icon style={ styles.icon} name="arrow-round-back" />
                             </Button>
                         }
                         right={
                             <Button transparent onPress={() => {this.setModalVisible(true)}}>
-                                <Icon style={{ color: '#fff'}} name="create" />
+                                <Icon style={ styles.icon } name="create" />
                             </Button>
                         }
                     />

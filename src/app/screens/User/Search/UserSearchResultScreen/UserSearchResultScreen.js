@@ -13,6 +13,7 @@ import AppUtils from "../../../../utils/AppUtils";
 const DEFAULT_IMAGE_URL = 'http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png';
 const TWITTER_URL = 'http://www.twitter.com/';
 
+// obrazovka zobrazujuca zoznam vyhladanych ludi
 class UserSearchResultScreen extends React.Component {
     constructor (props) {
         super(props);
@@ -34,6 +35,7 @@ class UserSearchResultScreen extends React.Component {
         this.getSearchResults();
     }
 
+    // zavolanie funkcie pre vyhladanie userov
     getSearchResults () {
         if (this.props.term === '') {
             return this.setState({ items: '' });
@@ -53,6 +55,7 @@ class UserSearchResultScreen extends React.Component {
         });
     }
 
+    // vytvorenie uzivatela a stiahnutie jeho udajov aj s fotkou
     handleItemPress (screenName) {
         let url = TWITTER_URL + screenName;
         WebBrowser.openBrowserAsync(url);

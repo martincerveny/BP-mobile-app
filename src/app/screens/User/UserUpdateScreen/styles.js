@@ -14,4 +14,10 @@ export default StyleSheet.create({
     buttonContainer: {
         flex: 1,
     },
+    separator: {
+        marginTop: -1
+    },
+    input: {
+        height: 115
+    }
 });

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Container, Content, Text, Icon, Left, Separator, ListItem, List, Right, Input, Item, Thumbnail, Body } from 'native-base';
+import { Container, Content, Text, Icon, Left, Separator, ListItem, Right, Thumbnail, Body } from 'native-base';
 import styles from './styles';
 import {FileSystem} from "expo";
 
+// detail uzivatela
 const UserDetailTab = ({ userItem }) => (
             <Container style={ styles.container }>
                 <Content>
@@ -24,7 +25,7 @@ const UserDetailTab = ({ userItem }) => (
                     </Separator>
                     <ListItem >
                         <Left>
-                            <Icon active name="ios-card" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 30, marginLeft: 5 }}/>
+                            <Icon active name="ios-card" style={ styles.icon }/>
                             <Text>Vek</Text>
                         </Left>
                         <Right style={ styles.listItemRight }>
@@ -33,7 +34,7 @@ const UserDetailTab = ({ userItem }) => (
                     </ListItem>
                     <ListItem >
                         <Left>
-                            <Icon active name="ios-home-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 30, marginLeft: 5 }}/>
+                            <Icon active name="ios-home-outline" style={ styles.icon }/>
                             <Text>Bydlisko</Text>
                         </Left>
                         <Right style={ styles.listItemRight }>
@@ -42,7 +43,7 @@ const UserDetailTab = ({ userItem }) => (
                     </ListItem>
                     <ListItem>
                         <Left>
-                            <Icon active name="ios-briefcase-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 30, marginLeft: 5 }}/>
+                            <Icon active name="ios-briefcase-outline" style={styles.icon }/>
                             <Text>Firma</Text>
                         </Left>
                         <Right style={ styles.listItemRight }>
@@ -53,7 +54,7 @@ const UserDetailTab = ({ userItem }) => (
                     <Separator bordered>
                         <Text>POZNÁMKA</Text>
                     </Separator>
-                    <Text style={{ paddingLeft: 15, paddingTop: 10}}>{userItem && userItem.getNote()}</Text>
+                    <Text style={ styles.textNote}>{userItem && userItem.getNote()}</Text>
                 </Content>
             </Container>
 );

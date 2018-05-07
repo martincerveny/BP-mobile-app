@@ -1,10 +1,11 @@
 import React from 'react';
-import { Content, Text, Body, Card, CardItem, Icon, Left } from 'native-base';
+import { Text, Body, Card, CardItem, Icon, Left } from 'native-base';
 import {TouchableOpacity, View} from 'react-native';
 import MeetingConstants from "../../flux/Meeting/MeetingConstants";
 import UserStore from "../../flux/User/UserStore";
 import styles from './styles';
 
+// objekt najblizsej schodzky zo zoznamu
 class NextMeetingListItem extends React.Component {
     constructor (props) {
         super(props);
@@ -24,6 +25,7 @@ class NextMeetingListItem extends React.Component {
         UserStore.removeChangeListener(this.loadUserItems);
     }
 
+    //nacitanie uzivatelov
     loadUserItems () {
         const meetingId = this.props.item.getId();
         UserStore.getAllItemsByMeetingId(MeetingConstants.STORE_KEY_ITEM + meetingId).then(userItems => {
@@ -40,28 +42,28 @@ class NextMeetingListItem extends React.Component {
                         <CardItem >
                             <Left>
                                 <Body>
-                                <Text style={{ fontSize: 17 }}>{this.props.item.getName()}</Text>
-                                <Text note>{this.props.item.getDate()}</Text>
+                                    <Text style={ styles.name }>{this.props.item.getName()}</Text>
+                                    <Text note>{this.props.item.getDate()}</Text>
                                 </Body>
                             </Left>
                         </CardItem>
-                        <CardItem style={{ justifyContent: 'space-between', flexDirection: 'row', flex: 1}}>
+                        <CardItem style={ styles.cardItem}>
                             <View>
                                 <Left>
-                                    <Icon active name="ios-time-outline" style={{ fontSize: 30, color: '#e74c3c'}}/>
+                                    <Icon active name="ios-time-outline" style={ styles.icon }/>
                                     <Text>{this.props.item.getTime()}</Text>
 
                                 </Left>
                             </View>
                             <View>
                                 <Left>
-                                    <Icon style={{ fontSize: 30, color: '#e74c3c'}} active name="ios-pin-outline" />
+                                    <Icon style={ styles.icon } active name="ios-pin-outline" />
                                     <Text>{this.props.item.getPlace()}</Text>
                                 </Left>
                             </View>
                             <View>
                                 <Left>
-                                    <Icon style={{ fontSize: 30, color: '#e74c3c'}}  active name="ios-people-outline" />
+                                    <Icon style={ styles.icon }  active name="ios-people-outline" />
                                     <Text>{userItems.length}</Text>
                                 </Left>
                             </View>

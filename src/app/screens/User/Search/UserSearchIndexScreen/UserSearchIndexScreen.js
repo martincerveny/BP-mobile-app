@@ -9,6 +9,7 @@ import UserSearchResultScreen from "../UserSearchResultScreen/UserSearchResultSc
 import UserAddFromListScreen from "../../UserAddFromListScreen/UserAddFromListScreen";
 import UserCreateScreen from "../../UserCreateScreen/UserCreateScreen";
 
+//obrazovka zobrazujuca pridanie uzivatela spolu s moznostou vyhladania
 class UserSearchIndexScreen extends React.Component {
     constructor (props) {
         super(props);
@@ -50,22 +51,22 @@ class UserSearchIndexScreen extends React.Component {
                         title='Pridať osobu'
                         left={
                             <Button transparent onPress={this.goBack}>
-                                <Icon style={{ color: '#fff'}} name="arrow-round-back" />
+                                <Icon style={ styles.icon} name="arrow-round-back" />
                             </Button>
                         }
                     />
                     <View style={ styles.container }>
                         <Content>
                             <Form>
-                                <Text style={{ textAlign: 'center', fontWeight: 'bold', marginTop: 20, fontSize: 17}}>Vyhľadať osobu</Text>
+                                <Text style={ styles.searchText}>Vyhľadať osobu</Text>
 
                                 <View style={ styles.searchBox}>
-                                    <Item regular style={{ width: 250}}>
+                                    <Item regular style={ styles.item}>
                                         <Input autoCorrect={false} onChangeText={(term) => this.setState({term})} placeholder="Zadajte meno" />
                                     </Item>
-                                    <Button full danger style={{ width: 52, height: 52}} onPress={() => {this.setUserSearchResultModalVisible(true)}}><Icon style={{ fontSize: 27}} name='search' /></Button>
+                                    <Button full danger style={ styles.searchButton} onPress={() => {this.setUserSearchResultModalVisible(true)}}><Icon style={ styles.searchIcon } name='search' /></Button>
                                 </View>
-                                <Text style={{ textAlign: 'center', fontWeight: 'bold', marginTop: 35, fontSize: 17}}>alebo</Text>
+                                <Text style={ styles.searchText}>alebo</Text>
                                 <View style={ styles.buttonContainer }>
                                     <View style={ styles.addButtonContainer }>
                                         <Button danger block onPress={() => {this.setUserCreateModalVisible(true)}}>
@@ -74,7 +75,7 @@ class UserSearchIndexScreen extends React.Component {
 
                                         {
                                             this.props.navigation.state.params.meetingId
-                                                ? (<Button danger block style={{ marginTop: 20}} onPress={() => {this.setUserAddFromListModalVisible(true)}}><Text>Vybrať zo zoznamu</Text></Button>)
+                                                ? (<Button danger block style={ styles.addFromListButton } onPress={() => {this.setUserAddFromListModalVisible(true)}}><Text>Vybrať zo zoznamu</Text></Button>)
                                                 : null
                                         }
                                     </View>

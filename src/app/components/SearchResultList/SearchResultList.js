@@ -4,6 +4,7 @@ import SearchResultListItem from './../SearchResultListItem/SearchResultListItem
 
 import styles from './styles';
 
+//zoznam vyhladanych ludi
 const SearchResultList = ({ items, createItemOnPress, onItemPress }) => (
     <ListView
         enableEmptySections

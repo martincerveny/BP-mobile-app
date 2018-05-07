@@ -1,6 +1,5 @@
 import Dispatcher from './../Dispatcher';
 import NoteConstants from './NoteConstants';
-import MeetingConstants from "../Meeting/MeetingConstants";
 
 /**
  * Creates item.

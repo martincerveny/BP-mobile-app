@@ -7,6 +7,7 @@ import MeetingConstants from "../../../flux/Meeting/MeetingConstants";
 import styles from './styles';
 import {createOrUpdateUserItem} from "../../../flux/User/UserActions";
 
+// obrazovka zoznamu vytvorenych zoznamu uzivatelov, ktorych je mozne pridat ku schodzke
 class UserAddFromListScreen extends React.Component {
 
     constructor (props) {
@@ -34,6 +35,7 @@ class UserAddFromListScreen extends React.Component {
     };
 
 
+    // nacitanie uzivatelov, ktori este niesu pridani ku danej schodzke
     loadItems () {
         const meetingId = this.props.meetingId;
 

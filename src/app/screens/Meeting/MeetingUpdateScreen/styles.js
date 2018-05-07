@@ -19,4 +19,13 @@ export default StyleSheet.create({
     buttonContainer: {
         flex: 1,
     },
+    listItem: {
+        height: 70
+    },
+    noteInput: {
+        height: 115
+    },
+    separator: {
+        marginTop: -1
+    }
 });

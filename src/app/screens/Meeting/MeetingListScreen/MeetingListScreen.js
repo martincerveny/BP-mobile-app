@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import { Modal } from 'react-native';
 import Header from '../../../components/Header/Header'
-import {Container, Content, Button, Icon, Text, Item, Input} from 'native-base';
-import { SearchBar } from 'react-native-elements'
+import {Container, Content, Button, Icon, Text} from 'native-base';
 import styles from './styles';
 import MeetingStore from "../../../flux/Meeting/MeetingStore";
 import MeetingList from '../../../components/MeetingList/MeetingList';
 import MeetingCreateScreen from '../MeetingCreateScreen/MeetingCreateScreen';
-import _ from 'lodash';
 
+//obrazovka zoznamu schodzok
 class MeetingListScreen extends Component {
     constructor (props) {
         super(props);
@@ -54,12 +53,12 @@ class MeetingListScreen extends Component {
                     title='Zoznam schôdzok'
                     left={
                         <Button transparent onPress={() => {this.setModalVisible(true);}}>
-                            <Icon style={{ color: '#fff'}} name="add" />
+                            <Icon style={ styles.icon } name="add" />
                         </Button>
                     }
                     right={
                         <Button transparent>
-                            <Icon style={{ color: '#fff'}} name="search" />
+                            <Icon style={ styles.icon } name="search" />
                         </Button>
                     }
                 />

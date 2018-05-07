@@ -4,6 +4,7 @@ import styles from './styles';
 import {ListView} from "react-native";
 import UserCardItem from "../UserCardItem/UserCardItem";
 
+//zoznam objektov usercard
 const UserCardList = ({ userItems, meetingItem, navigation }) => (
     <Container style={ styles.container }>
         <ListView

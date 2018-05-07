@@ -2,12 +2,11 @@ import React from 'react';
 import { ListView } from 'react-native';
 import NoteListItem from './../NoteListItem/NoteListItem';
 import {Button, Icon, List} from "native-base";
-
-import styles from './styles';
-import {createOrUpdateUserItem} from "../../flux/User/UserActions";
-import MeetingConstants from "../../flux/Meeting/MeetingConstants";
 import {deleteNoteItem} from "../../flux/Note/NoteActions";
 
+import styles from './styles';
+
+//zoznam poznamok
 class NoteList extends React.Component {
     constructor(props) {
         super(props);

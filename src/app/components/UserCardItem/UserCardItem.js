@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardItem, Thumbnail, Text, Left, Button, Icon, Input, Right, Body} from 'native-base';
+import {Card, CardItem, Thumbnail, Text, Left, Button, Icon, Input} from 'native-base';
 import {FileSystem} from "expo";
 import NoteList from '../NoteList/NoteList';
 import NoteStore from "../../flux/Note/NoteStore";
@@ -8,6 +8,7 @@ import {createNoteItem} from '../../flux/Note/NoteActions';
 
 import styles from './styles';
 
+// karta uzivatela
 class UserCardItem extends React.Component {
     constructor (props) {
         super(props);
@@ -30,6 +31,7 @@ class UserCardItem extends React.Component {
         NoteStore.removeChangeListener(this.loadNoteItems);
     }
 
+    // nacitanie poznamok na zaklade ID schodzky a uzivatela
     loadNoteItems () {
         const meetingId = this.props.meetingId;
         const userId = this.props.item.getId();
@@ -39,11 +41,13 @@ class UserCardItem extends React.Component {
         });
     }
 
+    //zmaze input
     clearTextInput(fieldName) {
         this.setState({ text: ''});
         this.refs[fieldName].setNativeProps({text: ''});
     }
 
+    //vytvorenie poznamky
     handleCreateNoteItem () {
         let noteItem = {
             id: AppUtils.generateId(),
@@ -73,7 +77,7 @@ class UserCardItem extends React.Component {
                                     ? (<Thumbnail size={80} source={require('../../../resources/assets/images/person-flat.png')} />)
                                     : (<Thumbnail size={80} source={{uri: FileSystem.documentDirectory + this.props.item.getImage()}} />)
                             }
-                                <Text style={{ color: '#000', fontSize: 16}}>{this.props.item.getFirstName()} {this.props.item.getLastName()}</Text>
+                                <Text style={ styles.text }>{this.props.item.getFirstName()} {this.props.item.getLastName()}</Text>
                         </Button>
                     </Left>
                 </CardItem>

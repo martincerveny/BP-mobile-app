@@ -14,6 +14,7 @@ const config = {
     },
 };
 
+// zakladna navigacia aplikacie
 const AppNavigation = TabNavigator({
         'Najbližšie schôdzky': {
             screen: NextMeetingNavigation,

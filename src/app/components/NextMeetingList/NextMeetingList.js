@@ -2,9 +2,9 @@ import React from 'react';
 import { SectionList} from 'react-native';
 import NextMeetingListItem from './../NextMeetingListItem/NextMeetingListItem';
 import {Card, CardItem, Text} from "native-base";
-
 import styles from './styles';
 
+//zoskupenie schodzok podla najblizsieho datumu
 const makeSections = (items) => {
     //zoskupi podla datumu
     const groupedItems = _.groupBy(items, item => item.getDate());
@@ -69,6 +69,7 @@ const makeSections = (items) => {
     return result;
 };
 
+//render zoznamu najblizsich schodzok
 const NextMeetingList = ({ items, onItemPress }) => {
     const sections = makeSections(items);
     return (
@@ -85,8 +86,8 @@ const NextMeetingList = ({ items, onItemPress }) => {
             renderSectionHeader={({section}) => {
                 return (
                     <Card>
-                        <CardItem style={{ backgroundColor: '#e74c3c'}}>
-                            <Text style={{ color: 'white'}}>{section.key}</Text>
+                        <CardItem style={ styles.cardItem }>
+                            <Text style={ styles.cardItemText}>{section.key}</Text>
                         </CardItem>
                     </Card>
                 )

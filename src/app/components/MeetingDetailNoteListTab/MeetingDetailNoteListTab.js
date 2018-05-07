@@ -3,6 +3,7 @@ import { Container, Text } from 'native-base';
 import styles from './styles';
 import UserCardList from "../UserCardList/UserCardList";
 
+// Komponenta renderujuca TAB s poznamkami na detaile schodzky
 const MeetingDetailNoteListTab = ({ userItems, meetingItem, navigation }) => (
     <Container style={ styles.container }>
         {

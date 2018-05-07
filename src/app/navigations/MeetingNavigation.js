@@ -14,12 +14,13 @@ const config = {
     headerMode: 'none',
 };
 
+// navigacia schodzok
 const MeetingNavigation = StackNavigator({
     'meeting.list': { screen: MeetingListScreen },
     'meeting.detail': { screen: MeetingDetailScreen },
     'meeting.create': { screen: MeetingCreateScreen },
 
-    //user
+    //use
     'user.detail': { screen: UserDetailScreen },
     'user.search.index': { screen: UserSearchIndexScreen },
     'user.create': { screen: UserCreateScreen },

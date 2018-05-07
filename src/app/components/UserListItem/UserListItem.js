@@ -1,8 +1,9 @@
 import React from 'react';
-import { Content, List, ListItem, Thumbnail, Text, Body, Input, Right } from 'native-base';
-import styles from './styles';
+import { List, ListItem, Thumbnail, Text, Body } from 'native-base';
 import {FileSystem} from "expo";
+import styles from './styles';
 
+//objekt uzivatela v zozname
 const UserListItem = ({ item, onPress }) => (
     <List>
         <ListItem  button onPress={() => onPress(item.getId())}>

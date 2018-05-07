@@ -13,6 +13,7 @@ const config = {
     headerMode: 'none',
 };
 
+//navigacia najblizsich schodzok
 const NextMeetingNavigation = StackNavigator({
     'meeting.nextMeeting.list': { screen: NextMeetingListScreen },
     'meeting.nextMeeting.detail': {screen: NextMeetingDetailScreen},

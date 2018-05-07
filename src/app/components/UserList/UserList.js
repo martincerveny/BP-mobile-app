@@ -1,10 +1,11 @@
 import React from 'react';
 import { SectionList} from 'react-native';
 import UserListItem from './../UserListItem/UserListItem';
-
-import styles from './styles';
 import {ListItem, Text} from "native-base";
 
+import styles from './styles';
+
+//zoskupenie zoznamu podla abecedy
 const makeSections = (items) => {
     //zoskupi podla prveho pismena nazvu - podla abecedy
     const groupedItems = _.groupBy(items, item => item.getFirstName().substr(0,1).toUpperCase());
@@ -32,6 +33,7 @@ const makeSections = (items) => {
 };
 
 
+//komponenta zoznamu uzivatelov
 const UserList = ({ items, onItemPress }) => {
     const sections = makeSections(items);
     return (
@@ -47,8 +49,8 @@ const UserList = ({ items, onItemPress }) => {
             }}
             renderSectionHeader={({section}) => {
                 return (
-                    <ListItem itemDivider style={{ marginTop: -1}}>
-                        <Text style={{ marginLeft: 10}}>{section.key}</Text>
+                    <ListItem itemDivider style={ styles.listItem }>
+                        <Text style={ styles.text}>{section.key}</Text>
                     </ListItem>
                 )
             }}

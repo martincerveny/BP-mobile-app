@@ -1,8 +1,9 @@
 import React from 'react';
-import {Container, Content, Text} from 'native-base';
+import {Container, Text} from 'native-base';
 import UserNoteList from "../UserNoteList/UserNoteList";
 import styles from './styles';
 
+//poznamky na detaile uzivatela
 const UserDetailNoteListTab = ({ noteItems, meetingItems }) => (
     <Container style={ styles.container }>
             {

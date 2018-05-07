@@ -1,9 +1,9 @@
 import React from 'react';
-import {Container, Content, Text} from 'native-base';
+import {Container, Text} from 'native-base';
 import MeetingList from '../../components/MeetingList/MeetingList'
 import styles from './styles';
 
-
+// zoznam schodzok na detaile uzivatela
 const UserDetailMeetingListTab = ({ meetingItems, onMeetingItemPress }) => (
     <Container style={ styles.container }>
             {

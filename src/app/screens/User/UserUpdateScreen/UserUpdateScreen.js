@@ -22,6 +22,7 @@ var CANCEL_INDEX_ADD_IMAGE = 2;
 var CANCEL_INDEX_EDIT_IMAGE = 3;
 var CANCEL_INDEX_DELETE_ITEM = 1;
 
+//obrazovka zobrazujuca upravu uzivatela
 class UserUpdateScreen extends Component {
     constructor (props) {
         super(props);
@@ -49,6 +50,7 @@ class UserUpdateScreen extends Component {
         this.props.modalVisible(false);
     }
 
+    // update a ulozenie dat uzivatela
     handleUpdateItem () {
         let userItem = {
             id: this.props.userItem.getId(),
@@ -67,6 +69,7 @@ class UserUpdateScreen extends Component {
     }
 
 
+    // zmazanie uzivatela
     handleDeleteItem () {
         ActionSheet.show(
             {
@@ -105,6 +108,7 @@ class UserUpdateScreen extends Component {
         );
     }
 
+    // spracovanie actionsheetu fotky
     handleImageActionSheet () {
         // v pripade, ze uzivatel este nema pridanu fotku
         if (this.props.userItem.getImage() == null) {
@@ -135,6 +139,7 @@ class UserUpdateScreen extends Component {
         }
     }
 
+   // update obrazka, pridanie fotografie, odfotenie
     async handleUpdateImage () {
         if (this.state.imageActionSheetClicked === 'Odfotiť') {
             let path = AppUtils.generateId() + '.png';
@@ -198,6 +203,7 @@ class UserUpdateScreen extends Component {
     }
 
 
+    // update uzivatela pre spracovanie fotky
     handleCreateOrUpdateImageItem () {
         let userItem = {
             id: this.props.userItem.getId(),
@@ -257,7 +263,7 @@ class UserUpdateScreen extends Component {
                             <Label >Priezvisko:</Label>
                             <Input autoCorrect={false} value={this.state.lastName} onChangeText={(lastName) => this.setState({lastName})}/>
                         </Item>
-                        <Separator bordered style={{ marginTop: -1}}>
+                        <Separator bordered style={ styles.separator }>
                             <Text>ROZŠÍRENÉ INFORMÁCIE</Text>
                         </Separator>
                         <Item floatingLabel style={ styles.formItem }>
@@ -272,13 +278,13 @@ class UserUpdateScreen extends Component {
                             <Label>Firma:</Label>
                             <Input autoCorrect={false} value={this.state.company} onChangeText={(company) => this.setState({company})}/>
                         </Item>
-                        <Separator bordered style={{ marginTop: -1}}>
+                        <Separator bordered style={ styles.separator }>
                             <Text>POZNÁMKA</Text>
                         </Separator>
                         <Item>
-                            <Input autoCorrect={false} value={ this.state.note } placeholder='Zadajte poznámku' multiline={true} numberOfLines={5} onChangeText={(note) => this.setState({note})} style={{ height: 115}}/>
+                            <Input autoCorrect={false} value={ this.state.note } placeholder='Zadajte poznámku' multiline={true} numberOfLines={5} onChangeText={(note) => this.setState({note})} style={ styles.input }/>
                         </Item>
-                        <Separator bordered style={{ marginTop: -1}}>
+                        <Separator bordered style={ styles.separator }>
                         </Separator>
                     </Form>
                     <View style={ styles.buttonContainer }>

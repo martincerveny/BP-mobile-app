@@ -9,4 +9,7 @@ export default StyleSheet.create({
         textAlign: "center",
         marginTop: 20
     },
+    icon: {
+        color: '#fff'
+    }
 });

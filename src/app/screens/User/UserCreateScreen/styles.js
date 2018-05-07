@@ -16,4 +16,7 @@ export default StyleSheet.create({
         color: 'white',
         opacity: 0.7
     },
+    separator: {
+        marginTop: -1
+    }
 });

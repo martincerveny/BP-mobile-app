@@ -3,6 +3,7 @@ import {Container, Content, Button, Text, Icon, View} from 'native-base';
 import styles from './styles';
 import UserSwipableList from "../UserSwipableList/UserSwipableList";
 
+//komponenta zobrazujuca ucastnikov schodzky
 const MeetingDetailUserListTab = ({ userItems, onUserItemPress, navigation, meetingId }) => (
     <Container style={ styles.container }>
         <Content>

@@ -3,9 +3,9 @@ import {Container, Content, Button, Icon, Text} from 'native-base';
 import Header from '../../../components/Header/Header'
 import UserStore from "../../../flux/User/UserStore";
 import UserList from '../../../components/UserList/UserList'
-
 import styles from './styles';
 
+//obrazovka zobrazujuca zoznam uzivatelov
 class UserListScreen extends React.Component {
 
     constructor (props) {
@@ -47,12 +47,12 @@ class UserListScreen extends React.Component {
                     title='Zoznam ľudí'
                     left={
                         <Button transparent onPress={() => {this.props.navigation.navigate('user.search.index', { meetingId: null})}}>
-                            <Icon style={{ color: '#fff'}} name="add" />
+                            <Icon style={ styles.icon } name="add" />
                         </Button>
                     }
                     right={
                         <Button transparent>
-                            <Icon style={{ color: '#fff'}} name="search" />
+                            <Icon style={ styles.icon} name="search" />
                         </Button>
                     }
                 />

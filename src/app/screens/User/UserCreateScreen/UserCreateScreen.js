@@ -8,6 +8,7 @@ import {createOrUpdateUserItem} from "../../../flux/User/UserActions";
 import AppUtils from "../../../utils/AppUtils";
 import MeetingConstants from "../../../flux/Meeting/MeetingConstants";
 
+// obrazovka pre vytvorenie uzivatela
 class UserCreateScreen extends Component {
     constructor (props) {
         super(props);
@@ -88,7 +89,7 @@ class UserCreateScreen extends Component {
                             <Label>Priezvisko:</Label>
                             <Input autoCorrect={false} onChangeText={(lastName) => this.setState({lastName})}/>
                         </Item>
-                        <Separator bordered style={{ marginTop: -1}}>
+                        <Separator bordered style={ styles.separator }>
                             <Text>ROZŠÍRENÉ INFORMÁCIE</Text>
                         </Separator>
                         <Item floatingLabel style={ styles.formItem }>

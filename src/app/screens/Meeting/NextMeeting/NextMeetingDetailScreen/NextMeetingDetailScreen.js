@@ -7,6 +7,7 @@ import UserStore from "../../../../flux/User/UserStore";
 import styles from './styles';
 import UserCardList from "../../../../components/UserCardList/UserCardList";
 
+//obrazovka detailu najblizsich schodzok
 class NextMeetingDetailScreen extends Component {
     constructor (props) {
         super(props);
@@ -62,12 +63,12 @@ class NextMeetingDetailScreen extends Component {
                     title={meetingItem && meetingItem.getName()}
                     left={
                         <Button transparent onPress={this.goBack}>
-                            <Icon style={{ color: '#fff'}} name="arrow-round-back" />
+                            <Icon style={ styles.icon} name="arrow-round-back" />
                         </Button>
                     }
                     right={
                         <Button transparent onPress={() => {this.props.navigation.navigate('user.search.index', { meetingId: meetingItem.getId()})}}>
-                            <Icon style={{ color: '#fff'}} name="md-person-add" />
+                            <Icon style={styles.icon} name="md-person-add" />
                         </Button>
                     }
                 />

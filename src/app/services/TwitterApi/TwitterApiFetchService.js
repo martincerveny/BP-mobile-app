@@ -12,6 +12,7 @@ const {rest} = twitter(tokens);
 
 const TwitterApiFetchService = {
 
+    // vyhladanie uzivatelov z API
     async getUsers (term) {
         return rest.get('users/search', {q: term});
     }

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Icon, Text, Left, Separator, ListItem, Right, Input, Content, Container } from 'native-base';
+import { Icon, Text, Left, Separator, ListItem, Right, Content, Container } from 'native-base';
 
 import styles from './styles';
 
+// komponenta TABU zobrazujuceho detail schodzky
 const MeetingDetailTab = ({ meetingItem, peopleCount }) => (
     <Container>
         <Content>
@@ -11,7 +12,7 @@ const MeetingDetailTab = ({ meetingItem, peopleCount }) => (
             </Separator>
             <ListItem>
                 <Left>
-                    <Icon active name="ios-calendar-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 30, marginLeft: 5 }}/>
+                    <Icon active name="ios-calendar-outline" style={ styles.icon }/>
                     <Text>Dátum</Text>
                 </Left>
                 <Right style={ styles.listItemRight }>
@@ -20,7 +21,7 @@ const MeetingDetailTab = ({ meetingItem, peopleCount }) => (
             </ListItem>
             <ListItem>
                 <Left>
-                    <Icon active name="ios-time-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 30, marginLeft: 5  }}/>
+                    <Icon active name="ios-time-outline" style={ styles.icon }/>
                     <Text>Čas</Text>
                 </Left>
                 <Right style={ styles.listItemRight }>
@@ -29,7 +30,7 @@ const MeetingDetailTab = ({ meetingItem, peopleCount }) => (
             </ListItem>
             <ListItem>
                 <Left>
-                    <Icon active name="ios-pin-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 27, marginLeft: 8  }}/>
+                    <Icon active name="ios-pin-outline" style={ styles.icon }/>
                     <Text>Miesto</Text>
                 </Left>
                 <Right style={ styles.listItemRight }>
@@ -38,7 +39,7 @@ const MeetingDetailTab = ({ meetingItem, peopleCount }) => (
             </ListItem>
             <ListItem last>
                 <Left>
-                    <Icon active name="ios-people-outline" style={{ fontSize: 30, color: '#e74c3c', paddingRight: 30, marginLeft: 5  }}/>
+                    <Icon active name="ios-people-outline" style={ styles.icon }/>
                     <Text>Počet ľudí</Text>
                 </Left>
                 <Right style={ styles.listItemRight }>
@@ -48,7 +49,7 @@ const MeetingDetailTab = ({ meetingItem, peopleCount }) => (
             <Separator bordered>
                 <Text>POZNÁMKA</Text>
             </Separator>
-            <Text style={{ paddingLeft: 15, paddingTop: 10}}>{meetingItem && meetingItem.getNote()}</Text>
+            <Text style={ styles.noteTextStyle }>{meetingItem && meetingItem.getNote()}</Text>
         </Content>
     </Container>
 );

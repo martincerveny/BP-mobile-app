@@ -6,6 +6,7 @@ import styles from './styles';
 import MeetingStore from "../../../../flux/Meeting/MeetingStore";
 import NextMeetingList from '../../../../components/NextMeetingList/NextMeetingList';
 
+// obrazovka zobrazujuca zoznam najblizsich schodzok
 class NextMeetingListScreen extends Component {
     constructor (props) {
         super(props);
@@ -26,6 +27,7 @@ class NextMeetingListScreen extends Component {
         MeetingStore.removeChangeListener(this.loadItems);
     }
 
+    // nacitanie schodzok podla datumu
     loadItems () {
         MeetingStore.getAllItems().then(items => {
             let meetingItemsArray = [];

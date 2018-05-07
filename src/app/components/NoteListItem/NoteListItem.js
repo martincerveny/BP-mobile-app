@@ -1,8 +1,9 @@
 import React from 'react';
-import { List, ListItem, Body, Input, Button, Icon, Text } from 'native-base';
+import { List, ListItem, Body, Text } from 'native-base';
 import styles from './styles';
 import {createNoteItem} from "../../flux/Note/NoteActions";
 
+//objekt poznamky
 const NoteListItem = ({ item, }) => (
     <List>
         <ListItem style={styles.listItem}>

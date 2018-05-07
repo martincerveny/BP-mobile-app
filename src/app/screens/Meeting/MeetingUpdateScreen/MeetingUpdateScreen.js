@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import {
     Container, Text, Button, Toast, Separator, Content, Label, Input, View, Form, Item,
     ListItem, ActionSheet
@@ -18,6 +17,7 @@ var ACTION_SHEET_DELETE_ITEM = ['Vymazať schôdzku', 'Zrušiť'];
 var DESTRUCTIVE_INDEX_DELETE_ITEM = 0;
 var CANCEL_INDEX_DELETE_ITEM = 1;
 
+//obrazovka upravy schodzky
 class MeetingUpdateScreen extends React.Component {
     constructor (props) {
         super(props);
@@ -30,39 +30,13 @@ class MeetingUpdateScreen extends React.Component {
             isDatePickerVisible: false,
             isTimePickerVisible: false,
             deleteItemClicked: null
-            // day: '',
-            // month: '',
-            // year: '',
-            // hour: '',
-            // minute: '',
         };
 
         this.goBack = this.goBack.bind(this);
         this.handleDeleteItem = this.handleDeleteItem.bind(this);
         this.handleUpdateItem = this.handleUpdateItem.bind(this);
-        // this.parseDateTimeToState = this.parseDateTimeToState.bind(this);
     };
 
-    componentDidMount () {
-        // this.parseDateTimeToState();
-    }
-    // /**
-    //  *  metoda rozparsuje datum a cas z AsyncStorage do DateTimePicker componenty
-    //  */
-    // parseDateTimeToState () {
-    //     // rozdelime datum na den, mesiac a rok
-    //     let date = this.props.meetingItem.getDate().replace(/ +/g, "").split('.');
-    //    // rozdelime cas na hodiny a minut
-    //     let time = this.props.meetingItem.getTime().split(':');
-    //     this.setState({
-    //        day: date[0],
-    //        month: date[1],
-    //        year: date[2],
-    //        hour: time[0],
-    //        minute: time[1],
-    //
-    //     });
-    // }
     _showDatePicker = () => this.setState({ isDatePickerVisible: true });
     _hideDatePicker = () => this.setState({ isDatePickerVisible: false });
 
@@ -90,6 +64,7 @@ class MeetingUpdateScreen extends React.Component {
         this.props.modalVisible(false);
     }
 
+    // zmazanie schodzky
     handleDeleteItem () {
         const userItems = this.props.userItems;
         const meetingItem = this.props.meetingItem;
@@ -136,6 +111,8 @@ class MeetingUpdateScreen extends React.Component {
         );
     }
 
+
+    // ulozenie upravy schodzky
     handleUpdateItem () {
         let meetingItem = {
             id: this.props.meetingItem.getId(),
@@ -175,7 +152,7 @@ class MeetingUpdateScreen extends React.Component {
                             <Label >Názov</Label>
                             <Input autoCorrect={false} value={ this.state.name } onChangeText={(name) => this.setState({name})}/>
                         </Item>
-                        <ListItem onPress={this._showDatePicker} style={{ height: 70}}>
+                        <ListItem onPress={this._showDatePicker} style={ styles.listItem}>
                                 <Label > {this.state.date}</Label>
                                 <DateTimePicker
                                     isVisible={this.state.isDatePickerVisible}
@@ -185,10 +162,9 @@ class MeetingUpdateScreen extends React.Component {
                                     confirmTextIOS={'Potvrdiť'}
                                     titleIOS={'Vybrať dátum'}
                                     mode={'date'}
-                                    // date={new Date(this.state.year, this.state.month, this.state.day, this.state.hour, this.state.minute)}
                                 />
                         </ListItem>
-                        <ListItem onPress={this._showTimePicker} style={{ height: 70 }}>
+                        <ListItem onPress={this._showTimePicker} style={ styles.listItem}>
                             <Label > {this.state.time}</Label>
                             <DateTimePicker
                                 isVisible={this.state.isTimePickerVisible}
@@ -204,13 +180,13 @@ class MeetingUpdateScreen extends React.Component {
                             <Label>Miesto</Label>
                             <Input autoCorrect={false} value={ this.state.place } onChangeText={(place) => this.setState({place})}/>
                         </Item>
-                        <Separator bordered style={{ marginTop: -1}}>
+                        <Separator bordered style={ styles.separator}>
                             <Text>POZNÁMKA</Text>
                         </Separator>
                         <Item>
-                            <Input autoCorrect={false} value={ this.state.note } placeholder='Zadajte poznámku' multiline={true} numberOfLines={5} onChangeText={(note) => this.setState({note})} style={{ height: 115}}/>
+                            <Input autoCorrect={false} value={ this.state.note } placeholder='Zadajte poznámku' multiline={true} numberOfLines={5} onChangeText={(note) => this.setState({note})} style={ styles.noteInput}/>
                         </Item>
-                        <Separator bordered style={{ marginTop: -1}}>
+                        <Separator bordered style={styles.separator}>
                         </Separator>
                     </Form>
                     <View style={ styles.buttonContainer }>

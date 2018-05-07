@@ -13,6 +13,7 @@ import UserUpdateScreen from "../UserUpdateScreen/UserUpdateScreen";
 import UserDetailNoteListTab from "../../../components/UserDetailNoteListTab/UserDetailNoteListTab";
 import NoteStore from "../../../flux/Note/NoteStore";
 
+// obrazovka zobrazujuca detail uzivatela
 class UserDetailScreen extends Component {
     constructor (props) {
         super(props);
@@ -50,6 +51,7 @@ class UserDetailScreen extends Component {
         NoteStore.removeChangeListener(this.loadItem);
     }
 
+    // nacitanie udajov uzivatela
     loadItem () {
         const userId = this.props.navigation.state.params.userId;
         UserStore.getItemById(userId).then(userItem => {
@@ -84,12 +86,12 @@ class UserDetailScreen extends Component {
                         title={ userItem && userItem.firstName + ' ' + userItem.lastName }
                         left={
                             <Button transparent onPress={this.goBack}>
-                                <Icon style={{ color: '#fff'}} name="arrow-round-back" />
+                                <Icon style={ styles.icon} name="arrow-round-back" />
                             </Button>
                         }
                         right={
                                 <Button transparent onPress={() => {this.setModalVisible(true)}}>
-                                    <Icon style={{ color: '#fff'}} name="create" />
+                                    <Icon style={ styles.icon} name="create" />
                                 </Button>
                         }
                     />

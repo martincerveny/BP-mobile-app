@@ -29,5 +29,26 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         flex: 1,
+    },
+    icon: {
+        color: '#fff'
+    },
+    searchText: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        marginTop: 20,
+        fontSize: 17
+    },
+    item: {
+        width: 250
+    },
+    searchButton: {
+        width: 52, height: 52
+    },
+    addFromListButton: {
+        marginTop: 20
+    },
+    searchIcon: {
+        fontSize: 27
     }
 });

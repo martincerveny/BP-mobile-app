@@ -5,6 +5,7 @@ import {ListItem, Text} from "native-base";
 
 import styles from './styles';
 
+// konstanta vytvarajuca sekcie podla abecedy
 const makeSections = (items) => {
     //zoskupi podla prveho pismena nazvu - podla abecedy
     const groupedItems = _.groupBy(items, item => item.getName().substr(0,1).toUpperCase());
@@ -30,6 +31,7 @@ const makeSections = (items) => {
     return result;
 };
 
+// renderuje zoznam schodzok
 const MeetingList = ({ items, onItemPress }) => {
     const sections = makeSections(items);
 
@@ -46,8 +48,8 @@ const MeetingList = ({ items, onItemPress }) => {
             }}
             renderSectionHeader={({section}) => {
                 return (
-                    <ListItem itemDivider style={{ marginTop: -1}}>
-                        <Text style={{ marginLeft: 10}}>{section.key}</Text>
+                    <ListItem itemDivider style={ styles.listItem}>
+                        <Text style={ styles.listItemText }>{section.key}</Text>
                     </ListItem>
                 )
             }}

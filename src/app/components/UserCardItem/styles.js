@@ -6,5 +6,9 @@ export default StyleSheet.create({
     },
     removeButton: {
         color: '#e74c3c'
+    },
+    text: {
+        color: '#000',
+        fontSize: 16
     }
 });
