@@ -1,6 +1,6 @@
 {
   "expo": {
-    "sdkVersion": "25.0.0",
+    "sdkVersion": "27.0.0",
     "splash": {
       "image": "./src/resources/assets/images/splash.png",
       "resizeMode": "cover"

@@ -6,7 +6,7 @@ import {
 import Header from '../../../components/Header/Header'
 import styles from './styles';
 import {createOrUpdateUserItem, deleteUserItem} from "../../../flux/User/UserActions";
-import { FileSystem, ImagePicker } from "expo";
+import { FileSystem, ImagePicker, Permissions } from "expo";
 import AppUtils from "../../../utils/AppUtils";
 import NoteStore from "../../../flux/Note/NoteStore";
 import {deleteNoteItem} from "../../../flux/Note/NoteActions";
@@ -35,7 +35,7 @@ class UserUpdateScreen extends Component {
             company: this.props.userItem.getCompany(),
             note: this.props.userItem.getNote(),
             imageActionSheetClicked: null,
-            deleteUserClicked: null
+            deleteUserClicked: null,
         };
 
         this.goBack = this.goBack.bind(this);
@@ -140,33 +140,35 @@ class UserUpdateScreen extends Component {
     }
 
    // update obrazka, pridanie fotografie, odfotenie
-    async handleUpdateImage () {
+
+    handleUpdateImage = async () => {
         if (this.state.imageActionSheetClicked === 'Odfotiť') {
+            await Permissions.askAsync(Permissions.CAMERA);
             let path = AppUtils.generateId() + '.png';
-
-            // spustime kameru
-            let imageObject = await ImagePicker.launchCameraAsync({
-                allowsEditing: true,
-                quality: 0.2
-            });
-
-            // ak je vybraty novy obrazok
-            if (imageObject.cancelled === false) {
-                // ak uz predtym existovala fotka, ktora sa moze zmazat
-                if (this.state.image !== null) {
-                    await FileSystem.deleteAsync(FileSystem.documentDirectory + this.state.image);
-                }
-                // skopirujeme obrazok z galerie do nasej aplikacie
-                await FileSystem.copyAsync({
-                    from: imageObject.uri,
-                    to: FileSystem.documentDirectory + path,
+                // spustime kameru
+                let imageObject = await ImagePicker.launchCameraAsync({
+                    allowsEditing: true,
+                    quality: 0.2
                 });
 
-                // ulozime userItem s novym obrazkom
-                this.setState({ image: path});
-                this.handleCreateOrUpdateImageItem();
-            }
+                // ak je vybraty novy obrazok
+                if (imageObject.cancelled === false) {
+                    // ak uz predtym existovala fotka, ktora sa moze zmazat
+                    if (this.state.image !== null) {
+                        await FileSystem.deleteAsync(FileSystem.documentDirectory + this.state.image);
+                    }
+                    // skopirujeme obrazok z galerie do nasej aplikacie
+                    await FileSystem.copyAsync({
+                        from: imageObject.uri,
+                        to: FileSystem.documentDirectory + path,
+                    });
+
+                    // ulozime userItem s novym obrazkom
+                    this.setState({ image: path});
+                    this.handleCreateOrUpdateImageItem();
+                }
         } else if (this.state.imageActionSheetClicked === 'Vybrať fotku') {
+            await Permissions.askAsync(Permissions.CAMERA_ROLL);
             let path = AppUtils.generateId() + '.png';
 
             // spustime galeriu
