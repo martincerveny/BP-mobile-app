@@ -1,8 +1,9 @@
-# BP-mobile-app
+# Mobilná aplikácia pre vyhľadanie fotiek účastníkov schôdzky
 ## Bakalárska práca
 
 #### Prezentačné video: https://www.youtube.com/watch?v=iv3c21YxiSo&ab_channel=Redis
-#### Text práce: http://www.fit.vutbr.cz/study/DP/BP.php.cs?id=19505&file=t
+#### Text práce: http://www.fit.vutbr.cz/study/DP/BP.php.cs?id=19505&file=
+#### Expo link: https://expo.io/@martincervenybp/bp-meeting
 Cieľom práce je navrhnúť a implementovať aplikáciu pre vyhľadanie účastnikov stretnutí, ich
 fotiek a menšiu správu týchto stretnutí s možnosťou písania poznámok. Aplikácia by mala
 zefektívniť prípravu na tieto stretnutia. Pre úspešný vývoj bol najskôr vykonaný prieskum
